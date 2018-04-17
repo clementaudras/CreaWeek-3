@@ -19,15 +19,19 @@ public class PlayerController : MonoBehaviour {
     public bool move;
 
 	Vector3 velocityNormilze;
+    Quaternion angle;
+    Transform arrowTrans;
+    Transform spriteTrans;
 
-
-	public GameObject egg;
+    public GameObject egg;
 
     //Vector3 currDir;
     public bool confirmed;
 
     void Start()
     {
+        arrowTrans = transform.GetChild(1);
+        spriteTrans = transform.GetChild(0);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -163,10 +167,18 @@ public class PlayerController : MonoBehaviour {
     rb.velocity = rb.velocity * 0.01f;
 }
 */
-		transform.rotation = Quaternion.LookRotation(velocityNormilze, Vector2.zero);
-		if(rb.velocity != Vector2.zero){
-			velocityNormilze = rb.velocity.normalized;
-		}
+
+
+        if (GM.GetComponent<GameManager>().confirmation != 0)
+        {
+            angle = arrowTrans.rotation;
+
+        }
+        else
+        {
+
+            spriteTrans.rotation = angle;
+        }
 
         //Press button "A" to go fast
         if (move)
