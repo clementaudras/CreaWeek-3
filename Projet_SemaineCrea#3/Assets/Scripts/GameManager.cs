@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     public int confirmation;
     public GameObject player_1;
-	public bool preparationPhase;
+    public GameObject player_2;
+
+    public bool preparationPhase;
 	public bool resolutionPhase;
 	public GameObject prepScreen;
 	public GameObject resolScreen;
@@ -29,6 +31,8 @@ public class GameManager : MonoBehaviour {
         if (player_1 == null)
             player_1 = GameObject.FindGameObjectWithTag("Player1");
 
+        if (player_2 == null)
+            player_2 = GameObject.FindGameObjectWithTag("Player2");
 
         if (!_isEverthingStatic)
         {
@@ -50,22 +54,28 @@ public class GameManager : MonoBehaviour {
             //annoucerText.text = "Waiting for players...";
         }
 
+        if (confirmation <= 0)
+        {
+            confirmation = 0;
+        }
 
-        if (confirmation == 1)
+        if (confirmation == 2)
         {
             //annoucerText.text = "Winner Winner chiken dinner!";
             //move
             player_1.GetComponent<PlayerController>().move = true;
+            player_2.GetComponent<PlayerController>().move = true;
 
             //reset
             confirmation = 0;
+            //StartCoroutine(Reset());
             player_1.GetComponent<PlayerController>().confirmed = false;
-
+            player_2.GetComponent<PlayerController>().confirmed = false;
 
         }
 
-			//preparation phase
-			if(preparationPhase){
+        //preparation phase
+        if (preparationPhase){
 				prepScreen.SetActive(true);
 			} else if (!preparationPhase){
 				prepScreen.SetActive(false);
@@ -94,6 +104,13 @@ public class GameManager : MonoBehaviour {
         preparationPhase = true;
         yield return new WaitForSecondsRealtime(2.5f);
         preparationPhase = false;
+        yield return null;
+    }
+
+    IEnumerator Reset()
+    {
+        yield return new WaitForSecondsRealtime(2.5f);
+            confirmation = 0;
         yield return null;
     }
 
