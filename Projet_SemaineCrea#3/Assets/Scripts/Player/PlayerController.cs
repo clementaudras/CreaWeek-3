@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     public GameManager GM;
     public bool move;
 
+	Vector3 velocityNormilze;
+
     //Vector3 currDir;
     public bool confirmed;
 
@@ -71,14 +73,13 @@ public class PlayerController : MonoBehaviour {
                 // ANGLE GUN
                 arrow.transform.rotation = Quaternion.AngleAxis(aim_angle, Vector3.forward);
             }
+        }
 
-            //eggs
-            if (Input.GetButtonDown("p1_RightBumper"))
+		            //eggs
+            if (Input.GetButtonDown("p1_RightBumper") || Input.GetButtonDown("p2_RightBumper"))
             {
                 Debug.Log("Instantiate Egg and move player.");
             }
-        }
-
 
         /*
         if (x != 0.0f || y != 0.0f)
@@ -159,6 +160,10 @@ public class PlayerController : MonoBehaviour {
     rb.velocity = rb.velocity * 0.01f;
 }
 */
+		transform.rotation = Quaternion.LookRotation(velocityNormilze, Vector2.zero);
+		if(rb.velocity != Vector2.zero){
+			velocityNormilze = rb.velocity.normalized;
+		}
 
         //Press button "A" to go fast
         if (move)
@@ -169,6 +174,7 @@ public class PlayerController : MonoBehaviour {
                 rb.AddRelativeForce((target.transform.position - transform.position).normalized * forcePower);
                 StartCoroutine("SlowDown");
                 move = false;
+				//transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.right);
         }
     }
 
