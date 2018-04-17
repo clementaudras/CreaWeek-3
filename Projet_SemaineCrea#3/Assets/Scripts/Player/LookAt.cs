@@ -13,6 +13,7 @@ public class LookAt : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.LookAt(target);
-	}
+		//transform.LookAt(target);
+        transform.rotation = Quaternion.LookRotation(Vector3.up, target.transform.position);
+    }
 }
