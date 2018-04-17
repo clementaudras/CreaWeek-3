@@ -83,11 +83,12 @@ public class PlayerController : MonoBehaviour {
         }
 
 		            //eggs
+					/*
             if (Input.GetButtonDown("p1_RightBumper") || Input.GetButtonDown("p2_RightBumper"))
             {
                 Debug.Log("Instantiate Egg and move player.");
             }
-
+			*/
         /*
         if (x != 0.0f || y != 0.0f)
         {

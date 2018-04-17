@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Egg : MonoBehaviour {
 		public float eggHealthPoint = 100;
-
+		public GameObject flaque;
 		public bool slow = true;
 		public Rigidbody2D rb;
 
@@ -20,6 +20,13 @@ public class Egg : MonoBehaviour {
         yield return null;
     }
 
+		IEnumerator Die()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        gameObject.SetActive(false);
+        yield return null;
+    }
+
 		// Update is called once per frame
 		void Update () {
 		//slow
@@ -29,7 +36,8 @@ public class Egg : MonoBehaviour {
 			
 			//egg death -> flaque
 		if(eggHealthPoint <= 0f){
-			gameObject.SetActive(false);
+			flaque.SetActive(true);
+			StartCoroutine("Die");
 			}	
 		}
 

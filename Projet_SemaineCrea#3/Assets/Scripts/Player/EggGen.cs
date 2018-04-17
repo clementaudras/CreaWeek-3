@@ -24,7 +24,7 @@ public class EggGen : MonoBehaviour {
 	void Update () {
 
 	//instantiate egg with a button
-			if(Input.GetKeyDown(KeyCode.G)){
+			if(Input.GetKeyDown(KeyCode.G) || Input.GetButtonDown("p1_RightBumper") || Input.GetButtonDown("p2_RightBumper")){
 			Instantiate(eggPrefab, transform.position, Quaternion.identity);
 			Debug.Log("Instantiate Egg and move player.");
 			rb.AddRelativeForce((target.transform.position - transform.position).normalized * eggForcePower);
