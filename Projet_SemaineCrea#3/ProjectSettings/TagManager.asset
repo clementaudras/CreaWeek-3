@@ -7,6 +7,8 @@ TagManager:
   - Bouncy
   - Player1
   - Player2
+  - HeadP1
+  - HeadP2
   layers:
   - Default
   - TransparentFX

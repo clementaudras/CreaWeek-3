@@ -8,6 +8,7 @@ public class Egg : MonoBehaviour {
 		public Flaque flaqueScript;
 		public bool slow = true;
 		public Rigidbody2D rb;
+        public bool _isPlayer1Egg;
 
 		// Use this for initialization
 		void Start () {
@@ -30,6 +31,7 @@ public class Egg : MonoBehaviour {
 
 		// Update is called once per frame
 		void Update () {
+
 		//slow
 		if (slow){
 		    rb.velocity = rb.velocity * 0.9f;
@@ -43,28 +45,44 @@ public class Egg : MonoBehaviour {
 		}
 
 		void OnTriggerEnter2D(Collider2D other){
-			if(other.CompareTag("Player1")){
-				if(eggHealthPoint <= 0f){
-					flaqueScript._isPlayer1 = true;
-				}
-				
-				StartCoroutine("SlowDown");
-				rb.AddRelativeForce(Vector3.right.normalized * 10f);
-			}
-
-			if(other.CompareTag("Player2")){
-				if(eggHealthPoint <= 0f){
-					flaqueScript._isPlayer1 = false;
-				}
-				
-				StartCoroutine("SlowDown");
-				rb.AddRelativeForce(Vector3.right.normalized * 10f);
-			}
-		}
-
+        StartCoroutine("SlowDown");
+        rb.AddRelativeForce(Vector3.right.normalized * 10f);
+        if (_isPlayer1Egg)
+        {
+            flaqueScript._isPlayer1 = true;
+        }
+        else if (!_isPlayer1Egg)
+        {
+            flaqueScript._isPlayer1 = false;
+        }
+    }
 
 		void OnCollisionEnter2D(Collision2D collision) {
 			if (collision.relativeVelocity.magnitude > 0f)
 				eggHealthPoint -= 10f * collision.relativeVelocity.magnitude;
 			}
 		}
+
+
+
+
+/*
+
+        if(other.CompareTag("Player1")){
+            if(eggHealthPoint <= 0f){
+                flaqueScript._isPlayer1 = true;
+            }
+
+            StartCoroutine("SlowDown");
+            rb.AddRelativeForce(Vector3.right.normalized * 10f);
+        }
+
+        if(other.CompareTag("Player2")){
+            if(eggHealthPoint <= 0f){
+                flaqueScript._isPlayer1 = false;
+            }
+
+            StartCoroutine("SlowDown");
+            rb.AddRelativeForce(Vector3.right.normalized * 10f);
+        }
+*/

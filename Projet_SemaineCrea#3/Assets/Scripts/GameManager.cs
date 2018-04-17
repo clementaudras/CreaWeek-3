@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public int confirmation;
-    public PlayerController player_1;
+    public GameObject player_1;
 	public bool preparationPhase;
 	public bool resolutionPhase;
 	public GameObject prepScreen;
 	public GameObject resolScreen;
+    public Text annoucerText;
+
+    bool _isEverthingStatic = true;
 
     //public PlayerController player_2;
 
@@ -21,14 +25,35 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//quit to menu
-		if(Input.GetKeyDown(KeyCode.Escape)){
+
+        if (player_1 == null)
+            player_1 = GameObject.FindGameObjectWithTag("Player1");
+
+
+        if (!_isEverthingStatic)
+        {
+            annoucerText.text = "Winner Winner chiken dinner!";
+        }
+        else
+        {
+            annoucerText.text = "Waiting for players...";
+        }
+
+        //quit to menu
+        if (Input.GetKeyDown(KeyCode.Escape)){
 			//quit to menu
         SceneManager.LoadScene("Menu");
 		}
 
-	    if(confirmation == 1)
+        if(confirmation == 0)
         {
+            //annoucerText.text = "Waiting for players...";
+        }
+
+
+        if (confirmation == 1)
+        {
+            //annoucerText.text = "Winner Winner chiken dinner!";
             //move
             player_1.GetComponent<PlayerController>().move = true;
 
@@ -62,7 +87,17 @@ public class GameManager : MonoBehaviour {
         yield return null;
     }
 
-	 IEnumerator CheckObjectsHaveStopped()
+
+    IEnumerator PlayerDeathTransition()
+    {
+        yield return new WaitForSecondsRealtime(2.5f);
+        preparationPhase = true;
+        yield return new WaitForSecondsRealtime(2.5f);
+        preparationPhase = false;
+        yield return null;
+    }
+
+    IEnumerator CheckObjectsHaveStopped()
  {
      print("checking... ");
      Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
@@ -83,8 +118,8 @@ public class GameManager : MonoBehaviour {
         }
      
      }
-     //Debug.Log("Everything is static.");
-	 //Do something else
- 
+        //Debug.Log("Everything is static.");
+        //Do something else
+        _isEverthingStatic = true;
  }
 }

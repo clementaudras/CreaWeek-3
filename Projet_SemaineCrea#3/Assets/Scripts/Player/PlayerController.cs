@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 		public Transform target;
         public Transform targetPos;
 
-    public float horizontalSpeed = 100.0F;
+        private float horizontalSpeed = 100.0F;
 	    public Rigidbody2D rb;
 		public float forcePower = 50f;
 		public bool slow = false;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
     Transform spriteTrans;
 
     public GameObject egg;
-
+    public GameObject fakeEgg;
 
 	//Debug Velocity Direction
 	public Vector3 velocityVector;
@@ -42,45 +42,17 @@ public class PlayerController : MonoBehaviour {
         arrowTrans = transform.GetChild(1);
         spriteTrans = transform.GetChild(0);
         rb = GetComponent<Rigidbody2D>();
-
-
-		
     }
 
-    /*
-    void FixedUpdate()
-    {
-        currDir = new Vector3(transform.position.x, transform.position.y, 0);
-    }
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Enter2D");
-        Vector2 newDir = new Vector2(transform.position.x, transform.position.y);
-        float newDirValue = Mathf.Atan2(newDir.y - currDir.y, newDir.x - currDir.x);
-        float newDirValueDeg = (90 / Mathf.PI) * newDirValue;
-        transform.rotation = Quaternion.Euler(0, 0, newDirValueDeg);
-    }
-    */
     void Update() {
 
-	//
-	velocityVector = rb.velocity.normalized;
-	directionVel = velocityVector + transform.position;
+        //rebond aligner
+        Debug.DrawLine(transform.position, directionVel, Color.magenta);
+        velocityVector = rb.velocity.normalized;
+        directionVel = velocityVector + transform.position;
+        spriteTrans.LookAt(directionVel);
 
-	Debug.DrawLine(transform.position, directionVel, Color.red);
-	
-	_lookRotation = Quaternion.LookRotation(directionVel);
-	//spriteTrans.rotation = _lookRotation;
-	spriteTrans.LookAt(directionVel);	
-	//
-
-        //debug
-        //Vector3 targetDir = target.position - transform.position;
-
-        //Vector3 newDir = Vector3.RotateTowards(transform.right, targetDir, 0f, 0.0f);
-        //Debug.DrawRay(transform.position, newDir, Color.red);
-
+        //Controller input
         if (player_1)
         {
             //with josticks
@@ -101,26 +73,34 @@ public class PlayerController : MonoBehaviour {
 
                 aim_angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
 
-                // ANGLE GUN
+                // ANGLE ARROW
                 arrow.transform.rotation = Quaternion.AngleAxis(aim_angle, Vector3.forward);
             }
+        } else if (!player_1) {
+
+                //with josticks
+                float aim_angle = 0.0f;
+                float x = Input.GetAxis("p2_Horizontal");
+                float y = Input.GetAxis("p2_Vertical");
+
+                // CANCEL ALL INPUT BELOW THIS FLOAT
+                float R_analog_threshold = 0.10f;
+
+                if (Mathf.Abs(x) < R_analog_threshold) { x = 0.0f; }
+
+                if (Mathf.Abs(y) < R_analog_threshold) { y = 0.0f; }
+
+                // CALCULATE ANGLE AND ROTATE
+                if (x != 0.0f || y != 0.0f)
+                {
+
+                    aim_angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+
+                    // ANGLE ARROW
+                    arrow.transform.rotation = Quaternion.AngleAxis(aim_angle, Vector3.forward);
+                }
         }
 
-		            //eggs
-					/*
-            if (Input.GetButtonDown("p1_RightBumper") || Input.GetButtonDown("p2_RightBumper"))
-            {
-                Debug.Log("Instantiate Egg and move player.");
-            }
-			*/
-        /*
-        if (x != 0.0f || y != 0.0f)
-        {
-            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-            // Do something with the angle here.
-            arrow.rotation = angle;
-        }
-        */
         //with keys
         if (Input.GetKey(KeyCode.Q))
 			arrow.Rotate(Vector3.forward * horizontalSpeed * Time.deltaTime);
@@ -129,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 			arrow.Rotate(-Vector3.forward * horizontalSpeed * Time.deltaTime);
 
 
-        //Confirmation de la direction a prendre
+        //Direction confirmation
         if (confirmed)
         {
             target.transform.parent = null;
@@ -149,79 +129,21 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-
-
-
-
-
-
-        if (reflect)
-        {
-
-            /*
-            RaycastHit hit;
-
-            if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, 10f))
-            {
-                Vector2 incomingV = hit.normal - transform.position;
-                //Vector3 reflectV = Vector3.Reflect(incomingV, hit.normal);
-                //Debug.DrawRay(hit.point, reflectV, Color.green, 10f);
-                Vector2.Reflect(incomingV, hit.normal);
-                Vector2 outboundDirection = Vector2.Reflect(incomingV, hit.normal);
-                //Transform hitBounce = PoolManager.Pools["AMMO"].Spawn("BoltReflected");
-                //transform.position = hit.point;
-                //transform.eulerAngles = reflectV;
-            }
-            */
-        }
-
-        //Debug.DrawLine(transform.position, newDir * 100f, Color.red);
-
-        //Xbox 360 controller 1
-
-        //Xbox 360 controller 2
-
-        //Slow velocity over time
+        //slower over time
         if (slow){
 		    rb.velocity = rb.velocity * 0.9f;
 		}
-        /*
-        if(Input.GetKey(KeyCode.S)){
-    Debug.Log(rb.velocity);
-    //rb.velocity = Vector3.zero;
-    rb.velocity = rb.velocity * 0.01f;
-}
-*/
 
-		//Rotation direction
-        /*
-		if (GM.GetComponent<GameManager>().confirmation != 0)
-        {
-            angle = arrowTrans.rotation;
-
-        }
-        else
-        {
-		
-            spriteTrans.rotation = angle;
-        }
-		*/
-
-        //Press button "A" to go fast
+        //if all player have confirmed -> Move chiken
         if (move)
         {
-                //Debug.Log("move");
+                fakeEgg.SetActive(false);
                 slow = false;
-                //rb.AddRelativeForce(Vector3.forward * 100f);
                 rb.AddRelativeForce((target.transform.position - transform.position).normalized * forcePower);
                 StartCoroutine("SlowDown");
                 move = false;
-				//transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.right);
         }
     }
-
-
-    
 
     IEnumerator SlowDown()
     {
@@ -230,5 +152,3 @@ public class PlayerController : MonoBehaviour {
         yield return null;
     }
 }
-	 
-	 
