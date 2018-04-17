@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public int confirmation;
@@ -20,6 +21,12 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//quit to menu
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			//quit to menu
+        SceneManager.LoadScene("Menu");
+		}
+
 	    if(confirmation == 1)
         {
             //move
@@ -76,7 +83,7 @@ public class GameManager : MonoBehaviour {
         }
      
      }
-     Debug.Log("Everything is static.");
+     //Debug.Log("Everything is static.");
 	 //Do something else
  
  }
