@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	//Debug Velocity Direction
-	Vector3 velocityVector;
+	public Vector3 velocityVector;
 	public Vector3 directionVel;
 
 	//
