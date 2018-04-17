@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour {
 
 	Vector3 velocityNormilze;
 
+
+	public GameObject egg;
+
     //Vector3 currDir;
     public bool confirmed;
 
