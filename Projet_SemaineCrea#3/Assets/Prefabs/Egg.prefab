@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 212050090704676558}
   - component: {fileID: 58316023387757030}
   - component: {fileID: 114868210396945300}
+  - component: {fileID: 114315443435354310}
   m_Layer: 0
   m_Name: Flaque
   m_TagString: Untagged
@@ -164,6 +165,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114315443435354310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415054776842436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a17567a74f5eb44fac314d7bfd47d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isPlayer1: 1
 --- !u!114 &114523433483996822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,8 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc08a8b3d39d0242b2ff2356681817a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggHealthPoint: 500
+  eggHealthPoint: 1
   flaque: {fileID: 1415054776842436}
+  flaqueScript: {fileID: 114315443435354310}
   slow: 1
   rb: {fileID: 50432991012344258}
 --- !u!114 &114868210396945300

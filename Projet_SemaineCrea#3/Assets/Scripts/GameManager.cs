@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		StartCoroutine(ScreenChanger());
+		StartCoroutine(CheckObjectsHaveStopped());
 	}
 	
 	// Update is called once per frame
@@ -53,4 +54,30 @@ public class GameManager : MonoBehaviour {
         preparationPhase = false;
         yield return null;
     }
+
+	 IEnumerator CheckObjectsHaveStopped()
+ {
+     print("checking... ");
+     Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
+     bool allSleeping = false;
+     
+     while(!allSleeping)
+     {
+        allSleeping = true;
+ 
+        foreach (Rigidbody GO in GOS) 
+        {
+           if(!GO.IsSleeping())
+           {
+              allSleeping = false;
+              yield return null;
+              break;
+           }
+        }
+     
+     }
+     Debug.Log("Everything is static.");
+	 //Do something else
+ 
+ }
 }

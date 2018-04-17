@@ -5,6 +5,7 @@ using UnityEngine;
 public class Egg : MonoBehaviour {
 		public float eggHealthPoint = 100;
 		public GameObject flaque;
+		public Flaque flaqueScript;
 		public bool slow = true;
 		public Rigidbody2D rb;
 
@@ -42,9 +43,22 @@ public class Egg : MonoBehaviour {
 		}
 
 		void OnTriggerEnter2D(Collider2D other){
-			if(other.CompareTag("Player")){
+			if(other.CompareTag("Player1")){
+				if(eggHealthPoint <= 0f){
+					flaqueScript._isPlayer1 = true;
+				}
+				
 				StartCoroutine("SlowDown");
-				//rb.AddRelativeForce(Vector3.right.normalized * 10f);
+				rb.AddRelativeForce(Vector3.right.normalized * 10f);
+			}
+
+			if(other.CompareTag("Player2")){
+				if(eggHealthPoint <= 0f){
+					flaqueScript._isPlayer1 = false;
+				}
+				
+				StartCoroutine("SlowDown");
+				rb.AddRelativeForce(Vector3.right.normalized * 10f);
 			}
 		}
 
