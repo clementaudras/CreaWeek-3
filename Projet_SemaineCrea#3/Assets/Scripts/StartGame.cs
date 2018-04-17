@@ -12,12 +12,12 @@ public class StartGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown("Start")){
+		if(Input.GetButtonDown("Start") || Input.GetKey(KeyCode.Space)){
             Debug.Log("StartGame");
             SceneManager.LoadScene("TheGame");
 		}
 
-        if (Input.GetButtonDown("Quit"))
+        if (Input.GetButtonDown("Quit") || Input.GetKey(KeyCode.Escape))
         {
             Debug.Log("QuitGame");
             Application.Quit();
