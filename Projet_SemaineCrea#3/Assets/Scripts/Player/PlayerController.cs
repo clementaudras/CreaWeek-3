@@ -18,12 +18,21 @@ public class PlayerController : MonoBehaviour {
     public GameManager GM;
     public bool move;
 
+	private Quaternion _lookRotation;
+
 	Vector3 velocityNormilze;
     Quaternion angle;
     Transform arrowTrans;
     Transform spriteTrans;
 
     public GameObject egg;
+
+
+	//Debug Velocity Direction
+	Vector3 velocityVector;
+	public Vector3 directionVel;
+
+	//
 
     //Vector3 currDir;
     public bool confirmed;
@@ -33,6 +42,9 @@ public class PlayerController : MonoBehaviour {
         arrowTrans = transform.GetChild(1);
         spriteTrans = transform.GetChild(0);
         rb = GetComponent<Rigidbody2D>();
+
+
+		
     }
 
     /*
@@ -51,6 +63,18 @@ public class PlayerController : MonoBehaviour {
     }
     */
     void Update() {
+
+	//
+	velocityVector = rb.velocity.normalized;
+	directionVel = velocityVector + transform.position;
+
+	Debug.DrawLine(transform.position, directionVel, Color.red);
+	
+	_lookRotation = Quaternion.LookRotation(directionVel);
+	//spriteTrans.rotation = _lookRotation;
+	spriteTrans.LookAt(directionVel);	
+	//
+
         //debug
         //Vector3 targetDir = target.position - transform.position;
 
@@ -169,22 +193,24 @@ public class PlayerController : MonoBehaviour {
 }
 */
 
-
-        if (GM.GetComponent<GameManager>().confirmation != 0)
+		//Rotation direction
+        /*
+		if (GM.GetComponent<GameManager>().confirmation != 0)
         {
             angle = arrowTrans.rotation;
 
         }
         else
         {
-
+		
             spriteTrans.rotation = angle;
         }
+		*/
 
         //Press button "A" to go fast
         if (move)
         {
-                Debug.Log("move");
+                //Debug.Log("move");
                 slow = false;
                 //rb.AddRelativeForce(Vector3.forward * 100f);
                 rb.AddRelativeForce((target.transform.position - transform.position).normalized * forcePower);
