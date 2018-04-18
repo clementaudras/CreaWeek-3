@@ -11,7 +11,9 @@ public class PlayerHealth : MonoBehaviour {
     public GameObject blueWinScreen;
     public GameObject redWinScreen;
     public Transition transitionScript;
-    
+    public GameObject _player1;
+    public GameObject _player2;
+
     GameObject dontDestroyon;
     bool _isDead;
     bool _canAddScore = true;
@@ -46,8 +48,11 @@ public class PlayerHealth : MonoBehaviour {
         if (playerHealth <= 0)
         {
             _isDead = true;
+
             scoreScript = (Score)FindObjectOfType(typeof(Score));
 
+            _player1.SetActive(false);
+            _player2.SetActive(false);
 
             StartCoroutine(NextPhase());
         }
@@ -65,6 +70,27 @@ public class PlayerHealth : MonoBehaviour {
             blueWinScreen.SetActive(true);
             StartCoroutine(WaitLoad());
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if (_isPlayer1)
+        {
+            if (other.CompareTag("P2Egg"))
+            {
+                Destroy(other.transform.parent.gameObject);
+                playerHealth = 0;
+            }
+        } else if (!_isPlayer1)
+        {
+            if (other.CompareTag("P1Egg"))
+            {
+                Destroy(other.transform.parent.gameObject);
+                playerHealth = 0;
+            }
+        }
+
     }
 
     IEnumerator WaitLoad()

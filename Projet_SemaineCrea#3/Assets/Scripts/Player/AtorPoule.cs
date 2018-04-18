@@ -20,6 +20,7 @@ public class AtorPoule : MonoBehaviour {
         {
             pouleAtor.SetBool("Pond", true);
             pondAct.pond = false;
+            //Debug.Log("POND");
         }
 
 
@@ -28,6 +29,7 @@ public class AtorPoule : MonoBehaviour {
 
             pouleAtor.SetBool("Run", true);
             pouleAtor.SetBool("Iddle", false);
+            //Debug.Log("MOVE");
         }
         else
         {

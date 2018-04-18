@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Egg : MonoBehaviour {
-		public float eggHealthPoint = 100f;
+		public int eggHealthPoint = 3;
 		public GameObject flaque;
 		public Flaque flaqueScript;
 		public bool slow = true;
 		public Rigidbody2D rb;
         public bool _isPlayer1Egg;
-    public float rotInd;
+        public float rotInd;
 
-    Animator eggState;
-   Transform eggSprite;
+        Animator eggState;
+        Transform eggSprite;
 
     // Use this for initialization
     void Start () {
         eggState = this.transform.GetChild(0).GetComponent<Animator>();
         eggSprite = this.transform.GetChild(0);
+
+
     }
 		
 	IEnumerator SlowDown()
@@ -49,54 +51,20 @@ public class Egg : MonoBehaviour {
 		}
 			
 			//egg death -> flaque
-		if(eggHealthPoint <= 0f){
+		if(eggHealthPoint <= 0){
 			flaque.SetActive(true);
 			StartCoroutine("Die");
 			}	
 		}
 
 		void OnTriggerEnter2D(Collider2D other){
-            rb.AddRelativeForce(Vector3.right.normalized * 10f);
+            //rb.AddRelativeForce(Vector3.right.normalized * 10f);
             StartCoroutine("SlowDown");
-        /*
-        if (_isPlayer1Egg)
-        {
-            flaqueScript._isPlayer1 = true;
-        }
-        else if (!_isPlayer1Egg)
-        {
-            flaqueScript._isPlayer1 = false;
-        }
-        */
     }
 
 		void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.relativeVelocity.magnitude > 0f)
-            eggHealthPoint -= 10f;
+            //if (collision.relativeVelocity.magnitude > 0f)
+                eggHealthPoint -= 1;
                 //eggHealthPoint -= 10f * collision.relativeVelocity.magnitude;
     }
 }
-
-
-
-
-/*
-
-        if(other.CompareTag("Player1")){
-            if(eggHealthPoint <= 0f){
-                flaqueScript._isPlayer1 = true;
-            }
-
-            StartCoroutine("SlowDown");
-            rb.AddRelativeForce(Vector3.right.normalized * 10f);
-        }
-
-        if(other.CompareTag("Player2")){
-            if(eggHealthPoint <= 0f){
-                flaqueScript._isPlayer1 = false;
-            }
-
-            StartCoroutine("SlowDown");
-            rb.AddRelativeForce(Vector3.right.normalized * 10f);
-        }
-*/

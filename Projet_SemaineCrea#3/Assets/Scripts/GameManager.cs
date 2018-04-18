@@ -15,7 +15,12 @@ public class GameManager : MonoBehaviour {
 	public GameObject resolScreen;
     public Text annoucerText;
 
-    public Transition transitionScript;
+    public int p1_eggCount = 0;
+    public int p1_antiEggCount = 0;
+    public bool p1_canLayEgg = true;
+    public bool p1_canExplodeEgg;
+
+    public int p2_eggCount = 0;
 
     bool _isEverthingStatic = true;
 
@@ -30,12 +35,16 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        Debug.Log(p1_eggCount);
         if (player_1 == null)
             player_1 = GameObject.FindGameObjectWithTag("Player1");
 
         if (player_2 == null)
             player_2 = GameObject.FindGameObjectWithTag("Player2");
 
+        //Debug.Log(player_1.GetComponent<EggGen>()._layEgg);
+
+        /*
         if (!_isEverthingStatic)
         {
             annoucerText.text = "Winner Winner chiken dinner!";
@@ -44,6 +53,7 @@ public class GameManager : MonoBehaviour {
         {
             annoucerText.text = "Waiting for players...";
         }
+        */
 
         //quit to menu
         if (Input.GetKeyDown(KeyCode.Escape)){
@@ -70,6 +80,8 @@ public class GameManager : MonoBehaviour {
                 player_1.GetComponent<PlayerController>().move = true;
 				player_1.GetComponent<PlayerController>().StartCoroutine("WaitToReParent");
 				player_1.GetComponent<PlayerController>().p1_canSelectDir = true;
+                p1_eggCount = 0;
+                p1_antiEggCount += 1;
             }
 
             if (player_2.GetComponent<PlayerController>().dirConfirmed == true)
@@ -82,12 +94,32 @@ public class GameManager : MonoBehaviour {
             //Lay egg
             if (player_1.GetComponent<EggGen>().eggConfirmed == true)
             {
-                player_1.GetComponent<EggGen>()._layEgg = true;
+                p1_eggCount += 1;
+                if(p1_eggCount >= 2)
+                {
+                    StartCoroutine(WaitReset_P1EggCount());
+                    player_1.GetComponent<EggGen>().p1_canSelectEgg = true;
+                }
+                else if(p1_eggCount < 2)
+                {
+                    player_1.GetComponent<EggGen>()._layEgg = true;
+                    player_1.GetComponent<EggGen>().p1_canSelectEgg = true;
+                }
             }
 
             if (player_2.GetComponent<EggGen>().eggConfirmed == true)
             {
-                player_2.GetComponent<EggGen>()._layEgg = true;
+                p2_eggCount += 1;
+                if (p2_eggCount >= 2)
+                {
+                    StartCoroutine(WaitReset_P2EggCount());
+                    player_2.GetComponent<EggGen>().p2_canSelectEgg = true;
+                }
+                else if (p2_eggCount < 2)
+                {
+                    player_2.GetComponent<EggGen>()._layEgg = true;
+                    player_2.GetComponent<EggGen>().p2_canSelectEgg = true;
+                }
             }
 
 
@@ -131,10 +163,17 @@ public class GameManager : MonoBehaviour {
 
 
 
-    IEnumerator PlayerDeathTransition()
+    IEnumerator WaitReset_P1EggCount()
     {
-        yield return new WaitForSecondsRealtime(2.5f);
-        transitionScript.GetComponent<Transition>().transition = true;
+        yield return new WaitForSecondsRealtime(0.1f);
+        p1_eggCount = 0;
+        yield return null;
+    }
+
+    IEnumerator WaitReset_P2EggCount()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        p2_eggCount = 0;
         yield return null;
     }
 
@@ -147,7 +186,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CheckObjectsHaveStopped()
  {
-     print("checking... ");
+     //print("checking... ");
      Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
      bool allSleeping = false;
      

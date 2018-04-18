@@ -10,10 +10,10 @@ public class PlayerController : MonoBehaviour {
 		public Transform target;
         public Transform targetPos;
 
-        private float horizontalSpeed = 100.0F;
+        private float horizontalSpeed = 100.0f;
 	    public Rigidbody2D rb;
-		public float forcePower = 50f;
-		public bool slow = false;
+		public float forcePower = 100f;
+	bool slow = false;
     public bool reflect = false;
     public GameManager GM;
     public bool move;
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour {
 							animatorUI.SetBool("Start", false);
 							this.dirConfirmed = true;
 							GM.GetComponent<GameManager>().confirmation += 1;
-							Debug.Log("p1 Added 1");
+							//Debug.Log("p1 Added 1");
 							p1_hasConfirmed = false;
 							p1_canCancel = true;
 							p1_canSelectDir = false;
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour {
 								this.dirConfirmed = false;
 								StartCoroutine(WaitToReParent());
 								//GM.GetComponent<GameManager>().confirmation -= 1;
-								Debug.Log("p1 Removed 1");
+								//Debug.Log("p1 Removed 1");
 								p1_hasConfirmed = false;
 								p1_canCancel = false;
 								p1_canSelectDir = true;
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour {
 								this.dirConfirmed = false;
 								StartCoroutine(WaitToReParent());
 								GM.GetComponent<GameManager>().confirmation -= 1;
-								Debug.Log("p1 Removed 1");
+								//Debug.Log("p1 Removed 1");
 								p1_hasConfirmed = false;
 								p1_canCancel = false;
 								p1_canSelectDir = true;
@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour {
 							animatorUI.SetBool("Start", false);
 							this.dirConfirmed = true;
 							GM.GetComponent<GameManager>().confirmation += 1;
-							Debug.Log("p1 Added 1");
+							//Debug.Log("p1 Added 1");
 							p2_hasConfirmed = false;
 							p2_canCancel = true;
 							p2_canSelectDir = false;
@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour {
 								this.dirConfirmed = false;
 								StartCoroutine(WaitToReParent());
 								//GM.GetComponent<GameManager>().confirmation -= 1;
-								Debug.Log("p1 Removed 1");
+								//Debug.Log("p1 Removed 1");
 								p2_hasConfirmed = false;
 								p2_canCancel = false;
 								p2_canSelectDir = true;
@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour {
 								this.dirConfirmed = false;
 								StartCoroutine(WaitToReParent());
 								GM.GetComponent<GameManager>().confirmation -= 1;
-								Debug.Log("p1 Removed 1");
+								//Debug.Log("p1 Removed 1");
 								p2_hasConfirmed = false;
 								p2_canCancel = false;
 								p2_canSelectDir = true;
@@ -340,20 +340,25 @@ public class PlayerController : MonoBehaviour {
 			*/
         }
 
+        if(rb.velocity.magnitude < 0.1)
+        {
+            StopCoroutine(SlowDown());
+        }
 
         //slower over time
         if (slow){
 		    rb.velocity = rb.velocity * 0.9f;
 		}
 
-        Debug.DrawLine(transform.position, (target.transform.position - transform.position).normalized * forcePower, Color.yellow);
+        Debug.DrawLine(transform.position, (target.transform.position - transform.position).normalized * 100f, Color.yellow);
 
         //if all player have confirmed -> Move chicken
         if (move)
         {
                 fakeEgg.SetActive(false);
                 slow = false;
-                rb.AddRelativeForce((target.transform.position - transform.position).normalized * forcePower);
+                //rb.AddRelativeForce((target.transform.position - transform.position).normalized * 100f);
+                
                 StartCoroutine("SlowDown");
                 move = false;
         }
@@ -361,6 +366,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator SlowDown()
     {
+        rb.AddForce((target.transform.position - transform.position).normalized * 100f);
         yield return new WaitForSecondsRealtime(2.5f);
         slow = true;
         yield return null;

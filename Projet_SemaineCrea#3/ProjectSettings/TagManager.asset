@@ -9,6 +9,8 @@ TagManager:
   - Player2
   - HeadP1
   - HeadP2
+  - P1Egg
+  - P2Egg
   layers:
   - Default
   - TransparentFX
