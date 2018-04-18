@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour {
     public Score scoreScript;
     public GameObject blueWinScreen;
     public GameObject redWinScreen;
+    public Transition transitionScript;
+    
     GameObject dontDestroyon;
     bool _isDead;
     bool _canAddScore = true;
@@ -67,9 +69,13 @@ public class PlayerHealth : MonoBehaviour {
 
     IEnumerator WaitLoad()
     {
-        yield return new WaitForSecondsRealtime(5f);
-        SceneManager.LoadScene("Menu");
-        Destroy(dontDestroyon);
+        yield return new WaitForSecondsRealtime(1f);
+        transitionScript.GetComponent<Transition>().transition = true;
+        if (transitionScript.GetComponent<Transition>()._transitionFinished == true)
+        {
+            SceneManager.LoadScene("Menu");
+            Destroy(dontDestroyon);
+        }
     }
 
     IEnumerator NextPhase()
@@ -78,43 +84,16 @@ public class PlayerHealth : MonoBehaviour {
             AddScore();
 
         yield return new WaitForSecondsRealtime(2.5f);
-        //SceneManager.LoadScene("Menu");
 
         if (scoreScript.scoreRed != 3 && scoreScript.scoreBlue != 3)
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            transitionScript.GetComponent<Transition>().transition = true;
+            if (transitionScript.GetComponent<Transition>()._transitionFinished == true)
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
         }
-        /*
-        else if(scoreScript.scoreRed == 3 || scoreScript.scoreBlue != 3)
-        {
-            Debug.Log("RED WIN");
-            redWinScreen.SetActive(true);
-            yield return new WaitForSecondsRealtime(2.5f);
-            SceneManager.LoadScene("Menu");
-        }
-        else if (scoreScript.scoreRed != 3 || scoreScript.scoreBlue == 3)
-        {
-            Debug.Log("BLUE WIN");
-            blueWinScreen.SetActive(true);
-            yield return new WaitForSecondsRealtime(2.5f);
-            SceneManager.LoadScene("Menu");
-        }
-        
-        if (scoreScript.scoreRed == 3)
-        {
-            redWinScreen.SetActive(true);
-            yield return new WaitForSecondsRealtime(2.5f);
-            SceneManager.LoadScene("Menu");
-        }
-
-        if(scoreScript.scoreBlue == 3)
-        {
-            blueWinScreen.SetActive(true);
-            yield return new WaitForSecondsRealtime(2.5f);
-            SceneManager.LoadScene("Menu");
-        }
-        */
         yield return null;
     }
 }

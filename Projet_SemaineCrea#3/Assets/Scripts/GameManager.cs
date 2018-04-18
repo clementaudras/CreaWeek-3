@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject resolScreen;
     public Text annoucerText;
 
+    public Transition transitionScript;
+
     bool _isEverthingStatic = true;
 
     //public PlayerController player_2;
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour {
             confirmation = 0;
         }
 
-        if (confirmation == 2)
+        if (confirmation == 1)
         {
             //annoucerText.text = "Winner Winner chicken dinner!";
             //move
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //preparation phase
+        /*
         if (preparationPhase){
 				prepScreen.SetActive(true);
 			} else if (!preparationPhase){
@@ -115,6 +118,7 @@ public class GameManager : MonoBehaviour {
 			} else if (!resolutionPhase){
 				resolScreen.SetActive(false);
 			}
+            */
     }
 
 	IEnumerator ScreenChanger()
@@ -130,9 +134,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator PlayerDeathTransition()
     {
         yield return new WaitForSecondsRealtime(2.5f);
-        preparationPhase = true;
-        yield return new WaitForSecondsRealtime(2.5f);
-        preparationPhase = false;
+        transitionScript.GetComponent<Transition>().transition = true;
         yield return null;
     }
 
