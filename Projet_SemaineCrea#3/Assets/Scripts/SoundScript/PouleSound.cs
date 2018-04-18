@@ -23,13 +23,8 @@ public class PouleSound : MonoBehaviour {
         {
 
             speakerPoule.Play();
-            speakerPoule.clip=coursePoule;
+            speakerPoule.clip = coursePoule;
             speakerPoule.loop = true;
-        }
-        else
-        {
-            speakerPoule.loop = false;
-            speakerPoule.Stop();
         }
 
     }
