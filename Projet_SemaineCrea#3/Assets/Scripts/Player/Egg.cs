@@ -10,10 +10,14 @@ public class Egg : MonoBehaviour {
 		public Rigidbody2D rb;
         public bool _isPlayer1Egg;
 
-		// Use this for initialization
-		void Start () {
-		
-		}
+    Animator eggState;
+   Transform eggSprite;
+
+    // Use this for initialization
+    void Start () {
+        eggState = this.transform.GetChild(0).GetComponent<Animator>();
+        eggSprite = this.transform.GetChild(0);
+    }
 		
 	IEnumerator SlowDown()
     {
@@ -33,7 +37,11 @@ public class Egg : MonoBehaviour {
 		// Update is called once per frame
 		void Update () {
             flaque.transform.position = transform.position;
-
+        eggState.SetFloat("bkState", eggHealthPoint);
+        if (rb.velocity.magnitude < 0.9)
+        {
+            transform.Rotate(0,0,1*rb.velocity.magnitude);
+        }
         //slow
         if (slow){
 		    rb.velocity = rb.velocity * 0.9f;
