@@ -24,15 +24,19 @@ public class EggGen : MonoBehaviour {
     Transform target;
 	Transform targetPos;
 
+    GameObject fakeEgg;
+
 	// Use this for initialization
 	void Awake () {
 		rb = player.GetComponent<Rigidbody2D>();
 		target = player.GetComponent<PlayerController>().target;
 		targetPos = player.GetComponent<PlayerController>().targetPos;
+        fakeEgg = this.transform.GetChild(3).gameObject;
 	}
 
     void LayEgg()
     {
+        fakeEgg.SetActive(false);
         pond = true;
         Instantiate(eggPrefab, transform.position, Quaternion.identity);
         rb.AddRelativeForce((target.transform.position - transform.position).normalized * eggForcePower);

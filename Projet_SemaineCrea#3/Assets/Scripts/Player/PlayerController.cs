@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour {
 
 	Vector3 velocityNormilze;
     Quaternion angle;
-    Transform arrowTrans;
     Transform spriteTrans;
 
     public GameObject egg;
@@ -42,11 +41,12 @@ public class PlayerController : MonoBehaviour {
     public GameObject A;
     public GameObject B;
 
+
     public EggGen eggGenScript;
 
     void Start()
     {
-        arrowTrans = transform.GetChild(1);
+
         spriteTrans = transform.GetChild(0);
         rb = GetComponent<Rigidbody2D>();
     }
