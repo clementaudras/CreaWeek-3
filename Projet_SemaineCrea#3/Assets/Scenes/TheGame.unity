@@ -608,7 +608,7 @@ MonoBehaviour:
   A: {fileID: 0}
   B: {fileID: 0}
   eggGenScript: {fileID: 0}
-  a: {fileID: 0}
+  animatorUI: {fileID: 0}
 --- !u!50 &83815353
 Rigidbody2D:
   serializedVersion: 4
@@ -724,6 +724,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1, y: 1.1}
   m_EdgeRadius: 0
+--- !u!95 &86336629 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95950922285659928, guid: 5c95d58cbe32d384091058f54d8f2878,
+    type: 2}
+  m_PrefabInternal: {fileID: 2132843637}
+--- !u!4 &86336630 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878,
+    type: 2}
+  m_PrefabInternal: {fileID: 2132843637}
 --- !u!1 &97729803
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,7 +943,7 @@ MonoBehaviour:
   reflect: 1
   GM: {fileID: 16193728}
   move: 0
-  egg: {fileID: 1866702582846038, guid: f8c0826900a38ac4eb0ab5fdaa0ae204, type: 2}
+  egg: {fileID: 1866702582846038, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
   fakeEgg: {fileID: 1953610727}
   velocityVector: {x: 0, y: 0, z: 0}
   directionVel: {x: 0, y: 0, z: 0}
@@ -942,7 +952,7 @@ MonoBehaviour:
   A: {fileID: 1014263874}
   B: {fileID: 2067575357}
   eggGenScript: {fileID: 132556530}
-  a: {fileID: 1269730614}
+  animatorUI: {fileID: 1269730614}
 --- !u!50 &132556527
 Rigidbody2D:
   serializedVersion: 4
@@ -1824,7 +1834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &340785735
 Transform:
   m_ObjectHideFlags: 0
@@ -1840,7 +1850,7 @@ Transform:
   - {fileID: 2041496094}
   - {fileID: 980199872}
   m_Father: {fileID: 2124513654}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &343445508 stripped
 Transform:
@@ -6795,7 +6805,7 @@ MonoBehaviour:
   A: {fileID: 0}
   B: {fileID: 0}
   eggGenScript: {fileID: 0}
-  a: {fileID: 0}
+  animatorUI: {fileID: 0}
 --- !u!50 &1598370406
 Rigidbody2D:
   serializedVersion: 4
@@ -6935,7 +6945,7 @@ MonoBehaviour:
   A: {fileID: 0}
   B: {fileID: 0}
   eggGenScript: {fileID: 0}
-  a: {fileID: 0}
+  animatorUI: {fileID: 0}
 --- !u!50 &1612795216
 Rigidbody2D:
   serializedVersion: 4
@@ -9226,7 +9236,7 @@ MonoBehaviour:
   A: {fileID: 200704245}
   B: {fileID: 1619598817}
   eggGenScript: {fileID: 2124513649}
-  a: {fileID: 0}
+  animatorUI: {fileID: 86336629}
 --- !u!50 &2124513652
 Rigidbody2D:
   serializedVersion: 4
@@ -9308,10 +9318,94 @@ Transform:
   - {fileID: 174696832}
   - {fileID: 1579933873}
   - {fileID: 1373683422}
+  - {fileID: 86336630}
   - {fileID: 340785735}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 12.981001}
+--- !u!1001 &2132843637
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2124513654}
+    m_Modifications:
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 212362375438388130, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212215365846865596, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212891864312859272, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212017074077174996, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212432804979790856, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841219453665518, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_Name
+      value: UI Selec (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2134150777 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1130097776726378, guid: c84ddeb985f54694888c0575c9bfb145,

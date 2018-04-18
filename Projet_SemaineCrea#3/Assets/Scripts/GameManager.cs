@@ -66,11 +66,15 @@ public class GameManager : MonoBehaviour {
             if (player_1.GetComponent<PlayerController>().dirConfirmed == true)
             {
                 player_1.GetComponent<PlayerController>().move = true;
+				player_1.GetComponent<PlayerController>().StartCoroutine("WaitToReParent");
+				player_1.GetComponent<PlayerController>().p1_canSelectDir = true;
             }
 
             if (player_2.GetComponent<PlayerController>().dirConfirmed == true)
             {
                 player_2.GetComponent<PlayerController>().move = true;
+				player_2.GetComponent<PlayerController>().StartCoroutine("WaitToReParent");
+				player_2.GetComponent<PlayerController>().p2_canSelectDir = true;
             }
 
             //Lay egg
