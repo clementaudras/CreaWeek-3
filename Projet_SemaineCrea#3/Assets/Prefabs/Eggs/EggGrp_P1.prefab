@@ -229,6 +229,7 @@ MonoBehaviour:
   slow: 1
   rb: {fileID: 50095995268012216}
   _isPlayer1Egg: 1
+  rotInd: 5
 --- !u!114 &114501003720654406
 MonoBehaviour:
   m_ObjectHideFlags: 1
