@@ -9,6 +9,7 @@ public class Egg : MonoBehaviour {
 		public bool slow = true;
 		public Rigidbody2D rb;
         public bool _isPlayer1Egg;
+    public float rotInd;
 
     Animator eggState;
    Transform eggSprite;
@@ -38,9 +39,9 @@ public class Egg : MonoBehaviour {
 		void Update () {
             flaque.transform.position = transform.position;
         eggState.SetFloat("bkState", eggHealthPoint);
-        if (rb.velocity.magnitude < 0.9)
+        if (rb.velocity.magnitude > 0.9)
         {
-            transform.Rotate(0,0,1*rb.velocity.magnitude);
+            transform.Rotate(0,0,1*rb.velocity.magnitude* rotInd);
         }
         //slow
         if (slow){
