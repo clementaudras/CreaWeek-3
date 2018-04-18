@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour {
 
     public EggGen eggGenScript;
 
+	public Animator animatorUI;
+
     void Start()
     {
 
@@ -135,7 +137,6 @@ public class PlayerController : MonoBehaviour {
             {
                 A.SetActive(false);
                 B.SetActive(true);
-
                 target.transform.parent = null;
                 if (player_1)
                 {
@@ -167,8 +168,10 @@ public class PlayerController : MonoBehaviour {
 
                 if (player_1)
                 {
-                    if (XCI.GetButtonDown(XboxButton.A, XboxController.First) || Input.GetKeyDown(KeyCode.A))
+                    if (XCI.GetButtonDown(XboxButton.LeftStick, XboxController.First) || Input.GetKeyDown(KeyCode.A))
                     {
+						animatorUI.SetBool("Start", true);
+
                         this.dirConfirmed = true;
                         GM.GetComponent<GameManager>().confirmation += 1;
                         Debug.Log("p1 Added 1");
@@ -176,8 +179,10 @@ public class PlayerController : MonoBehaviour {
                 }
                 else if (!player_1)
                 {
-                    if (XCI.GetButtonDown(XboxButton.A, XboxController.Second) || Input.GetKeyDown(KeyCode.L))
+                    if (XCI.GetButtonDown(XboxButton.LeftStick, XboxController.Second) || Input.GetKeyDown(KeyCode.L))
                     {
+						animatorUI.SetBool("Start", true);
+
                         this.dirConfirmed = true;
                         GM.GetComponent<GameManager>().confirmation += 1;
                         Debug.Log("p2 Added 1");

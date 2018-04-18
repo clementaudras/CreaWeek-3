@@ -608,6 +608,7 @@ MonoBehaviour:
   A: {fileID: 0}
   B: {fileID: 0}
   eggGenScript: {fileID: 0}
+  a: {fileID: 0}
 --- !u!50 &83815353
 Rigidbody2D:
   serializedVersion: 4
@@ -932,7 +933,7 @@ MonoBehaviour:
   reflect: 1
   GM: {fileID: 16193728}
   move: 0
-  egg: {fileID: 1327617719705624, guid: 8c18efb90b705114ba18d753e832c47c, type: 2}
+  egg: {fileID: 1866702582846038, guid: f8c0826900a38ac4eb0ab5fdaa0ae204, type: 2}
   fakeEgg: {fileID: 1953610727}
   velocityVector: {x: 0, y: 0, z: 0}
   directionVel: {x: 0, y: 0, z: 0}
@@ -941,6 +942,7 @@ MonoBehaviour:
   A: {fileID: 1014263874}
   B: {fileID: 2067575357}
   eggGenScript: {fileID: 132556530}
+  a: {fileID: 1269730614}
 --- !u!50 &132556527
 Rigidbody2D:
   serializedVersion: 4
@@ -977,6 +979,7 @@ Transform:
   - {fileID: 327682106}
   - {fileID: 575355210}
   - {fileID: 1953610728}
+  - {fileID: 1269730613}
   - {fileID: 739900421}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -3086,7 +3089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &739900421
 Transform:
   m_ObjectHideFlags: 0
@@ -3102,7 +3105,7 @@ Transform:
   - {fileID: 752287833}
   - {fileID: 1176220146}
   m_Father: {fileID: 132556528}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &750842893 stripped
 Transform:
@@ -5337,6 +5340,16 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!4 &1269730613 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878,
+    type: 2}
+  m_PrefabInternal: {fileID: 2143517257}
+--- !u!95 &1269730614 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95950922285659928, guid: 5c95d58cbe32d384091058f54d8f2878,
+    type: 2}
+  m_PrefabInternal: {fileID: 2143517257}
 --- !u!1 &1274173456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6782,6 +6795,7 @@ MonoBehaviour:
   A: {fileID: 0}
   B: {fileID: 0}
   eggGenScript: {fileID: 0}
+  a: {fileID: 0}
 --- !u!50 &1598370406
 Rigidbody2D:
   serializedVersion: 4
@@ -6921,6 +6935,7 @@ MonoBehaviour:
   A: {fileID: 0}
   B: {fileID: 0}
   eggGenScript: {fileID: 0}
+  a: {fileID: 0}
 --- !u!50 &1612795216
 Rigidbody2D:
   serializedVersion: 4
@@ -9202,7 +9217,7 @@ MonoBehaviour:
   reflect: 1
   GM: {fileID: 16193728}
   move: 0
-  egg: {fileID: 1327617719705624, guid: 8c18efb90b705114ba18d753e832c47c, type: 2}
+  egg: {fileID: 1642616892988224, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
   fakeEgg: {fileID: 1373683420}
   velocityVector: {x: 0, y: 0, z: 0}
   directionVel: {x: 0, y: 0, z: 0}
@@ -9211,6 +9226,7 @@ MonoBehaviour:
   A: {fileID: 200704245}
   B: {fileID: 1619598817}
   eggGenScript: {fileID: 2124513649}
+  a: {fileID: 0}
 --- !u!50 &2124513652
 Rigidbody2D:
   serializedVersion: 4
@@ -9340,3 +9356,82 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.94, y: 1.29}
   m_EdgeRadius: 0
+--- !u!1001 &2143517257
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 132556528}
+    m_Modifications:
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 212362375438388130, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212215365846865596, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212891864312859272, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212017074077174996, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 212432804979790856, guid: 5c95d58cbe32d384091058f54d8f2878,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271777805312936, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5c95d58cbe32d384091058f54d8f2878, type: 2}
+  m_IsPrefabParent: 0
