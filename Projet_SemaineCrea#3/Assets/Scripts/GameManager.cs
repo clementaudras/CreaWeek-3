@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour {
     }
 
 
+
     IEnumerator PlayerDeathTransition()
     {
         yield return new WaitForSecondsRealtime(2.5f);

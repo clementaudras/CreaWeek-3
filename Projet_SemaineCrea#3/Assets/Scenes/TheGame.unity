@@ -584,6 +584,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_1: 1
+  varCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   arrow: {fileID: 1628697315}
   target: {fileID: 1544173600}
   targetPos: {fileID: 1568221551}
@@ -893,11 +899,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_1: 1
+  varCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: -0.023517989
+      value: 0.30394965
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.6067782
+      value: 0.66886204
+      inSlope: -0.22006327
+      outSlope: -0.22006327
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   arrow: {fileID: 327682106}
   target: {fileID: 208330988}
   targetPos: {fileID: 1154555553}
   rb: {fileID: 132556527}
-  forcePower: 250
+  forcePower: 100
   slow: 0
   reflect: 1
   GM: {fileID: 16193728}
@@ -925,7 +955,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 0.25
   m_LinearDrag: 0
-  m_AngularDrag: 1
+  m_AngularDrag: 5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -1276,7 +1306,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6daa6ab6999436748aa26366c1664f9c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1700,6 +1730,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4fee8167228724b87aabaf13f58a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &303118696
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.528
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &327682105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,7 +1840,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6daa6ab6999436748aa26366c1664f9c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5353,6 +5425,48 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1001 &1221615435
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1274173456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6774,6 +6888,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_1: 1
+  varCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   arrow: {fileID: 1443827832}
   target: {fileID: 548399162}
   targetPos: {fileID: 618566412}
@@ -6907,6 +7027,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_1: 1
+  varCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   arrow: {fileID: 539343577}
   target: {fileID: 2074618413}
   targetPos: {fileID: 0}
@@ -9237,11 +9363,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_1: 0
+  varCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   arrow: {fileID: 174696832}
   target: {fileID: 98057716}
   targetPos: {fileID: 974578541}
   rb: {fileID: 2124513652}
-  forcePower: 250
+  forcePower: 100
   slow: 0
   reflect: 1
   GM: {fileID: 16193728}

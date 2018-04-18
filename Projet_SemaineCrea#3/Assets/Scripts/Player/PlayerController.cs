@@ -5,7 +5,7 @@ using XboxCtrlrInput;
 
 public class PlayerController : MonoBehaviour {
     public bool player_1 = true;
-
+	public AnimationCurve varCurve;
     public Transform arrow;
 		public Transform target;
         public Transform targetPos;
