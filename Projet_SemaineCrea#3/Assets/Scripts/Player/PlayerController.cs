@@ -45,6 +45,12 @@ public class PlayerController : MonoBehaviour {
     public EggGen eggGenScript;
 
 	public Animator animatorUI;
+	bool p1_hasConfirmed;
+	bool p2_hasConfirmed;
+	bool p1_canCancel;
+	bool p2_canCancel;
+	public bool p1_canSelectDir = true;
+	public bool p2_canSelectDir = true;
 
     void Start()
     {
@@ -133,19 +139,141 @@ public class PlayerController : MonoBehaviour {
         //Direction confirmation
         if(eggGenScript.GetComponent<EggGen>().eggConfirmed == false)
         {
+		//new
+		if(player_1){
+			if (XCI.GetButtonDown(XboxButton.LeftStick, XboxController.First) || Input.GetKeyDown(KeyCode.A))
+                    {
+						if(p1_canSelectDir){
+							animatorUI.SetBool("Press_B", false);
+							animatorUI.SetBool("Press_A", false);
+							animatorUI.SetBool("Start", true);
+							p1_hasConfirmed = true;
+							target.transform.parent = null;
+						}
+                    }
+					
+					if(p1_hasConfirmed){
+						if (XCI.GetButtonDown(XboxButton.A, XboxController.First)) {
+							animatorUI.SetBool("Press_B", false);
+							animatorUI.SetBool("Press_A", true);
+							animatorUI.SetBool("Start", false);
+							this.dirConfirmed = true;
+							GM.GetComponent<GameManager>().confirmation += 1;
+							Debug.Log("p1 Added 1");
+							p1_hasConfirmed = false;
+							p1_canCancel = true;
+							p1_canSelectDir = false;
+						}
+
+							if (XCI.GetButtonDown(XboxButton.B, XboxController.First)) {
+								animatorUI.SetBool("Press_B", true);
+								animatorUI.SetBool("Press_A", false);
+								animatorUI.SetBool("Start", false);
+								this.dirConfirmed = false;
+								StartCoroutine(WaitToReParent());
+								//GM.GetComponent<GameManager>().confirmation -= 1;
+								Debug.Log("p1 Removed 1");
+								p1_hasConfirmed = false;
+								p1_canCancel = false;
+								p1_canSelectDir = true;
+							}
+
+
+							}
+							if(p1_canCancel){
+								if (XCI.GetButtonDown(XboxButton.B, XboxController.First)) {
+								animatorUI.SetBool("Press_B", true);
+								animatorUI.SetBool("Press_A", false);
+								animatorUI.SetBool("Start", false);
+								this.dirConfirmed = false;
+								StartCoroutine(WaitToReParent());
+								GM.GetComponent<GameManager>().confirmation -= 1;
+								Debug.Log("p1 Removed 1");
+								p1_hasConfirmed = false;
+								p1_canCancel = false;
+								p1_canSelectDir = true;
+							}
+					}
+		}else if (!player_1){
+				if (XCI.GetButtonDown(XboxButton.LeftStick, XboxController.Second) || Input.GetKeyDown(KeyCode.P))
+                    {
+						if(p2_canSelectDir){
+							animatorUI.SetBool("Press_B", false);
+							animatorUI.SetBool("Press_A", false);
+							animatorUI.SetBool("Start", true);
+							p2_hasConfirmed = true;
+							target.transform.parent = null;
+						}
+                    }
+					
+					if(p2_hasConfirmed){
+						if (XCI.GetButtonDown(XboxButton.A, XboxController.Second)) {
+							animatorUI.SetBool("Press_B", false);
+							animatorUI.SetBool("Press_A", true);
+							animatorUI.SetBool("Start", false);
+							this.dirConfirmed = true;
+							GM.GetComponent<GameManager>().confirmation += 1;
+							Debug.Log("p1 Added 1");
+							p2_hasConfirmed = false;
+							p2_canCancel = true;
+							p2_canSelectDir = false;
+						}
+
+							if (XCI.GetButtonDown(XboxButton.B, XboxController.Second)) {
+								animatorUI.SetBool("Press_B", true);
+								animatorUI.SetBool("Press_A", false);
+								animatorUI.SetBool("Start", false);
+								this.dirConfirmed = false;
+								StartCoroutine(WaitToReParent());
+								//GM.GetComponent<GameManager>().confirmation -= 1;
+								Debug.Log("p1 Removed 1");
+								p2_hasConfirmed = false;
+								p2_canCancel = false;
+								p2_canSelectDir = true;
+							}
+
+
+							}
+							if(p2_canCancel){
+								if (XCI.GetButtonDown(XboxButton.B, XboxController.Second)) {
+								animatorUI.SetBool("Press_B", true);
+								animatorUI.SetBool("Press_A", false);
+								animatorUI.SetBool("Start", false);
+								this.dirConfirmed = false;
+								StartCoroutine(WaitToReParent());
+								GM.GetComponent<GameManager>().confirmation -= 1;
+								Debug.Log("p1 Removed 1");
+								p2_hasConfirmed = false;
+								p2_canCancel = false;
+								p2_canSelectDir = true;
+							}
+		}
+		}
+		///old
+		/*
             if (dirConfirmed)
             {
                 A.SetActive(false);
                 B.SetActive(true);
-                target.transform.parent = null;
+                //target.transform.parent = null;
                 if (player_1)
                 {
                     if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKeyDown(KeyCode.E))
                     {
-                        this.dirConfirmed = false;
-                        GM.GetComponent<GameManager>().confirmation -= 1;
-                        Debug.Log("p1 Removed 1");
+                        _hasConfirmed = true;
+						StartCoroutine(WaitToReParent());
                     }
+
+					if(_hasConfirmed){
+						if (XCI.GetButtonDown(XboxButton.B, XboxController.First)) {
+							animatorUI.SetBool("Press_B", true);
+							animatorUI.SetBool("Press_A", false);
+							animatorUI.SetBool("Start", false);
+							this.dirConfirmed = false;
+							GM.GetComponent<GameManager>().confirmation -= 1;
+							Debug.Log("p1 Removed 1");
+							}
+					}
                 }
                 else if (!player_1)
                 {
@@ -162,7 +290,7 @@ public class PlayerController : MonoBehaviour {
                 A.SetActive(true);
                 B.SetActive(false);
 
-                StartCoroutine(WaitToReParent());
+                //StartCoroutine(WaitToReParent());
                 //target.position = targetPos.position;
                 //target.rotation = targetPos.rotation;
 
@@ -170,12 +298,32 @@ public class PlayerController : MonoBehaviour {
                 {
                     if (XCI.GetButtonDown(XboxButton.LeftStick, XboxController.First) || Input.GetKeyDown(KeyCode.A))
                     {
-						animatorUI.SetBool("Start", true);
-
-                        this.dirConfirmed = true;
-                        GM.GetComponent<GameManager>().confirmation += 1;
-                        Debug.Log("p1 Added 1");
+							animatorUI.SetBool("Press_B", false);
+							animatorUI.SetBool("Press_A", false);
+							animatorUI.SetBool("Start", true);
+                        _hasConfirmed = true;
+                        target.transform.parent = null;
                     }
+					
+					if(_hasConfirmed){
+						if (XCI.GetButtonDown(XboxButton.A, XboxController.First)) {
+							animatorUI.SetBool("Press_B", false);
+							animatorUI.SetBool("Press_A", true);
+							animatorUI.SetBool("Start", true);
+							this.dirConfirmed = true;
+							GM.GetComponent<GameManager>().confirmation += 1;
+							Debug.Log("p1 Added 1");
+							}
+
+						if (XCI.GetButtonDown(XboxButton.B, XboxController.First)) {
+							animatorUI.SetBool("Press_B", true);
+							animatorUI.SetBool("Press_A", false);
+							animatorUI.SetBool("Start", false);
+							this.dirConfirmed = false;
+							GM.GetComponent<GameManager>().confirmation -= 1;
+							Debug.Log("p1 Removed 1");
+							}
+					}
                 }
                 else if (!player_1)
                 {
@@ -189,6 +337,7 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
             }
+			*/
         }
 
 
@@ -217,7 +366,7 @@ public class PlayerController : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator WaitToReParent()
+    private IEnumerator WaitToReParent()
     {
         yield return new WaitForSecondsRealtime(0.1f);
         target.transform.parent = targetPos.transform;
