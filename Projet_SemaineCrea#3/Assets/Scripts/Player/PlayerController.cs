@@ -5,7 +5,7 @@ using XboxCtrlrInput;
 
 public class PlayerController : MonoBehaviour {
     public bool player_1 = true;
-
+	public AnimationCurve varCurve;
     public Transform arrow;
 		public Transform target;
         public Transform targetPos;
@@ -104,8 +104,8 @@ public class PlayerController : MonoBehaviour {
             float aim_angle = 0.0f;
                 float x = XCI.GetAxis(XboxAxis.LeftStickX, XboxController.Second);
                 float y = XCI.GetAxis(XboxAxis.LeftStickY, XboxController.Second);
-                //float x = Input.GetAxis("p2_Horizontal");
-                //float y = Input.GetAxis("p2_Vertical");
+                //float x = Input.GetAxis("p1_Horizontal");
+                //float y = Input.GetAxis("p1_Vertical");
 
                 // CANCEL ALL INPUT BELOW THIS FLOAT
                 float R_analog_threshold = 0.10f;
