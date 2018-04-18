@@ -17,7 +17,7 @@ public class DebugVelocity : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if(playerCtrl.GetComponent<PlayerController>().confirmed)
+	if(playerCtrl.GetComponent<PlayerController>().dirConfirmed)
 	{
 		laucher.transform.parent = null;
 	}

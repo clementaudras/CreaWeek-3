@@ -61,16 +61,40 @@ public class GameManager : MonoBehaviour {
 
         if (confirmation == 2)
         {
-            //annoucerText.text = "Winner Winner chiken dinner!";
+            //annoucerText.text = "Winner Winner chicken dinner!";
             //move
-            player_1.GetComponent<PlayerController>().move = true;
-            player_2.GetComponent<PlayerController>().move = true;
+            if (player_1.GetComponent<PlayerController>().dirConfirmed == true)
+            {
+                player_1.GetComponent<PlayerController>().move = true;
+            }
+
+            if (player_2.GetComponent<PlayerController>().dirConfirmed == true)
+            {
+                player_2.GetComponent<PlayerController>().move = true;
+            }
+
+            //Lay egg
+            if (player_1.GetComponent<EggGen>().eggConfirmed == true)
+            {
+                player_1.GetComponent<EggGen>()._layEgg = true;
+            }
+
+            if (player_2.GetComponent<EggGen>().eggConfirmed == true)
+            {
+                player_2.GetComponent<EggGen>()._layEgg = true;
+            }
+
+
+            //player_2.GetComponent<PlayerController>().move = true;
 
             //reset
             confirmation = 0;
             //StartCoroutine(Reset());
-            player_1.GetComponent<PlayerController>().confirmed = false;
-            player_2.GetComponent<PlayerController>().confirmed = false;
+            player_1.GetComponent<PlayerController>().dirConfirmed = false;
+            player_2.GetComponent<PlayerController>().dirConfirmed = false;
+
+            player_1.GetComponent<EggGen>().eggConfirmed = false;
+            player_2.GetComponent<EggGen>().eggConfirmed = false;
 
         }
 

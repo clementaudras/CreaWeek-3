@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Egg : MonoBehaviour {
-		public float eggHealthPoint = 100;
+		public float eggHealthPoint = 100f;
 		public GameObject flaque;
 		public Flaque flaqueScript;
 		public bool slow = true;
@@ -25,15 +25,17 @@ public class Egg : MonoBehaviour {
 		IEnumerator Die()
     {
         yield return new WaitForSecondsRealtime(0.1f);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
         yield return null;
     }
 
 		// Update is called once per frame
 		void Update () {
+            flaque.transform.position = transform.position;
 
-		//slow
-		if (slow){
+        //slow
+        if (slow){
 		    rb.velocity = rb.velocity * 0.9f;
 		}
 			
@@ -45,8 +47,9 @@ public class Egg : MonoBehaviour {
 		}
 
 		void OnTriggerEnter2D(Collider2D other){
-        StartCoroutine("SlowDown");
-        rb.AddRelativeForce(Vector3.right.normalized * 10f);
+            rb.AddRelativeForce(Vector3.right.normalized * 10f);
+            StartCoroutine("SlowDown");
+        /*
         if (_isPlayer1Egg)
         {
             flaqueScript._isPlayer1 = true;
@@ -55,13 +58,15 @@ public class Egg : MonoBehaviour {
         {
             flaqueScript._isPlayer1 = false;
         }
+        */
     }
 
 		void OnCollisionEnter2D(Collision2D collision) {
-			if (collision.relativeVelocity.magnitude > 0f)
-				eggHealthPoint -= 10f * collision.relativeVelocity.magnitude;
-			}
-		}
+        if (collision.relativeVelocity.magnitude > 0f)
+            eggHealthPoint -= 10f;
+                //eggHealthPoint -= 10f * collision.relativeVelocity.magnitude;
+    }
+}
 
 
 

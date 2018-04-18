@@ -35,12 +35,14 @@ public class PlayerController : MonoBehaviour {
 	//
 
     //Vector3 currDir;
-    public bool confirmed;
+    public bool dirConfirmed;
 
 
     public GameObject OK;
     public GameObject A;
     public GameObject B;
+
+    public EggGen eggGenScript;
 
     void Start()
     {
@@ -127,55 +129,63 @@ public class PlayerController : MonoBehaviour {
 
 
         //Direction confirmation
-        if (confirmed)
+        if(eggGenScript.GetComponent<EggGen>().eggConfirmed == false)
         {
-            A.SetActive(false);
-            B.SetActive(true);
+            if (dirConfirmed)
+            {
+                A.SetActive(false);
+                B.SetActive(true);
 
-            target.transform.parent = null;
-            if (player_1)
-            {
-                if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKeyDown(KeyCode.E))
+                target.transform.parent = null;
+                if (player_1)
                 {
-                    this.confirmed = false;
-                    GM.GetComponent<GameManager>().confirmation -= 1;
-                    Debug.Log("p1 Removed 1");
+                    if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKeyDown(KeyCode.E))
+                    {
+                        this.dirConfirmed = false;
+                        GM.GetComponent<GameManager>().confirmation -= 1;
+                        Debug.Log("p1 Removed 1");
+                    }
                 }
-            } else if (!player_1)
-            {
-                if (XCI.GetButtonDown(XboxButton.B, XboxController.Second) || Input.GetKeyDown(KeyCode.M))
+                else if (!player_1)
                 {
-                    this.confirmed = false;
-                    GM.GetComponent<GameManager>().confirmation -= 1;
-                    Debug.Log("p2 Removed 1");
+                    if (XCI.GetButtonDown(XboxButton.B, XboxController.Second) || Input.GetKeyDown(KeyCode.M))
+                    {
+                        this.dirConfirmed = false;
+                        GM.GetComponent<GameManager>().confirmation -= 1;
+                        Debug.Log("p2 Removed 1");
+                    }
                 }
             }
-        } else if (!confirmed) {
-            A.SetActive(true);
-            B.SetActive(false);
-
-            StartCoroutine(WaitToReParent());
-            //target.position = targetPos.position;
-            //target.rotation = targetPos.rotation;
-
-            if (player_1)
+            else if (!dirConfirmed)
             {
-                if (XCI.GetButtonDown(XboxButton.A, XboxController.First) || Input.GetKeyDown(KeyCode.A))
+                A.SetActive(true);
+                B.SetActive(false);
+
+                StartCoroutine(WaitToReParent());
+                //target.position = targetPos.position;
+                //target.rotation = targetPos.rotation;
+
+                if (player_1)
                 {
-                    this.confirmed = true;
-                    GM.GetComponent<GameManager>().confirmation += 1;
-                    Debug.Log("p1 Added 1");
+                    if (XCI.GetButtonDown(XboxButton.A, XboxController.First) || Input.GetKeyDown(KeyCode.A))
+                    {
+                        this.dirConfirmed = true;
+                        GM.GetComponent<GameManager>().confirmation += 1;
+                        Debug.Log("p1 Added 1");
+                    }
                 }
-            } else if (!player_1)
-            {
-                if (XCI.GetButtonDown(XboxButton.A, XboxController.Second) || Input.GetKeyDown(KeyCode.L))
+                else if (!player_1)
                 {
-                    this.confirmed = true;
-                    GM.GetComponent<GameManager>().confirmation += 1;
-                    Debug.Log("p2 Added 1");
+                    if (XCI.GetButtonDown(XboxButton.A, XboxController.Second) || Input.GetKeyDown(KeyCode.L))
+                    {
+                        this.dirConfirmed = true;
+                        GM.GetComponent<GameManager>().confirmation += 1;
+                        Debug.Log("p2 Added 1");
+                    }
                 }
             }
         }
+
 
         //slower over time
         if (slow){

@@ -5,27 +5,29 @@ using UnityEngine;
 public class Flaque : MonoBehaviour {
 
 	public bool _isPlayer1;
-	public bool setup;
-	SpriteRenderer m_SpriteRenderer;
+    public PlayerHealth playerHealthScript;
 
-	// Use this for initialization
-	void Start () {
-		m_SpriteRenderer = GetComponent<SpriteRenderer>();
+    // Use this for initialization
+    void Start () {
 	}
 	
 	// Update is called once per frame
 	void Update () {
 			if(_isPlayer1){
 			//kill player 2
-        m_SpriteRenderer.color = Color.blue;		
 		} else if (!_isPlayer1){
 			//kill player 1
-			m_SpriteRenderer.color = Color.red;		
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-	if(!setup){
+        if (_isPlayer1 && other.CompareTag("Player2") || !_isPlayer1 && other.CompareTag("Player1"))
+        {
+            other.GetComponent<PlayerHealth>().playerHealth = 0;
+        }
+
+        /*
+        if (!setup){
 		if(other.CompareTag("Player1")){
 		_isPlayer1 = true;
 		setup = true;
@@ -33,11 +35,11 @@ public class Flaque : MonoBehaviour {
 		_isPlayer1 = false;
 		setup = true;
 	}
-	}
+}
 
 
 
-
+        
 		if(_isPlayer1){
 			//kill player 2
 			if(other.CompareTag("Player2")){
@@ -49,5 +51,6 @@ public class Flaque : MonoBehaviour {
 				other.gameObject.SetActive(false);
 			}
 		}
-	}
+        */
+    }
 }

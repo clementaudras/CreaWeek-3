@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XboxCtrlrInput;
 
 public class StartGame : MonoBehaviour {
 
@@ -12,12 +13,12 @@ public class StartGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown("Start") || Input.GetKey(KeyCode.Space)){
+		if(XCI.GetButtonDown(XboxButton.Start, XboxController.First) || XCI.GetButtonDown(XboxButton.Start, XboxController.Second) || Input.GetKey(KeyCode.Space)){
             Debug.Log("StartGame");
             SceneManager.LoadScene("TheGame");
 		}
 
-        if (Input.GetButtonDown("Quit") || Input.GetKey(KeyCode.Escape))
+        if (XCI.GetButtonDown(XboxButton.Back, XboxController.First) || XCI.GetButtonDown(XboxButton.Back, XboxController.Second) || Input.GetKey(KeyCode.Escape))
         {
             Debug.Log("QuitGame");
             Application.Quit();
