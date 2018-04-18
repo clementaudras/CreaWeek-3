@@ -30,6 +30,7 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1578170370928858
 GameObject:
   m_ObjectHideFlags: 1
@@ -49,6 +50,8 @@ GameObject:
   m_IsActive: 1
 =======
 >>>>>>> 47def43d2918b0a1a2ee56b6860c1e6b624f2bbc
+=======
+>>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
 --- !u!1 &1642616892988224
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +98,7 @@ GameObject:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Layer: 9
 =======
   m_Layer: 0
@@ -104,10 +108,11 @@ GameObject:
 >>>>>>> parent of 0a70026... fix Egg + controls bugged
   m_Name: Oeuf_pouleA_prefab
 =======
+=======
+>>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
   - component: {fileID: 212950596429833650}
   m_Layer: 0
   m_Name: Oeuf_pouleB_prefab
->>>>>>> 47def43d2918b0a1a2ee56b6860c1e6b624f2bbc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -39,6 +39,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4376747020373624}
   - component: {fileID: 95930862948897982}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 212733759038965052}
+>>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
   m_Layer: 0
   m_Name: Oeuf_pouleA_prefab
   m_TagString: Untagged
@@ -46,6 +50,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!1 &1604920715653410
 GameObject:
   m_ObjectHideFlags: 1
@@ -63,6 +68,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+=======
+>>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
 --- !u!1 &1814154201072748
 GameObject:
   m_ObjectHideFlags: 0
