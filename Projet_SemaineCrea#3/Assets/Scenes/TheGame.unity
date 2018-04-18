@@ -355,7 +355,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Waiting player...
+  m_Text: 
 --- !u!222 &27850234
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1907,6 +1907,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1327617719705624, guid: 8c18efb90b705114ba18d753e832c47c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c18efb90b705114ba18d753e832c47c, type: 2}
   m_IsPrefabParent: 0
@@ -2093,6 +2097,10 @@ Prefab:
     - target: {fileID: 4419529751685006, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
       propertyPath: m_RootOrder
       value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866702582846038, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3c7e56f4027012429620cd74ca81658, type: 2}
@@ -7531,6 +7539,10 @@ Prefab:
     - target: {fileID: 4186952919809906, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
       propertyPath: m_RootOrder
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642616892988224, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e40e4a5c84c718448d79c9d6eeba6e2, type: 2}
