@@ -96,8 +96,11 @@ public class EggGen : MonoBehaviour {
                     if (XCI.GetButtonDown(XboxButton.Y, XboxController.First) || Input.GetKeyDown(KeyCode.R))
                     {
                         this.eggConfirmed = true;
+					if (XCI.GetButtonDown(XboxButton.A, XboxController.First))
+                    {
                         GM.GetComponent<GameManager>().confirmation += 1;
-                        Debug.Log("p1 Added 1");
+                    }
+						Debug.Log("p1 Added 1");
                     }
                 }
                 else if (!_isPlayer1)
@@ -105,7 +108,10 @@ public class EggGen : MonoBehaviour {
                     if (XCI.GetButtonDown(XboxButton.Y, XboxController.Second) || Input.GetKeyDown(KeyCode.K))
                     {
                         this.eggConfirmed = true;
+					if (XCI.GetButtonDown(XboxButton.A, XboxController.Second))
+                    {
                         GM.GetComponent<GameManager>().confirmation += 1;
+                    }
                         Debug.Log("p2 Added 1");
                     }
                 }

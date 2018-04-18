@@ -31,7 +31,11 @@ public class PlayerController : MonoBehaviour {
 	public Vector3 velocityVector;
 	public Vector3 directionVel;
 
-	//
+	/*
+	move:
+		press A
+
+	*/
 
     //Vector3 currDir;
     public bool dirConfirmed;
@@ -40,7 +44,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject OK;
     public GameObject A;
     public GameObject B;
-
+	bool confirmationMovement;
 
     public EggGen eggGenScript;
 
@@ -125,7 +129,14 @@ public class PlayerController : MonoBehaviour {
                 }
         }
 
+		if(confirmationMovement){
 
+
+					
+
+		} else if (!confirmationMovement){
+		
+		}
 
 
         //Direction confirmation
@@ -139,7 +150,14 @@ public class PlayerController : MonoBehaviour {
                 target.transform.parent = null;
                 if (player_1)
                 {
-                    if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKeyDown(KeyCode.E))
+                    if (XCI.GetButtonDown(XboxButton.A, XboxController.First))
+                    {
+                        GM.GetComponent<GameManager>().confirmation += 1;
+                        this.dirConfirmed = true;
+                        Debug.Log("p1 Added 1");
+                    }
+
+					if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKeyDown(KeyCode.E))
                     {
                         this.dirConfirmed = false;
                         GM.GetComponent<GameManager>().confirmation -= 1;
@@ -148,7 +166,13 @@ public class PlayerController : MonoBehaviour {
                 }
                 else if (!player_1)
                 {
-                    if (XCI.GetButtonDown(XboxButton.B, XboxController.Second) || Input.GetKeyDown(KeyCode.M))
+                    if (XCI.GetButtonDown(XboxButton.A, XboxController.Second))
+                    {
+                        GM.GetComponent<GameManager>().confirmation += 1;
+                        Debug.Log("p2 Added 1");
+                    }
+					
+					if (XCI.GetButtonDown(XboxButton.B, XboxController.Second) || Input.GetKeyDown(KeyCode.M))
                     {
                         this.dirConfirmed = false;
                         GM.GetComponent<GameManager>().confirmation -= 1;
@@ -167,20 +191,21 @@ public class PlayerController : MonoBehaviour {
 
                 if (player_1)
                 {
-                    if (XCI.GetButtonDown(XboxButton.A, XboxController.First) || Input.GetKeyDown(KeyCode.A))
+                    if (XCI.GetButtonDown(XboxButton.LeftStick, XboxController.First) || Input.GetKeyDown(KeyCode.A))
                     {
+					confirmationMovement = true;
                         this.dirConfirmed = true;
-                        GM.GetComponent<GameManager>().confirmation += 1;
-                        Debug.Log("p1 Added 1");
+
                     }
                 }
                 else if (!player_1)
                 {
-                    if (XCI.GetButtonDown(XboxButton.A, XboxController.Second) || Input.GetKeyDown(KeyCode.L))
+                    if (XCI.GetButtonDown(XboxButton.LeftStick, XboxController.Second) || Input.GetKeyDown(KeyCode.L))
                     {
+					confirmationMovement = true;
                         this.dirConfirmed = true;
-                        GM.GetComponent<GameManager>().confirmation += 1;
-                        Debug.Log("p2 Added 1");
+
+
                     }
                 }
             }
