@@ -40,7 +40,10 @@ GameObject:
   - component: {fileID: 4376747020373624}
   - component: {fileID: 95930862948897982}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
   - component: {fileID: 212733759038965052}
 >>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
   m_Layer: 0
@@ -50,6 +53,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1 &1604920715653410
 GameObject:
@@ -68,6 +72,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+=======
+>>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
 =======
 >>>>>>> parent of 3b6aaaa... Merge branch 'master' of https://github.com/clementaudras/CreaWeek-3
 --- !u!1 &1814154201072748
