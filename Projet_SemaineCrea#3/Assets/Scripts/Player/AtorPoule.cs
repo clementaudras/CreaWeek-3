@@ -23,7 +23,7 @@ public class AtorPoule : MonoBehaviour {
         }
 
 
-        if (playerMove.move == true)
+        if (playerMove.rb.velocity.magnitude >0.9)
         {
 
             pouleAtor.SetBool("Run", true);
