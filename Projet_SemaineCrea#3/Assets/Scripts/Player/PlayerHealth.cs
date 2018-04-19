@@ -18,10 +18,28 @@ public class PlayerHealth : MonoBehaviour {
     bool _isDead;
     bool _canAddScore = true;
 
+    ParticleSystem my_deadExplosion;
+    GameObject my_liveSprite;
+    ParticleSystem his_deadExplosion;
+    GameObject his_liveSprite;
+
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start() {
+        if (_isPlayer1)
+        {
+
+            my_liveSprite = _player1.transform.parent.GetChild(2).GetChild(1).gameObject;
+            his_deadExplosion = _player2.transform.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+
+        }
+        if (!_isPlayer1)
+        {
+
+            my_liveSprite = _player2.transform.parent.GetChild(2).GetChild(1).gameObject;
+            his_deadExplosion = _player1.transform.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+
+        }
+    }
 	
     public void AddScore()
     {
@@ -50,6 +68,9 @@ public class PlayerHealth : MonoBehaviour {
             _isDead = true;
 
             scoreScript = (Score)FindObjectOfType(typeof(Score));
+
+            my_liveSprite.SetActive(true);
+            his_deadExplosion.Play();
 
             _player1.SetActive(false);
             _player2.SetActive(false);
