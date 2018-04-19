@@ -21,9 +21,10 @@ public class Flaque : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-        if (_isPlayer1 && other.CompareTag("Player2") || !_isPlayer1 && other.CompareTag("Player1"))
+        if (!_isPlayer1 && other.CompareTag("Player2") || _isPlayer1 && other.CompareTag("Player1"))
         {
-            other.GetComponent<PlayerHealth>().playerHealth = 0;
+            //other.GetComponent<PlayerHealth>().playerHealth = 0;
+			//other.GetComponent<PlayerController>().directionVel.normalized *= 0.9;
         }
 
         /*
