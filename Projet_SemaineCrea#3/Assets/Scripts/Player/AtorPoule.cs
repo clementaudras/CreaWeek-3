@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AtorPoule : MonoBehaviour {
 
     PlayerController playerMove;
     EggGen pondAct;
     Animator pouleAtor;
+    ParticleSystem smokeMove;
+
 	void Start () {
+        smokeMove = this.transform.parent.GetChild(3).GetComponent<ParticleSystem>();
         pouleAtor = this.GetComponent<Animator>();
         playerMove = this.transform.parent.parent.GetComponent<PlayerController>();
         pondAct = this.transform.parent.parent.GetComponent<EggGen>();
@@ -26,13 +27,14 @@ public class AtorPoule : MonoBehaviour {
 
         if (playerMove.rb.velocity.magnitude >0.9)
         {
-
+            smokeMove.Play();
             pouleAtor.SetBool("Run", true);
             pouleAtor.SetBool("Iddle", false);
             //Debug.Log("MOVE");
         }
         else
         {
+            smokeMove.Stop();
             pouleAtor.SetBool("Pond", false);
             pouleAtor.SetBool("Iddle", true);
             pouleAtor.SetBool("Run", false);
