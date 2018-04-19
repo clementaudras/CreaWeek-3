@@ -97,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4171630002813636
 Transform:
   m_ObjectHideFlags: 1
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc08a8b3d39d0242b2ff2356681817a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggHealthPoint: 3
+  eggHealthPoint: 10
   flaque: {fileID: 1814154201072748}
   flaqueScript: {fileID: 114501003720654406}
   slow: 1
