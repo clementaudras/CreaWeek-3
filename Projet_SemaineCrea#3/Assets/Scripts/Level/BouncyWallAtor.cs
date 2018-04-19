@@ -13,11 +13,12 @@ public class BouncyWallAtor : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        BouncyAtor.SetBool("Bounce",true);
-    }
+        if (collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2") || collision.gameObject.CompareTag("HeadP1") || collision.gameObject.CompareTag("HeadP2") || collision.gameObject.CompareTag("P1Egg") || collision.gameObject.CompareTag("P2Egg"))
+        {
+            BouncyAtor.SetBool("Bounce", true);
+        }
+        else { BouncyAtor.SetBool("Bounce", false); }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        BouncyAtor.SetBool("Bounce", false);
     }
+    
 }
