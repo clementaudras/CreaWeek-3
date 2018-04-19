@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
                 {
                     player_1.GetComponent<EggGen>()._layEgg = true;
                     player_1.GetComponent<EggGen>().p1_canSelectEgg = true;
-					player_1.GetComponent<Rigidbody2D>().AddForce(Vector3.right * 50f);
+					player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController>().vectorDirPlayer * 50f);
 					player_1.GetComponent<Rigidbody2D>().velocity = player_1.GetComponent<Rigidbody2D>().velocity * 0.9f;
                 }
             }
@@ -121,6 +121,8 @@ public class GameManager : MonoBehaviour {
                 {
                     player_2.GetComponent<EggGen>()._layEgg = true;
                     player_2.GetComponent<EggGen>().p2_canSelectEgg = true;
+					player_2.GetComponent<Rigidbody2D>().AddForce(player_2.GetComponent<PlayerController>().vectorDirPlayer * 50f);
+					player_2.GetComponent<Rigidbody2D>().velocity = player_2.GetComponent<Rigidbody2D>().velocity * 0.9f;
                 }
             }
 

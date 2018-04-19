@@ -52,9 +52,11 @@ public class PlayerController : MonoBehaviour {
 	public bool p1_canSelectDir = true;
 	public bool p2_canSelectDir = true;
 
+	public Vector3  vectorDirPlayer;
+
     void Start()
     {
-
+		vectorDirPlayer = target.transform.position - transform.position;
         spriteTrans = transform.GetChild(0);
         rb = GetComponent<Rigidbody2D>();
     }
@@ -345,6 +347,7 @@ public class PlayerController : MonoBehaviour {
             StopCoroutine(SlowDown());
         }
 
+		
         //slower over time
         if (slow){
 		    rb.velocity = rb.velocity * 0.9f;
