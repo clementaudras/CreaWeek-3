@@ -6,7 +6,7 @@ public class Egg : MonoBehaviour {
 		public int eggHealthPoint = 3;
 		public GameObject flaque;
 		public Flaque flaqueScript;
-		public bool slow = true;
+		public bool eggSlow = true;
 		public Rigidbody2D rb;
         public bool _isPlayer1Egg;
         public float rotInd;
@@ -26,7 +26,7 @@ public class Egg : MonoBehaviour {
 	IEnumerator SlowDown()
     {
         yield return new WaitForSecondsRealtime(2.5f);
-        slow = true;
+        eggSlow = true;
         yield return null;
     }
 
@@ -54,9 +54,10 @@ public class Egg : MonoBehaviour {
         {
             transform.Rotate(0,0,1*rb.velocity.magnitude* rotInd);
         }
-        //slow
-        if (slow){
+        //eggSlow
+		if (eggSlow){
 		    rb.velocity = rb.velocity * 0.9f;
+			//eggSlow = false;
 		}
 			
 			//egg death -> flaque

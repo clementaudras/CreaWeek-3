@@ -17,12 +17,20 @@ public class GameManager : MonoBehaviour {
 
     public int p1_eggCount = 0;
     public int p1_antiEggCount = 0;
+	public int p2_antiEggCount = 0;
+
     public bool p1_canLayEgg = true;
     public bool p1_canExplodeEgg;
 
     public int p2_eggCount = 0;
 
     bool _isEverthingStatic = true;
+
+	bool p1_hasLayedEgg;
+	bool p2_hasLayedEgg;
+
+	bool p1_isMoving;
+	bool p2_isMoving;
 
     //public PlayerController player_2;
 
@@ -35,12 +43,30 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+
         Debug.Log(p1_eggCount);
         if (player_1 == null)
             player_1 = GameObject.FindGameObjectWithTag("Player1");
 
         if (player_2 == null)
             player_2 = GameObject.FindGameObjectWithTag("Player2");
+
+
+
+		if(p1_hasLayedEgg && player_1.GetComponent<Rigidbody2D>().velocity.magnitude > 0f){
+			player_1.GetComponent<Rigidbody2D>().velocity *= 0.9f;
+			if(player_1.GetComponent<Rigidbody2D>().velocity.magnitude == 0f){
+				p1_hasLayedEgg = false;
+			}
+		}
+
+		if(p2_hasLayedEgg && player_2.GetComponent<Rigidbody2D>().velocity.magnitude > 0f){
+			player_2.GetComponent<Rigidbody2D>().velocity *= 0.9f;
+			if(player_2.GetComponent<Rigidbody2D>().velocity.magnitude == 0f){
+				p2_hasLayedEgg = false;
+			}
+		}
 
         //Debug.Log(player_1.GetComponent<EggGen>()._layEgg);
 
@@ -82,6 +108,7 @@ public class GameManager : MonoBehaviour {
 				player_1.GetComponent<PlayerController>().p1_canSelectDir = true;
                 p1_eggCount = 0;
                 p1_antiEggCount += 1;
+				p1_hasLayedEgg = false;
             }
 
             if (player_2.GetComponent<PlayerController>().dirConfirmed == true)
@@ -89,6 +116,9 @@ public class GameManager : MonoBehaviour {
                 player_2.GetComponent<PlayerController>().move = true;
 				player_2.GetComponent<PlayerController>().StartCoroutine("WaitToReParent");
 				player_2.GetComponent<PlayerController>().p2_canSelectDir = true;
+				p2_eggCount = 0;
+                p2_antiEggCount += 1;
+				p2_hasLayedEgg = false;
             }
 
             //Lay egg
@@ -104,8 +134,10 @@ public class GameManager : MonoBehaviour {
                 {
                     player_1.GetComponent<EggGen>()._layEgg = true;
                     player_1.GetComponent<EggGen>().p1_canSelectEgg = true;
-					player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController>().vectorDirPlayer * 50f);
-					player_1.GetComponent<Rigidbody2D>().velocity = player_1.GetComponent<Rigidbody2D>().velocity * 0.9f;
+					p1_hasLayedEgg = true;
+
+					player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController>().vectorDirPlayer * 30f);
+					
                 }
             }
 
@@ -121,8 +153,9 @@ public class GameManager : MonoBehaviour {
                 {
                     player_2.GetComponent<EggGen>()._layEgg = true;
                     player_2.GetComponent<EggGen>().p2_canSelectEgg = true;
-					player_2.GetComponent<Rigidbody2D>().AddForce(player_2.GetComponent<PlayerController>().vectorDirPlayer * 50f);
-					player_2.GetComponent<Rigidbody2D>().velocity = player_2.GetComponent<Rigidbody2D>().velocity * 0.9f;
+					
+					player_2.GetComponent<Rigidbody2D>().AddForce(player_2.GetComponent<PlayerController>().vectorDirPlayer * 30f);
+					p2_hasLayedEgg = true;
                 }
             }
 

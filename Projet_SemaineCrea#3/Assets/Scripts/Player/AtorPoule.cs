@@ -8,7 +8,7 @@ public class AtorPoule : MonoBehaviour {
     ParticleSystem smokeMove;
 
 	void Start () {
-        smokeMove = this.transform.parent.parent.GetChild(3).GetComponent<ParticleSystem>();
+        smokeMove = this.transform.GetChild(0).GetComponent<ParticleSystem>();
         pouleAtor = this.GetComponent<Animator>();
         playerMove = this.transform.parent.parent.GetComponent<PlayerController>();
         pondAct = this.transform.parent.parent.GetComponent<EggGen>();
@@ -27,14 +27,13 @@ public class AtorPoule : MonoBehaviour {
 
         if (playerMove.rb.velocity.magnitude >0.9)
         {
-            smokeMove.Play();
             pouleAtor.SetBool("Run", true);
             pouleAtor.SetBool("Iddle", false);
             //Debug.Log("MOVE");
         }
         else
         {
-            smokeMove.Stop();
+            smokeMove.Play();
             pouleAtor.SetBool("Pond", false);
             pouleAtor.SetBool("Iddle", true);
             pouleAtor.SetBool("Run", false);

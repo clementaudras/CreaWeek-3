@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 114282362912109558}
   m_Layer: 0
   m_Name: Egg_P2
-  m_TagString: Untagged
+  m_TagString: P2Egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbEgg: {fileID: 50768369661871276}
-  eggForce: 10
+  eggForce: 0
 --- !u!114 &114617721528744620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,6 +349,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPlayer1: 0
   playerHealthScript: {fileID: 0}
+  player_1: {fileID: 0}
+  player_2: {fileID: 0}
+  forceBoost: 1
 --- !u!212 &212369566552171832
 SpriteRenderer:
   m_ObjectHideFlags: 1
