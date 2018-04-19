@@ -10,6 +10,7 @@ public class Egg : MonoBehaviour {
 		public Rigidbody2D rb;
         public bool _isPlayer1Egg;
         public float rotInd;
+		public Collider2D col;
 
         Animator eggState;
         Transform eggSprite;
@@ -18,7 +19,7 @@ public class Egg : MonoBehaviour {
     void Start () {
         eggState = this.transform.GetChild(0).GetComponent<Animator>();
         eggSprite = this.transform.GetChild(0);
-
+		StartCoroutine(Born());
 
     }
 		
@@ -31,9 +32,17 @@ public class Egg : MonoBehaviour {
 
 		IEnumerator Die()
     {
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(1.5f);
         Destroy(gameObject);
         //gameObject.SetActive(false);
+        yield return null;
+    }
+
+	IEnumerator Born()
+    {
+        col.enabled = false;
+		yield return new WaitForSecondsRealtime(0.1f);
+        col.enabled = true;
         yield return null;
     }
 

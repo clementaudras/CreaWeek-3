@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
             confirmation = 0;
         }
 
-        if (confirmation == 2)
+        if (confirmation == 1)
         {
             //annoucerText.text = "Winner Winner chicken dinner!";
             //move
@@ -95,27 +95,29 @@ public class GameManager : MonoBehaviour {
             if (player_1.GetComponent<EggGen>().eggConfirmed == true)
             {
                 p1_eggCount += 1;
-                if(p1_eggCount >= 2)
+                if(p1_eggCount >= 2) //explode egg
                 {
                     StartCoroutine(WaitReset_P1EggCount());
                     player_1.GetComponent<EggGen>().p1_canSelectEgg = true;
                 }
-                else if(p1_eggCount < 2)
+                else if(p1_eggCount < 2) //lay egg
                 {
                     player_1.GetComponent<EggGen>()._layEgg = true;
                     player_1.GetComponent<EggGen>().p1_canSelectEgg = true;
+					player_1.GetComponent<Rigidbody2D>().AddForce(Vector3.right * 50f);
+					player_1.GetComponent<Rigidbody2D>().velocity = player_1.GetComponent<Rigidbody2D>().velocity * 0.9f;
                 }
             }
 
             if (player_2.GetComponent<EggGen>().eggConfirmed == true)
             {
                 p2_eggCount += 1;
-                if (p2_eggCount >= 2)
+                if (p2_eggCount >= 2) //explode egg
                 {
                     StartCoroutine(WaitReset_P2EggCount());
                     player_2.GetComponent<EggGen>().p2_canSelectEgg = true;
                 }
-                else if (p2_eggCount < 2)
+                else if (p2_eggCount < 2) //lay egg
                 {
                     player_2.GetComponent<EggGen>()._layEgg = true;
                     player_2.GetComponent<EggGen>().p2_canSelectEgg = true;

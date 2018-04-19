@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114323657721847278}
   - component: {fileID: 95045908451609580}
   - component: {fileID: 114212101359513340}
+  - component: {fileID: 114772296703920160}
   m_Layer: 0
   m_Name: Egg_P1
   m_TagString: Untagged
@@ -97,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4171630002813636
 Transform:
   m_ObjectHideFlags: 1
@@ -146,7 +147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1866702582846038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.07, y: -1.33, z: 5.1300583}
+  m_LocalPosition: {x: -1.93, y: 3, z: 5.1300583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4808716152490572}
@@ -178,9 +179,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.01575895
+  m_Mass: 0.01
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 10
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: ebf8cd93869894245991798c0946b5e8, type: 2}
   m_Interpolate: 2
@@ -196,7 +197,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -321,19 +322,33 @@ MonoBehaviour:
   rb: {fileID: 50095995268012216}
   _isPlayer1Egg: 1
   rotInd: 5
+  col: {fileID: 61661701661873384}
 --- !u!114 &114501003720654406
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1814154201072748}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a17567a74f5eb44fac314d7bfd47d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayer1: 1
   playerHealthScript: {fileID: 0}
+--- !u!114 &114772296703920160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1010794862727762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4679111ebc23d334bbe4806b47d2b774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rbEgg: {fileID: 50095995268012216}
+  eggForce: 10
 --- !u!212 &212056628942666764
 SpriteRenderer:
   m_ObjectHideFlags: 1
