@@ -22,21 +22,22 @@ public class PlayerHealth : MonoBehaviour {
     GameObject my_liveSprite;
     ParticleSystem his_deadExplosion;
     GameObject his_liveSprite;
+	int pouleExplosion = 0;
 
     // Use this for initialization
     void Start() {
         if (_isPlayer1)
         {
 
-            my_liveSprite = _player1.transform.parent.GetChild(2).GetChild(1).gameObject;
-            his_deadExplosion = _player2.transform.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+            my_liveSprite = _player1.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
+            his_deadExplosion = _player2.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
 
         }
         if (!_isPlayer1)
         {
 
-            my_liveSprite = _player2.transform.parent.GetChild(2).GetChild(1).gameObject;
-            his_deadExplosion = _player1.transform.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+            my_liveSprite = _player2.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
+            his_deadExplosion = _player1.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
 
         }
     }
@@ -69,8 +70,7 @@ public class PlayerHealth : MonoBehaviour {
 
             scoreScript = (Score)FindObjectOfType(typeof(Score));
 
-            my_liveSprite.SetActive(true);
-            his_deadExplosion.Play();
+			StartCoroutine(playerSkin());
 
             _player1.SetActive(false);
             _player2.SetActive(false);
@@ -127,6 +127,7 @@ public class PlayerHealth : MonoBehaviour {
 
     IEnumerator NextPhase()
     {
+
         if (_canAddScore)
             AddScore();
 
@@ -143,4 +144,16 @@ public class PlayerHealth : MonoBehaviour {
         }
         yield return null;
     }
+
+	IEnumerator playerSkin()
+	{
+		if (pouleExplosion ==0){
+            my_liveSprite.SetActive(true);
+            his_deadExplosion.Play();
+		}
+
+			pouleExplosion+=1;
+			yield return null;
+
+	}
 }

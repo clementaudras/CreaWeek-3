@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 95615631697664242}
   - component: {fileID: 114432408081916426}
   m_Layer: 0
-  m_Name: PouleA_prefab
+  m_Name: p2_PouleA_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1186,7 +1186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423345061851626}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4201481391587226}
@@ -1510,7 +1510,7 @@ Transform:
   m_GameObject: {fileID: 1641904014359928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.034, y: -0.903, z: -0.1}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4299203857282172}
   m_RootOrder: 4
@@ -2571,7 +2571,7 @@ MonoBehaviour:
   redWinScreen: {fileID: 0}
   transitionScript: {fileID: 0}
   _player1: {fileID: 0}
-  _player2: {fileID: 1468573241318208}
+  _player2: {fileID: 1353813242921722}
 --- !u!198 &198041842820973330
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -2584,7 +2584,7 @@ ParticleSystem:
   stopAction: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -3597,8 +3597,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.5661765, g: 0.40998986, b: 0, a: 1}
-        key1: {r: 1, g: 0.7655173, b: 0, a: 0}
+        key0: {r: 0, g: 0.33189657, b: 0.5661765, a: 1}
+        key1: {r: 0, g: 0.6275863, b: 1, a: 0}
         key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6008,7 +6008,7 @@ ParticleSystem:
   stopAction: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -12775,7 +12775,7 @@ ParticleSystem:
   stopAction: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
