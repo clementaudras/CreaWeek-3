@@ -14,11 +14,15 @@ public class Egg : MonoBehaviour {
 
         Animator eggState;
         Transform eggSprite;
+    ParticleSystem eggExplod;
+    bool eggEpl;
+
 
     // Use this for initialization
     void Start () {
         eggState = this.transform.GetChild(0).GetComponent<Animator>();
         eggSprite = this.transform.GetChild(0);
+        eggExplod = this.transform.parent.GetChild(2).GetComponent<ParticleSystem>();
 		StartCoroutine(Born());
 
     }
@@ -62,7 +66,14 @@ public class Egg : MonoBehaviour {
 			
 			//egg death -> flaque
 		if(eggHealthPoint <= 0){
-			flaque.SetActive(true);
+            if (!eggEpl)
+            {
+                eggExplod.Play();
+                eggEpl = true;
+                flaque.transform.rotation = Quaternion.Euler(0,0,Random.Range(0,360));
+            }
+            flaque.SetActive(true);
+
 			StartCoroutine("Die");
 			}	
 		}

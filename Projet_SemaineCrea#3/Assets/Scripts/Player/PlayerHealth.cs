@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour {
     GameObject my_liveSprite;
     ParticleSystem his_deadExplosion;
     GameObject his_liveSprite;
-	int pouleExplosion = 0;
+	bool pouleExplosion;
 
     // Use this for initialization
     void Start() {
@@ -147,12 +147,13 @@ public class PlayerHealth : MonoBehaviour {
 
 	IEnumerator playerSkin()
 	{
-		if (pouleExplosion ==0){
+		if (!pouleExplosion){
             my_liveSprite.SetActive(true);
             his_deadExplosion.Play();
-		}
+            pouleExplosion = true;
+        }
 
-			pouleExplosion+=1;
+
 			yield return null;
 
 	}

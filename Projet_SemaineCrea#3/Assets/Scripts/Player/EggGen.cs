@@ -35,6 +35,11 @@ public class EggGen : MonoBehaviour {
     public bool p1_canSelectEgg = true;
     public bool p2_canSelectEgg = true;
 
+    public bool cancelAct;
+    public bool validAct;
+
+
+
     // Use this for initialization
     void Awake () {
 		rb = player.GetComponent<Rigidbody2D>();
@@ -93,6 +98,7 @@ public class EggGen : MonoBehaviour {
                         animatorUI.SetBool("Press_A", false);
                         animatorUI.SetBool("Start", true);
                         p1_hasConfirmedEgg = true;
+                        validAct = true;
                     }
                 }
 
@@ -109,6 +115,7 @@ public class EggGen : MonoBehaviour {
                         p1_hasConfirmedEgg = false;
                         p1_canCancelEgg = true;
                         p1_canSelectEgg = false;
+                        validAct = true;
                     }
 
                     if(XCI.GetButtonDown(XboxButton.B, XboxController.First))
@@ -122,6 +129,7 @@ public class EggGen : MonoBehaviour {
                         p1_hasConfirmedEgg = false;
                         p1_canCancelEgg = false;
                         p1_canSelectEgg = true;
+                        cancelAct = true;
                     }
                 }
 
@@ -138,6 +146,7 @@ public class EggGen : MonoBehaviour {
                         p1_hasConfirmedEgg = false;
                         p1_canCancelEgg = false;
                         p1_canSelectEgg = true;
+                        cancelAct = true;
                     }
                 }
             }
