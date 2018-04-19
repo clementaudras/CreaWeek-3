@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
             confirmation = 0;
         }
 
-        if (confirmation == 1)
+        if (confirmation == 2)
         {
             //annoucerText.text = "Winner Winner chicken dinner!";
             //move
