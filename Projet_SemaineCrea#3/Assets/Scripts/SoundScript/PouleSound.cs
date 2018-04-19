@@ -52,37 +52,29 @@ public class PouleSound : MonoBehaviour
 
         }
         
-        if (playerAct2.pond)
-        {
-            speakerPoule.clip = EggPop;
-            speakerPoule.Play();
+		if (playerAct2.pond) {
+			speakerPoule.clip = EggPop;
+			speakerPoule.Play ();
 
-        }
-        else if (rb.velocity.magnitude > 0.9)
-        {
-            dontrun = true;
-            if (dontrun == true)
-            {
-                speakerPoule.clip = coursePoule;
-                speakerPoule.loop = true;
-                speakerPoule.pitch = runVol;
-                if (!run)
-                {
-                    speakerPoule.Play();
-                    run = true;
-                }
+		}
+		if (rb.velocity.magnitude > 0.9) {
+
+			speakerPoule.clip = coursePoule;
+			speakerPoule.loop = true;
+			speakerPoule.pitch = runVol;
+			if (!run) {
+				speakerPoule.Play ();
+				run = true;
+			}
 
 
-            }
-            else
-            {
-                run = false;
-                speakerPoule.loop = false;
-                speakerPoule.Stop();
-
-                speakerPoule.pitch = 1;
-            }
-        }else { dontrun = false; }
+		} else {
+			run = false;
+			speakerPoule.loop = false;
+			speakerPoule.Stop ();
+			speakerPoule.pitch = 1;
+		}
+       
 
     }
 }
