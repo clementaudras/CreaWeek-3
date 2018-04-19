@@ -8,7 +8,7 @@ public class AtorPoule : MonoBehaviour {
     ParticleSystem smokeMove;
 
 	void Start () {
-        smokeMove = this.transform.parent.GetChild(3).GetComponent<ParticleSystem>();
+        smokeMove = this.transform.parent.parent.GetChild(3).GetComponent<ParticleSystem>();
         pouleAtor = this.GetComponent<Animator>();
         playerMove = this.transform.parent.parent.GetComponent<PlayerController>();
         pondAct = this.transform.parent.parent.GetComponent<EggGen>();
