@@ -18,7 +18,7 @@ public class EggSound : MonoBehaviour {
 
     private void Start()
     {
-        rb = transform.parent.GetComponent<Rigidbody2D>();
+        rb = transform.GetChild(0).GetComponent<Rigidbody2D>();
         eggSound = GetComponent<AudioSource>();
         eggSound.PlayOneShot(eggSpawn, 1F);
     }
