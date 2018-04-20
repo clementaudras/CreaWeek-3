@@ -11,9 +11,9 @@ public class CollisionEffect : MonoBehaviour {
     }
 	
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        ContactPoint contact = collision.contacts[0];
+        ContactPoint2D contact = collision.contacts[0];
         collisionFX.transform.position = contact.point;
         collisionFX.GetComponent<ParticleSystem>().Play();
     }
