@@ -120,7 +120,7 @@ public class PlayerHealth : MonoBehaviour {
         transitionScript.GetComponent<Transition>().transition = true;
         if (transitionScript.GetComponent<Transition>()._transitionFinished == true)
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("LD");
             Destroy(dontDestroyon);
         }
     }

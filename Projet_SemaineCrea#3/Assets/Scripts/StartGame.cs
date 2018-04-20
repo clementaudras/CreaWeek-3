@@ -15,11 +15,19 @@ public class StartGame : MonoBehaviour {
 	void Update () {
 		if(XCI.GetButtonDown(XboxButton.Start, XboxController.First) || XCI.GetButtonDown(XboxButton.Start, XboxController.Second) || Input.GetKey(KeyCode.Space)){
             Debug.Log("StartGame");
-            SceneManager.LoadScene("TheGame");
+            SceneManager.LoadScene("LD");
 		}
 
         if (XCI.GetButtonDown(XboxButton.Back, XboxController.First) || XCI.GetButtonDown(XboxButton.Back, XboxController.Second) || Input.GetKey(KeyCode.Escape))
         {
+			SceneManager.LoadScene("UI Victor");
+            Debug.Log("UI");
+            //Application.Quit();
+        }
+
+		if (XCI.GetButtonDown(XboxButton.LeftBumper, XboxController.First) || XCI.GetButtonDown(XboxButton.LeftBumper, XboxController.Second) || Input.GetKey(KeyCode.Escape))
+        {
+			//SceneManager.LoadScene("UI Victor");
             Debug.Log("QuitGame");
             Application.Quit();
         }
