@@ -18,7 +18,7 @@ public class Egg : MonoBehaviour {
     bool eggEpl;
 
     AudioSource eggSound;
-    AudioClip moveSound;
+    public AudioClip moveSound;
     bool run;
     float velToVol = .2f;
 

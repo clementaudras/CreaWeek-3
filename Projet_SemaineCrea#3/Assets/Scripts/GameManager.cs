@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour {
         }
 
         if (confirmation == 2)
-        {
+        {//2joueru valid
 		uiReadyp1.SetActive(false);
 		uiReadyp2.SetActive(false);
             //annoucerText.text = "Winner Winner chicken dinner!";

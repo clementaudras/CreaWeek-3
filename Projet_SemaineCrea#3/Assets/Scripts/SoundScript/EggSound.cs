@@ -6,8 +6,8 @@ public class EggSound : MonoBehaviour {
 
 
 
-    AudioClip eggBreak;
-    AudioClip eggSpawn;
+    public AudioClip eggBreak;
+    public AudioClip eggSpawn;
 
        AudioSource eggSound;
 
@@ -18,14 +18,14 @@ public class EggSound : MonoBehaviour {
 
     private void Start()
     {
-        rb = transform.GetChild(0).GetComponent<Rigidbody2D>();
+
         eggSound = GetComponent<AudioSource>();
         eggSound.PlayOneShot(eggSpawn, 1F);
     }
 
     void Update()
     {
-        float runVol = velToVol * rb.velocity.magnitude;
+
         if (transform.GetChild(1).GetComponent<Egg>().eggHealthPoint <= 0 &&run == false)
         {
             eggSound.PlayOneShot(eggBreak, 1F);

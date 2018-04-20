@@ -24,6 +24,9 @@ public class PlayerHealth : MonoBehaviour {
     GameObject his_liveSprite;
 	bool pouleExplosion;
 
+	public bool endManche;
+	public bool endMatch;
+
     // Use this for initialization
     void Start() {
         if (!_isPlayer1)
@@ -80,6 +83,7 @@ public class PlayerHealth : MonoBehaviour {
 
         if (scoreScript.scoreRed == 3)
         {
+		endMatch=true;
             Debug.Log("RED WIN");
             redWinScreen.SetActive(true);
             StartCoroutine(WaitLoad());
@@ -90,6 +94,8 @@ public class PlayerHealth : MonoBehaviour {
             Debug.Log("BLUE WIN");
             blueWinScreen.SetActive(true);
             StartCoroutine(WaitLoad());
+			
+		endMatch=true;
         }
     }
 
@@ -135,6 +141,7 @@ public class PlayerHealth : MonoBehaviour {
 
         if (scoreScript.scoreRed != 3 && scoreScript.scoreBlue != 3)
         {
+		endManche = true;
             transitionScript.GetComponent<Transition>().transition = true;
             if (transitionScript.GetComponent<Transition>()._transitionFinished == true)
             {

@@ -297,7 +297,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -342,7 +342,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -366,7 +366,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!82 &82256816674821400
 AudioSource:
   m_ObjectHideFlags: 1
@@ -377,7 +377,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -422,7 +422,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -446,7 +446,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95332029969136500
 Animator:
   serializedVersion: 3
@@ -500,6 +500,7 @@ MonoBehaviour:
   _isPlayer1Egg: 0
   rotInd: 5
   col: {fileID: 61847116942311494}
+  moveSound: {fileID: 8300000, guid: 48e6e4777497e6f4192121e8b047a48b, type: 3}
 --- !u!114 &114264707432298718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -557,6 +558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bf018dbc963024aa56f040052a4580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eggBreak: {fileID: 8300000, guid: 8902061f1bf873148b20b4d9a579dbf8, type: 3}
+  eggSpawn: {fileID: 8300000, guid: 70a5832ff009ded4ba0f79c64340c087, type: 3}
 --- !u!198 &198804960816936804
 ParticleSystem:
   m_ObjectHideFlags: 1
