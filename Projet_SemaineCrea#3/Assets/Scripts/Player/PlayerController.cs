@@ -57,11 +57,9 @@ public class PlayerController : MonoBehaviour {
     public bool cancelAct;
     public bool validAct;
 
-    GameObject collisionFX;
 
     void Start()
     {
-        collisionFX = this.transform.GetChild(4).gameObject;
 		vectorDirPlayer = target.transform.position - transform.position;
         spriteTrans = transform.GetChild(0);
         rb = GetComponent<Rigidbody2D>();
@@ -405,10 +403,5 @@ public class PlayerController : MonoBehaviour {
         yield return null;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        ContactPoint contact = collision.contacts[0];
-        collisionFX.transform.position = contact.point;
-        collisionFX.GetComponent<ParticleSystem>().Play();
-    }
+
 }

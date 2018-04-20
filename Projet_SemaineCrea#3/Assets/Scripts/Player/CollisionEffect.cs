@@ -7,7 +7,7 @@ public class CollisionEffect : MonoBehaviour {
     GameObject collisionFX;
     // Use this for initialization
     void Start () {
-        collisionFX = this.transform.parent.parent.parent.GetChild(4).gameObject;
+        collisionFX = transform.GetChild(0).gameObject;
     }
 	
 
