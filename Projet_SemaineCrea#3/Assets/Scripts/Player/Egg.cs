@@ -17,6 +17,11 @@ public class Egg : MonoBehaviour {
     ParticleSystem eggExplod;
     bool eggEpl;
 
+    AudioSource eggSound;
+    AudioClip moveSound;
+    bool run;
+    float velToVol = .2f;
+
 
     // Use this for initialization
     void Start () {
@@ -24,7 +29,8 @@ public class Egg : MonoBehaviour {
         eggSprite = this.transform.GetChild(0);
         eggExplod = this.transform.parent.GetChild(2).GetComponent<ParticleSystem>();
 		StartCoroutine(Born());
-
+        eggSound = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
     }
 		
 	IEnumerator SlowDown()
@@ -52,12 +58,33 @@ public class Egg : MonoBehaviour {
 
 		// Update is called once per frame
 		void Update () {
-            flaque.transform.position = transform.position;
+        float runVol = velToVol * rb.velocity.magnitude;
+
+        flaque.transform.position = transform.position;
         eggState.SetFloat("bkState", eggHealthPoint);
         if (rb.velocity.magnitude > 0.9)
         {
-            transform.Rotate(0,0,1*rb.velocity.magnitude* rotInd);
+            transform.Rotate(0, 0, 1 * rb.velocity.magnitude * rotInd);
+
+            eggSound.clip = moveSound;
+            eggSound.loop = true;
+            eggSound.pitch = runVol;
+            if (!run)
+            {
+                eggSound.Play();
+                run = true;
+            }
+
+
         }
+        else
+        {
+            run = false;
+            eggSound.loop = false;
+            eggSound.Stop();
+
+        }
+
         //eggSlow
 		if (eggSlow){
 		    rb.velocity = rb.velocity * 0.9f;

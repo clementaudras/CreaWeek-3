@@ -5,10 +5,9 @@ using UnityEngine;
 public class PouleSound : MonoBehaviour
 {
 
-    public AudioClip coursePoule;
+
     public AudioClip ValidAct;
     public AudioClip AnnulAct;
-    public AudioClip EggPop;
 
     private float velToVol = .2f;
 
@@ -31,8 +30,6 @@ public class PouleSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float runVol = velToVol * rb.velocity.magnitude;
-
 
         if (playerAct.cancelAct == true || playerAct2.cancelAct == true)
         {
@@ -52,28 +49,8 @@ public class PouleSound : MonoBehaviour
 
         }
         
-		if (playerAct2.pond) {
-			speakerPoule.clip = EggPop;
-			speakerPoule.Play ();
-
-		}
-		if (rb.velocity.magnitude > 0.9) {
-
-			speakerPoule.clip = coursePoule;
-			speakerPoule.loop = true;
-			speakerPoule.pitch = runVol;
-			if (!run) {
-				speakerPoule.Play ();
-				run = true;
-			}
 
 
-		} else {
-			run = false;
-			speakerPoule.loop = false;
-			speakerPoule.Stop ();
-			speakerPoule.pitch = 1;
-		}
        
 
     }
