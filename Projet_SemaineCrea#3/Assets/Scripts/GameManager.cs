@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+	public GameObject uiReadyp1;
+	public GameObject uiReadyp2;
+
     public int confirmation;
     public GameObject player_1;
     public GameObject player_2;
@@ -99,6 +102,8 @@ public class GameManager : MonoBehaviour {
 
         if (confirmation == 2)
         {
+		uiReadyp1.SetActive(false);
+		uiReadyp2.SetActive(false);
             //annoucerText.text = "Winner Winner chicken dinner!";
             //move
             if (player_1.GetComponent<PlayerController>().dirConfirmed == true)

@@ -4,6 +4,8 @@ using UnityEngine;
 using XboxCtrlrInput;
 
 public class PlayerController : MonoBehaviour {
+	public GameObject ui_ready;
+
     public bool player_1 = true;
 	public AnimationCurve varCurve;
     public Transform arrow;
@@ -169,6 +171,7 @@ public class PlayerController : MonoBehaviour {
                         animatorUI.SetBool("Start", false);
                         this.dirConfirmed = true;
                         GM.GetComponent<GameManager>().confirmation += 1;
+						ui_ready.SetActive(true);
                         //Debug.Log("p1 Added 1");
                         p1_hasConfirmed = false;
                         validAct = true;
@@ -203,6 +206,7 @@ public class PlayerController : MonoBehaviour {
                         this.dirConfirmed = false;
                         StartCoroutine(WaitToReParent());
                         GM.GetComponent<GameManager>().confirmation -= 1;
+						ui_ready.SetActive(false);
                         //Debug.Log("p1 Removed 1");
                         p1_hasConfirmed = false;
                         p1_canCancel = false;
@@ -232,6 +236,7 @@ public class PlayerController : MonoBehaviour {
                         animatorUI.SetBool("Start", false);
                         this.dirConfirmed = true;
                         GM.GetComponent<GameManager>().confirmation += 1;
+						ui_ready.SetActive(true);
                         //Debug.Log("p1 Added 1");
                         p2_hasConfirmed = false;
                         p2_canCancel = true;
@@ -264,6 +269,7 @@ public class PlayerController : MonoBehaviour {
                         this.dirConfirmed = false;
                         StartCoroutine(WaitToReParent());
                         GM.GetComponent<GameManager>().confirmation -= 1;
+						ui_ready.SetActive(false);
                         //Debug.Log("p1 Removed 1");
                         p2_hasConfirmed = false;
                         p2_canCancel = false;
