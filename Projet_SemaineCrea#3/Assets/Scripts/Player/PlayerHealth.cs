@@ -26,14 +26,14 @@ public class PlayerHealth : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        if (_isPlayer1)
+        if (!_isPlayer1)
         {
 
             my_liveSprite = _player1.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
             his_deadExplosion = _player2.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
 
         }
-        if (!_isPlayer1)
+        if (_isPlayer1)
         {
 
             my_liveSprite = _player2.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
