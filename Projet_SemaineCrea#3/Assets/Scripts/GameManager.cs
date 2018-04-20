@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-        Debug.Log(p1_eggCount);
+        //Debug.Log(p1_eggCount);
         if (player_1 == null)
             player_1 = GameObject.FindGameObjectWithTag("Player1");
 
