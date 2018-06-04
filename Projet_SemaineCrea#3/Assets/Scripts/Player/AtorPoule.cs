@@ -2,25 +2,25 @@
 
 public class AtorPoule : MonoBehaviour {
 
-    PlayerController playerMove;
-    EggGen pondAct;
+    PlayerController_v2 playerMove;
+    //EggGen pondAct;
     Animator pouleAtor;
     ParticleSystem smokeMove;
 
 	void Start () {
         smokeMove = this.transform.GetChild(0).GetComponent<ParticleSystem>();
         pouleAtor = this.GetComponent<Animator>();
-        playerMove = this.transform.parent.parent.GetComponent<PlayerController>();
-        pondAct = this.transform.parent.parent.GetComponent<EggGen>();
+        playerMove = this.transform.parent.parent.GetComponent<PlayerController_v2>();
+        //pondAct = this.transform.parent.parent.GetComponent<EggGen>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (pondAct.pond == true)
+        if (playerMove.pond == true)
         {
             pouleAtor.SetBool("Pond", true);
-            pondAct.pond = false;
+            playerMove.pond = false;
             //Debug.Log("POND");
         }
 

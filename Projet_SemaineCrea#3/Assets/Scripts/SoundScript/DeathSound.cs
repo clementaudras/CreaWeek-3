@@ -6,13 +6,13 @@ public class DeathSound : MonoBehaviour {
 
     AudioSource speakerPoule;
     public List<AudioClip> deathSound;
-    PlayerHealth player;
+    PlayerHealth_v2 player;
     bool dead;
 
     void Start () {
         speakerPoule = GetComponent<AudioSource>();
 
-        player = transform.parent.GetComponent<PlayerHealth>();
+        player = transform.parent.GetComponent<PlayerHealth_v2>();
 
     }
 	

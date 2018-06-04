@@ -5,7 +5,7 @@ using UnityEngine;
 public class EggSound : MonoBehaviour {
 
 
-
+    public Egg eggScript;
     public AudioClip eggBreak;
     public AudioClip eggSpawn;
 
@@ -26,7 +26,7 @@ public class EggSound : MonoBehaviour {
     void Update()
     {
 
-        if (transform.GetChild(1).GetComponent<Egg>().eggHealthPoint <= 0 &&run == false)
+        if (eggScript.eggHealthPoint <= 0 && run == false)
         {
             eggSound.PlayOneShot(eggBreak, 1F);
             run = true;
