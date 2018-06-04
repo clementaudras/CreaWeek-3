@@ -193,8 +193,6 @@ public class PlayerController : MonoBehaviour {
                         p1_canSelectDir = true;
                         cancelAct = true;
                     }
-
-
                 }
                 if (p1_canCancel)
                 {
@@ -299,8 +297,8 @@ public class PlayerController : MonoBehaviour {
                 slow = false;
                 //rb.AddRelativeForce((target.transform.position - transform.position).normalized * 100f);
                 
-                StartCoroutine("SlowDown");
-                move = false;
+            StartCoroutine("SlowDown");
+            move = false;
         }
     }
 

@@ -8,8 +8,7 @@ public class LevelSelection : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        int numOfCtrlrs = XCI.GetNumPluggedCtrlrs();
-        Debug.Log("There are " + numOfCtrlrs + " Xbox controllers plugged in.");
+        int numOfCtrlrs = XCI.GetNumPluggedCtrlrs(); // nombre de manette connectées
 
         //Instructions
         if (numOfCtrlrs < 2)

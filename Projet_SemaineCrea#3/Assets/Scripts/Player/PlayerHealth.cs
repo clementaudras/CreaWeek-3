@@ -159,9 +159,6 @@ public class PlayerHealth : MonoBehaviour {
             his_deadExplosion.Play();
             pouleExplosion = true;
         }
-
-
 			yield return null;
-
 	}
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CollisionEffect : MonoBehaviour {
 
-    GameObject collisionFX;
-    AudioSource speakerPoule;
+    public GameObject collisionFX;
+    public AudioSource speakerPoule;
     public List<AudioClip> chocSound;
 
     // Use this for initialization
     void Start () {
-        collisionFX = transform.GetChild(0).gameObject;
+        //collisionFX = transform.GetChild(0).gameObject;
         speakerPoule = GetComponent<AudioSource>();
     }
 	

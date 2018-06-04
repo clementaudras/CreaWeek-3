@@ -11,8 +11,8 @@ public class PouleSound : MonoBehaviour
 
     private float velToVol = .2f;
 
-    PlayerController playerAct;
-    EggGen playerAct2;
+    PlayerController_v2 playerAct;
+    //EggGen playerAct2;
     AudioSource speakerPoule;
     Rigidbody2D rb;
     bool run;
@@ -22,11 +22,12 @@ public class PouleSound : MonoBehaviour
     void Start()
     {
         speakerPoule = GetComponent<AudioSource>();
-        playerAct = GetComponent<PlayerController>();
-        playerAct2 = GetComponent<EggGen>();
+        playerAct = GetComponent<PlayerController_v2>();
+        //playerAct2 = GetComponent<EggGen>();
         rb = GetComponent<Rigidbody2D>();
     }
 
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -50,8 +51,9 @@ public class PouleSound : MonoBehaviour
         }
         
 
-
+  
        
 
     }
+      */
 }
