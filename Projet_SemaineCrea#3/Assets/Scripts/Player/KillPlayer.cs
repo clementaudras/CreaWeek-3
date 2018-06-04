@@ -3,43 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KillPlayer : MonoBehaviour {
-
-    public bool _isPlayer1;
-    public GameObject adversairePlayerHealthScript;
-    public PlayerHealth playerHSCript;
-    public int thisPlayerHeatlh;
+    [Range(1, 4)]
+    public int isPlayerNum;
+    GameManager_v2 GM;
+    GameObject player1;
+    GameObject player2;
+    GameObject player3;
+    GameObject player4;
 
     // Use this for initialization
     void Start()
     {
-
+        GM = GameObject.Find("Main Camera").GetComponent<GameManager_v2>();
+        player1 = GameObject.Find("Player_1");
+        player2 = GameObject.Find("Player_2");
+        player3 = GameObject.Find("Player_3");
+        player4 = GameObject.Find("Player_4");
     }
 
     void Update()
     {
-        if (_isPlayer1)
-        {
-            adversairePlayerHealthScript = GameObject.FindGameObjectWithTag("Player2");
-            thisPlayerHeatlh = adversairePlayerHealthScript.GetComponent<PlayerHealth>().playerHealth;
-        }
-        else if (!_isPlayer1)
-        {
-            adversairePlayerHealthScript = GameObject.FindGameObjectWithTag("Player1");
-            thisPlayerHeatlh = adversairePlayerHealthScript.GetComponent<PlayerHealth>().playerHealth;
-        }
-        Debug.Log(thisPlayerHeatlh);
-        thisPlayerHeatlh -= 1;
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player1") || other.CompareTag("HeadP1")
-            || other.CompareTag("Player2") || other.CompareTag("HeadP2"))
+        if(isPlayerNum == 1)
         {
-            Debug.Log("PLAYER IS DEAD");
-            //thisPlayerHeatlh -= 100;
-            playerHSCript.playerHealth = 0;
+            if (other.CompareTag("Player2")|| other.CompareTag("Player3") || other.CompareTag("Player4"))
+            {
+                other.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
+                player1.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
+
+            if(other.CompareTag("HeadP2") || other.CompareTag("HeadP3") || other.CompareTag("HeadP4"))
+            {
+                other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
+                player1.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
         }
 
+        if (isPlayerNum == 2)
+        {
+            if (other.CompareTag("Player1") || other.CompareTag("Player3") || other.CompareTag("Player4"))
+            {
+                other.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
+                player2.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
+
+            if (other.CompareTag("HeadP1") || other.CompareTag("HeadP3") || other.CompareTag("HeadP4"))
+            {
+                other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
+                player2.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
+        }
+
+        if (isPlayerNum == 3)
+        {
+            if (other.CompareTag("Player2") || other.CompareTag("Player1") || other.CompareTag("Player4"))
+            {
+                other.GetComponent<PlayerHealth_v2>().playerHealth = 0;
+                player3.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
+
+            if(other.CompareTag("HeadP2") || other.CompareTag("HeadP1") || other.CompareTag("HeadP4"))
+            {
+                other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
+                player3.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
+        }
+
+        if (isPlayerNum == 4)
+        {
+            if (other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player1"))
+            {
+                other.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
+                player4.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
+
+            if(other.CompareTag("HeadP2") || other.CompareTag("HeadP3") || other.CompareTag("HeadP1"))
+            {
+                other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
+                player4.GetComponent<PlayerHealth_v2>().AddScore();
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            }
+        }
     }
 }

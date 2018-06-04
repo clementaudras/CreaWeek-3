@@ -30,6 +30,7 @@ public class TakeDamage : MonoBehaviour {
             if (other.CompareTag("HeadP1") || other.CompareTag("HeadP3") || other.CompareTag("HeadP4"))
             {
                 playerHealthScript.playerHealth -= damage;
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
                 other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().AddScore();
             }
         }
@@ -39,6 +40,7 @@ public class TakeDamage : MonoBehaviour {
             if (other.CompareTag("HeadP1") || other.CompareTag("HeadP2") || other.CompareTag("HeadP4"))
             {
                 playerHealthScript.playerHealth -= damage;
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
                 other.GetComponent<PlayerHealth_v2>().AddScore();
             }
         }
@@ -48,6 +50,7 @@ public class TakeDamage : MonoBehaviour {
             if (other.CompareTag("HeadP1") || other.CompareTag("HeadP2") || other.CompareTag("HeadP3"))
             {
                 playerHealthScript.playerHealth -= damage;
+                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
                 other.GetComponent<PlayerHealth_v2>().AddScore();
             }
         }

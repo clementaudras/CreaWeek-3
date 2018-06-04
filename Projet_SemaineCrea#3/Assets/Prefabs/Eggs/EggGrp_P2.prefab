@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4418203472289074}
   - component: {fileID: 61322917809813704}
+  - component: {fileID: 114824662498749588}
   m_Layer: 0
   m_Name: KillPlayer
   m_TagString: P2Egg
@@ -126,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1642616892988224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.96181864, y: 0.5783378, z: 3.3123274}
+  m_LocalPosition: {x: 1.37, y: -0.19, z: 3.3123274}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 4212627473545522}
@@ -492,9 +493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc08a8b3d39d0242b2ff2356681817a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggHealthPoint: 10
+  eggHealthPoint: 3
   flaque: {fileID: 1184402085961098}
-  flaqueScript: {fileID: 114617721528744620}
   eggSlow: 1
   rb: {fileID: 50768369661871276}
   _isPlayer1Egg: 0
@@ -542,6 +542,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a17567a74f5eb44fac314d7bfd47d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114824662498749588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039482622795698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229dd21fa8367a74cb0c2f2c1ea2dfde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerNum: 2
 --- !u!114 &114827830951557732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4105,8 +4117,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 28a1a9e747bd87143981adf2fcf0875e, type: 3}
+  m_SortingOrder: 15
+  m_Sprite: {fileID: 21300000, guid: 52eac24174aef654e959a257e49d0527, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4149,7 +4161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 14
   m_Sprite: {fileID: 21300000, guid: 8b0544bb9505d6544830fffcded2fbe7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

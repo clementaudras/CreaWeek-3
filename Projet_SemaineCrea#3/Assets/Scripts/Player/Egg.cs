@@ -5,7 +5,7 @@ using UnityEngine;
 public class Egg : MonoBehaviour {
 		public int eggHealthPoint = 3;
 		public GameObject flaque;
-		public Flaque flaqueScript;
+		//public Flaque flaqueScript;
 		public bool eggSlow = true;
 		public Rigidbody2D rb;
         public bool _isPlayer1Egg;
@@ -60,7 +60,6 @@ public class Egg : MonoBehaviour {
 		void Update () {
         float runVol = velToVol * rb.velocity.magnitude;
 
-        flaque.transform.position = transform.position;
         eggState.SetFloat("bkState", eggHealthPoint);
         if (rb.velocity.magnitude > 0.9)
         {
@@ -93,13 +92,15 @@ public class Egg : MonoBehaviour {
 			
 			//egg death -> flaque
 		if(eggHealthPoint <= 0){
+            flaque.SetActive(true);
+            flaque.transform.position = transform.position;
+
             if (!eggEpl)
             {
                 eggExplod.Play();
                 eggEpl = true;
                 flaque.transform.rotation = Quaternion.Euler(0,0,Random.Range(0,360));
             }
-            flaque.SetActive(true);
 
 			StartCoroutine("Die");
 			}	

@@ -14,8 +14,11 @@ public class GameManager_v2 : MonoBehaviour {
     private GameObject player_2;
     private GameObject player_3;
     private GameObject player_4;
+
     public GameObject uiReadyp1;
     public GameObject uiReadyp2;
+    public GameObject uiReadyp3;
+    public GameObject uiReadyp4;
 
     public int totalPlayersAlive;
 
@@ -62,6 +65,16 @@ public class GameManager_v2 : MonoBehaviour {
         {
             confirmation = 0;
         }
+        Debug.Log(totalPlayersAlive);
+
+        if (totalPlayersAlive < 1)
+            totalPlayersAlive = 1;
+
+        //IF only 1 player is alive -> Transition to next scene, until someone is at 3/3 win -> Win screen -> Menu
+        if (totalPlayersAlive == 1)
+        {
+            StartCoroutine(NewNextPhase());
+        }
 
         if (totalPlayers == 2)
         {
@@ -76,26 +89,47 @@ public class GameManager_v2 : MonoBehaviour {
                 uiReadyp2.SetActive(false);
 
                 Reset();
-
-                //IF only 1 player is alive -> Transition to next scene, until someone is at 3/3 win -> Win screen -> Menu
-                if (totalPlayersAlive == 1)
-                {
-                    StartCoroutine(NewNextPhase());
-                }
             }
         }
-            #endregion
+
+        if (totalPlayers == 3)
+        {
+            if (confirmation == 3)
+            {
+                //Confirmed Actions
+                P1_Confirmed();
+                P2_Confirmed();
+                P3_Confirmed();
+
+                //Deactivate UI "READY!"
+                uiReadyp1.SetActive(false);
+                uiReadyp2.SetActive(false);
+                uiReadyp3.SetActive(false);
+
+                Reset();
+            }
+        }
+        #endregion
     }
 
-    //RESET
+    //RESET ALL BOOL
     void Reset()
     {
         confirmation = 0;
         player_1.GetComponent<PlayerController_v2>().dirConfirmed = false;
         player_2.GetComponent<PlayerController_v2>().dirConfirmed = false;
+        player_2.GetComponent<PlayerController_v2>().dirConfirmed = false;
+        player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
+
+        player_1.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+        player_2.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+        player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+        player_4.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
 
         player_1.GetComponent<PlayerController_v2>().eggConfirmed = false;
         player_2.GetComponent<PlayerController_v2>().eggConfirmed = false;
+        player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
+        player_4.GetComponent<PlayerController_v2>().eggConfirmed = false;
     }
 
 
@@ -124,18 +158,6 @@ public class GameManager_v2 : MonoBehaviour {
             player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
             Debug.Log("P1 EGG");
         }
-
-        /*
-        //SLOW DOWN AFTER LAY EGG 
-        if (_hasLayedEgg && player_1.GetComponent<Rigidbody2D>().velocity.magnitude > 0f)
-        {
-            player_1.GetComponent<Rigidbody2D>().velocity *= 0.9f;
-            if (player_1.GetComponent<Rigidbody2D>().velocity.magnitude == 0f)
-            {
-                _hasLayedEgg = false;
-            }
-        }
-        */
     }
 
     void P2_Confirmed()
@@ -176,89 +198,28 @@ public class GameManager_v2 : MonoBehaviour {
         */
     }
 
-    //LAY EGG 
-    void P1_LayEgg()
+    void P3_Confirmed()
     {
-        if(player_1.GetComponent<PlayerController_v2>().eggConfirmed == true)
+        //MOVE
+        if (player_3.GetComponent<PlayerController_v2>().dirConfirmed == true)
         {
-            player_1.GetComponent<PlayerController_v2>()._layEgg = true;
-            player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-            _hasLayedEgg = true;
-            player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
-            player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-        }
-    }
-
-    void P2_LayEgg()
-    {
-        if (player_2.GetComponent<PlayerController_v2>().eggConfirmed == true)
-        {
-            player_2.GetComponent<PlayerController_v2>()._layEgg = true;
-            player_2.GetComponent<PlayerController_v2>().p2_canSelectEgg = true;
-            player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            player_2.GetComponent<Rigidbody2D>().AddForce(player_2.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
-            _hasLayedEgg = true;
-            player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-        }
-    }
-    //SLOW DOWN AFTER LAY EGG 
-    void P1_SlowDownAfterEgg()
-    {
-        if (_hasLayedEgg && player_1.GetComponent<Rigidbody2D>().velocity.magnitude > 0f)
-        {
-            player_1.GetComponent<Rigidbody2D>().velocity *= 0.9f;
-            if (player_1.GetComponent<Rigidbody2D>().velocity.magnitude == 0f)
-            {
-                _hasLayedEgg = false;
-            }
-        }
-    }
-    
-    void P2_SlowDownAfterEgg()
-    {
-        if (_hasLayedEgg && player_2.GetComponent<Rigidbody2D>().velocity.magnitude > 0f)
-        {
-            player_2.GetComponent<Rigidbody2D>().velocity *= 0.9f;
-            if (player_2.GetComponent<Rigidbody2D>().velocity.magnitude == 0f)
-            {
-                _hasLayedEgg = false;
-            }
-        }
-    }
-
-
-    //CONFIRM MOVE
-    void P1_ConfirmMove()
-    {
-        if (player_1.GetComponent<PlayerController_v2>().dirConfirmed == true)
-        {
-            player_1.GetComponent<PlayerController_v2>().move = true;
-            player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+            player_3.GetComponent<PlayerController_v2>().move = true;
+            player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+            player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
             _hasLayedEgg = false;
+            Debug.Log("P3 MOVE");
         }
-    }
 
-    void P2_ConfirmMove()
-    {
-        if (player_2.GetComponent<PlayerController_v2>().dirConfirmed == true)
+        //LAY EGG
+        if (player_3.GetComponent<PlayerController_v2>().eggConfirmed == true)
         {
-            player_2.GetComponent<PlayerController_v2>().move = true;
-            player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            _hasLayedEgg = false;
+            player_3.GetComponent<PlayerController_v2>().egged = true;
+            player_3.GetComponent<PlayerController_v2>()._layEgg = true;
+            _hasLayedEgg = true;
+            player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+            player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+            Debug.Log("P3 EGG");
         }
-    }
-
-    void Player3_ConfirmMove()
-    {
-      
-    }
-
-    void Player4_ConfirmMove()
-    {
-       
     }
 
     IEnumerator WaitReset_P1EggCount()
@@ -277,9 +238,31 @@ public class GameManager_v2 : MonoBehaviour {
 
     IEnumerator NewNextPhase()
     {
+        if(player_1.activeInHierarchy == true)
+        {
+            GameObject P1_Transition;
+            P1_Transition = GameObject.Find("P1_Transition");
+            P1_Transition.GetComponent<Transition>().transition = true;
+        } else if (player_2.activeInHierarchy == true)
+        {
+            GameObject P2_Transition;
+            P2_Transition = GameObject.Find("P2_Transition");
+            P2_Transition.GetComponent<Transition>().transition = true;
+        } else if (player_3.activeInHierarchy == true)
+        {
+            GameObject P3_Transition;
+            P3_Transition = GameObject.Find("P3_Transition");
+            P3_Transition.GetComponent<Transition>().transition = true;
+        } else if (player_4.activeInHierarchy == true)
+        {
+            GameObject P4_Transition;
+            P4_Transition = GameObject.Find("P4_Transition");
+            P4_Transition.GetComponent<Transition>().transition = true;
+        }
+
         yield return new WaitForSecondsRealtime(2.5f);
-                Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
         yield return null;
     }
 }
