@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b6a13bf13e88f104588aeb4f71cd5ba5
+timeCreated: 1527786311
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Peach Milk
+  fontNames:
+  - Peach Milk
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f29ca0d2d7fcc0f478cfbb1a0fd9963e
+timeCreated: 1527784935
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Vlump Black
+  fontNames:
+  - Vlump Black
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
