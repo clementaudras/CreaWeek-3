@@ -93,13 +93,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4171630002813636}
   - component: {fileID: 61338120168769074}
+  - component: {fileID: 114262153702296202}
   m_Layer: 0
   m_Name: KillPlayer
   m_TagString: P1Egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1866702582846038
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +497,18 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   player: {fileID: 0}
   _isPlayer1: 1
+--- !u!114 &114262153702296202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1833748849312286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229dd21fa8367a74cb0c2f2c1ea2dfde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerNum: 1
 --- !u!114 &114323657721847278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -507,9 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc08a8b3d39d0242b2ff2356681817a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggHealthPoint: 10
+  eggHealthPoint: 3
   flaque: {fileID: 1814154201072748}
-  flaqueScript: {fileID: 0}
   eggSlow: 1
   rb: {fileID: 50095995268012216}
   _isPlayer1Egg: 1

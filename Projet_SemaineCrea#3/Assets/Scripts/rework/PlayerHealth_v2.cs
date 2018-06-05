@@ -56,14 +56,14 @@ public class PlayerHealth_v2 : MonoBehaviour {
 
         if(is_playerNum == 1)
         {
-            my_liveSprite = _player2.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
-            his_deadExplosion = _player1.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+            //my_liveSprite = _player2.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
+            //his_deadExplosion = _player1.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
         }
 
         if (is_playerNum == 2)
         {
-            my_liveSprite = _player1.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
-            his_deadExplosion = _player2.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+            //my_liveSprite = _player1.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
+            //his_deadExplosion = _player2.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
         }
 
         if (is_playerNum == 3)
@@ -82,27 +82,34 @@ public class PlayerHealth_v2 : MonoBehaviour {
     public void AddScore()
     {
         _isDead = false;
-        _canAddScore = false;
-        Debug.Log("Player " + is_playerNum + " is dead.");
+        //_canAddScore = false;
+        Debug.Log("Player " + is_playerNum + " +1");
 
-        if (is_playerNum == 1)
+        if (_canAddScore)
         {
-            scoreScript.score_p1 += 1;
-        }
+            if (is_playerNum == 1)
+            {
+                scoreScript.score_p1 += 1;
+                _canAddScore = false;
+            }
 
-        if (is_playerNum == 2)
-        {
-            scoreScript.score_p2 += 1;
-        }
+            if (is_playerNum == 2)
+            {
+                scoreScript.score_p2 += 1;
+                _canAddScore = false;
+            }
 
-        if (is_playerNum == 3)
-        {
-            scoreScript.score_p3 += 1;
-        }
+            if (is_playerNum == 3)
+            {
+                scoreScript.score_p3 += 1;
+                _canAddScore = false;
+            }
 
-        if (is_playerNum == 4)
-        {
-            scoreScript.score_p4 += 1;
+            if (is_playerNum == 4)
+            {
+                scoreScript.score_p4 += 1;
+                _canAddScore = false;
+            }
         }
     }
 
@@ -114,6 +121,7 @@ public class PlayerHealth_v2 : MonoBehaviour {
         if (playerHealth <= 0)
         {
             _isDead = true;
+            this.gameObject.SetActive(false); //disable all colliders
         }
 
         /*
@@ -171,6 +179,9 @@ public class PlayerHealth_v2 : MonoBehaviour {
             StartCoroutine(WaitLoad());
         }
     }
+
+
+
 
     IEnumerator WaitLoad()
     {

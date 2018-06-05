@@ -19,9 +19,9 @@ public class PlayerController_v2 : MonoBehaviour {
     //GameObject References
     public GameObject ui_ready;
     public GameObject eggPrefab;
-    
+
     //Bool
-    bool p1_hasConfirmed;
+    [HideInInspector] public bool p1_hasConfirmed;
     bool p2_hasConfirmed;
     bool p3_hasConfirmed;
     bool p4_hasConfirmed;
@@ -67,6 +67,7 @@ public class PlayerController_v2 : MonoBehaviour {
     //Debug Velocity Direction
     [HideInInspector] public Vector3 velocityVector;
     [HideInInspector] public Vector3 directionVel;
+    public bool _canCancel;
 
     //EGG GEN
     [Header("EGG GENERATION")]
@@ -85,6 +86,7 @@ public class PlayerController_v2 : MonoBehaviour {
 
     void Awake()
     {
+        p1_hasConfirmed = true;
         //fakeEgg = this.transform.GetChild(3).gameObject;
     }
 
@@ -160,7 +162,7 @@ public class PlayerController_v2 : MonoBehaviour {
             float y = XCI.GetAxis(XboxAxis.LeftStickY, xboxCtrl);
 
             // CANCEL ALL INPUT BELOW THIS FLOAT
-            float R_analog_threshold = 0.10f;
+            float R_analog_threshold = 0.0f;
 
             if (Mathf.Abs(x) < R_analog_threshold) { x = 0.0f; }
 
@@ -181,25 +183,27 @@ public class PlayerController_v2 : MonoBehaviour {
         //MECHANICS INPUTS FOR ALL PLAYERS
         if (XCI.GetButtonDown(XboxButton.LeftStick, xboxCtrl)) //choose a direction
         {
-            if (p1_canSelectDir)
-            {
-                animatorUI.SetBool("Press_B", false);
-                animatorUI.SetBool("Press_A", false);
-                animatorUI.SetBool("Start", true);
-                p1_hasConfirmed = true;
+           // if (p1_canSelectDir)
+           // {
+                //animatorUI.SetBool("Press_B", false);
+                //animatorUI.SetBool("Press_A", false);
+                //animatorUI.SetBool("Start", true);
+                //      p1_hasConfirmed = true;
                 //validAct = true;
-                target.transform.parent = null;
-            }
+                //target.transform.parent = null;
+           // }
         }
 
         if (p1_hasConfirmed)
         {
             if (XCI.GetButtonDown(XboxButton.A, xboxCtrl)) //move in the choosed direction
             {
+            target.transform.parent = null;
+            _canCancel = true;
                 GM.GetComponent<GameManager_v2>().confirmation += 1;
-                animatorUI.SetBool("Press_B", false);
-                animatorUI.SetBool("Press_A", true);
-                animatorUI.SetBool("Start", true);
+                //animatorUI.SetBool("Press_B", false);
+                //animatorUI.SetBool("Press_A", true);
+                //animatorUI.SetBool("Start", true);
                 this.dirConfirmed = true;
                 ui_ready.SetActive(true);
                 p1_hasConfirmed = false;
@@ -213,10 +217,12 @@ public class PlayerController_v2 : MonoBehaviour {
             {
                 if (p1_canSelectEgg)
                 {
+                target.transform.parent = null;
+                _canCancel = true;
                     GM.GetComponent<GameManager_v2>().confirmation += 1;
-                    animatorUI.SetBool("Press_B", false);
-                    animatorUI.SetBool("Press_A", true);
-                    animatorUI.SetBool("Start", false);
+                    //animatorUI.SetBool("Press_B", false);
+                    //animatorUI.SetBool("Press_A", true);
+                    //animatorUI.SetBool("Start", false);
                     p1_hasConfirmedEgg = true;
                     //validAct = true;
                     p1_hasConfirmed = false;
@@ -226,9 +232,15 @@ public class PlayerController_v2 : MonoBehaviour {
             }
 
         }
+
         if (XCI.GetButtonDown(XboxButton.B, xboxCtrl)) //cancel action
         {
-            GM.GetComponent<GameManager_v2>().confirmation -= 1;
+            if (_canCancel)
+            {
+                GM.GetComponent<GameManager_v2>().confirmation -= 1;
+                _canCancel = false;
+            }
+
             animatorUI.SetBool("Press_B", true);
             animatorUI.SetBool("Press_A", false);
             animatorUI.SetBool("Start", false);
@@ -236,7 +248,7 @@ public class PlayerController_v2 : MonoBehaviour {
             this.eggConfirmed = false;
             StartCoroutine(WaitToReParent());
             ui_ready.SetActive(false);
-            p1_hasConfirmed = false;
+            p1_hasConfirmed = true;
             //p1_canCancel = false;
             p1_canSelectDir = true;
             //cancelAct = true;
@@ -264,6 +276,7 @@ public class PlayerController_v2 : MonoBehaviour {
             slow = false;
             StartCoroutine(SlowDown());
             move = false;
+            _canCancel = false;
         }
 
         //if all player have confirmed -> Move chicken
@@ -273,6 +286,7 @@ public class PlayerController_v2 : MonoBehaviour {
             slow = false;
             StartCoroutine(EggedSlowDown());
             egged = false;
+            _canCancel = false;
         }
     }
     #endregion
