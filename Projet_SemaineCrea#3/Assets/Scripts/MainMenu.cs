@@ -42,11 +42,13 @@ public class MainMenu : MonoBehaviour {
     public GameObject P4ReadySprite;
 
     public GameObject Selector;
+    public Animator MenuAnim;
 
     [Header("Other")]
     public GameObject MapSelectionPlayer = null;
     bool canNav = true;
     int ConnectedPlayers = 1;
+    bool pass;
 
     void Start ()
     {
@@ -56,71 +58,72 @@ public class MainMenu : MonoBehaviour {
 	void Update ()
     {
         MapSelector();
-
-        if (MenuState == "Intro")
+        pass = false;
+        if (MenuState == "Intro" && !pass)
         {
             Go_MenuIntro();
         }
-        if (MenuState == "PlayerNum")
+        if (MenuState == "PlayerNum" && !pass)
         {
             Go_MenuPlayer();
         }
-        if (MenuState == "MapSelection")
+        if (MenuState == "MapSelection" && !pass)
         {
             Go_MenuMap();
         }
     }
     void Go_MenuIntro()
     {
-        IntroMenuCanv.SetActive(true);
-        PlayerMenuCanv.SetActive(false);
-        MapMenuCanv.SetActive(false);
+        
 
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || Input.GetKey(KeyCode.RightArrow))
         {
             MenuState = "PlayerNum";
+            pass = true;
+            MenuAnim.SetTrigger("ChangeMenu");
         }
     }
     void Go_MenuPlayer()
     {
-        IntroMenuCanv.SetActive(false);
-        PlayerMenuCanv.SetActive(true);
-        MapMenuCanv.SetActive(false);
+
         ChangePlayerNum();
         // P1 controller
-        if (XCI.GetButtonDown(XboxButton.A, XboxController.First) && ConnectedPlayers > 1 && P1Ready)
+        if (XCI.GetButtonDown(XboxButton.A, XboxController.First) && ConnectedPlayers > 1 && P1Ready || Input.GetKey(KeyCode.RightArrow) && ConnectedPlayers > 1 && P1Ready)
         {
-            
+            MenuAnim.SetTrigger("ChangeMenu");
             MenuState = "MapSelection";
+            pass = true;
         }
 
-        if (XCI.GetButtonDown(XboxButton.B, XboxController.First) && !P1Ready)
+        if (XCI.GetButtonDown(XboxButton.B, XboxController.First) && !P1Ready || Input.GetKey(KeyCode.LeftArrow) && !P1Ready)
         {
+            MenuAnim.SetTrigger("Back");
             MenuState = "Intro";
+            pass = true;
         }
 
         // Other
         //P1
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || Input.GetKey(KeyCode.Alpha1))
         {
             P1Ready = true;
             P1ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P1ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.First))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKey(KeyCode.A))
         {
             P1Ready = false;
             P1ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
             P1ReadySprite.GetComponent<Image>().enabled = true;
         }
         // P2
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Second))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Second) || Input.GetKey(KeyCode.Alpha2))
         {
             P2Ready = true;
             P2ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P2ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Second))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Second) || Input.GetKey(KeyCode.Z))
         {
             P2Ready = false;
             P2ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
@@ -128,13 +131,13 @@ public class MainMenu : MonoBehaviour {
         }
 
         // P3
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Third))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Third) || Input.GetKey(KeyCode.Alpha3))
         {
             P3Ready = true;
             P3ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P3ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Third))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Third) || Input.GetKey(KeyCode.E))
         {
             P3Ready = false;
             P3ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
@@ -142,13 +145,13 @@ public class MainMenu : MonoBehaviour {
         }
 
         // P4
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Fourth))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Fourth) || Input.GetKey(KeyCode.Alpha4))
         {
             P4Ready = true;
             P4ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P4ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Fourth))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Fourth) || Input.GetKey(KeyCode.R))
         {
             P4Ready = false;
             P4ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
@@ -157,12 +160,7 @@ public class MainMenu : MonoBehaviour {
 
     }
     void Go_MenuMap()
-    {
-        IntroMenuCanv.SetActive(false);
-        PlayerMenuCanv.SetActive(false);
-        MapMenuCanv.SetActive(true);
-        
-        
+    {       
         if (XCI.GetAxis(XboxAxis.LeftStickX, XboxController.First) >= 0.7f && canNav)
         {
             canNav = false;
@@ -180,11 +178,14 @@ public class MainMenu : MonoBehaviour {
 
         if (XCI.GetButtonDown(XboxButton.A, XboxController.First))
         {
-
+            LauchMap();
+            pass = true;
         }
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First))
+        if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKey(KeyCode.LeftArrow))
         {
+            MenuAnim.SetTrigger("Back");
             MenuState = "PlayerNum";
+            pass = true;
         }
     }
 

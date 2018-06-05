@@ -9,11 +9,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: ffb160bd7fd325945945a326e5706835
   - enabled: 1
-    path: Assets/Scenes/TheGame.unity
+    path: Assets/Scenes/Other/TheGame.unity
     guid: 759c4ac65629a5a40ae55ae888545acc
   - enabled: 1
     path: Assets/Scenes/LD.unity
     guid: a435ea922007a0c42a2684701f3cf3f8
   - enabled: 1
-    path: Assets/Scenes/UI Victor.unity
+    path: Assets/Scenes/Other/UI Victor.unity
     guid: df1706ee2e7fa5947b5c95305f7b4103
+  - enabled: 1
+    path: Assets/Scenes/2J-1.unity
+    guid: faeba18a40db92242ad98afe03b45ded
+  - enabled: 1
+    path: Assets/Scenes/2J-2.unity
+    guid: 69244121bdc46f64780fa2bbce87dd52
+  - enabled: 1
+    path: Assets/Scenes/2J-3.unity
+    guid: 3eae062651136764d99faed7f4fa9918
+  - enabled: 1
+    path: Assets/Scenes/3J-1.unity
+    guid: e142b53cae0519247bb37170b7e4c618
+  - enabled: 1
+    path: Assets/Scenes/3J-2.unity
+    guid: f944299d67046a845815e51161aa342d
