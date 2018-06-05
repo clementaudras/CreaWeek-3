@@ -33,14 +33,14 @@ public class KillPlayer : MonoBehaviour {
             if (other.CompareTag("Player2")|| other.CompareTag("Player3") || other.CompareTag("Player4"))
             {
                 other.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
-                player1.GetComponent<PlayerHealth_v2>().AddScore();
+                //player1.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
 
             if(other.CompareTag("HeadP2") || other.CompareTag("HeadP3") || other.CompareTag("HeadP4"))
             {
                 other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
-                player1.GetComponent<PlayerHealth_v2>().AddScore();
+                //player1.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
         }
@@ -50,14 +50,14 @@ public class KillPlayer : MonoBehaviour {
             if (other.CompareTag("Player1") || other.CompareTag("Player3") || other.CompareTag("Player4"))
             {
                 other.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
-                player2.GetComponent<PlayerHealth_v2>().AddScore();
+                //player2.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
 
             if (other.CompareTag("HeadP1") || other.CompareTag("HeadP3") || other.CompareTag("HeadP4"))
             {
                 other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
-                player2.GetComponent<PlayerHealth_v2>().AddScore();
+                //player2.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
         }
@@ -67,14 +67,14 @@ public class KillPlayer : MonoBehaviour {
             if (other.CompareTag("Player2") || other.CompareTag("Player1") || other.CompareTag("Player4"))
             {
                 other.GetComponent<PlayerHealth_v2>().playerHealth = 0;
-                player3.GetComponent<PlayerHealth_v2>().AddScore();
+                //player3.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
 
             if(other.CompareTag("HeadP2") || other.CompareTag("HeadP1") || other.CompareTag("HeadP4"))
             {
                 other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
-                player3.GetComponent<PlayerHealth_v2>().AddScore();
+                //player3.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
         }
@@ -84,14 +84,14 @@ public class KillPlayer : MonoBehaviour {
             if (other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player1"))
             {
                 other.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
-                player4.GetComponent<PlayerHealth_v2>().AddScore();
+                //player4.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
 
             if(other.CompareTag("HeadP2") || other.CompareTag("HeadP3") || other.CompareTag("HeadP1"))
             {
                 other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().playerHealth -= 100;
-                player4.GetComponent<PlayerHealth_v2>().AddScore();
+                //player4.GetComponent<PlayerHealth_v2>().AddScore();
                 GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
             }
         }

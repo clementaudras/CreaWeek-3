@@ -8,6 +8,7 @@ public class TakeDamage : MonoBehaviour {
     public GameManager_v2 GM;
     public int damage = 100;
     int is_playerNum;
+    bool _canRetrieveAlivePlayer = true;
 
     void Start()
     {
@@ -21,8 +22,8 @@ public class TakeDamage : MonoBehaviour {
             if (other.CompareTag("HeadP2") || other.CompareTag("HeadP3") || other.CompareTag("HeadP4"))
             {
                 playerHealthScript.playerHealth -= damage;
-                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
-                other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().AddScore();
+                StartCoroutine(RetrieveAlivePlayer());
+                //other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().AddScore();
             }
         }
 
@@ -30,8 +31,9 @@ public class TakeDamage : MonoBehaviour {
             if (other.CompareTag("HeadP1") || other.CompareTag("HeadP3") || other.CompareTag("HeadP4"))
             {
                 playerHealthScript.playerHealth -= damage;
-                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
-                other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().AddScore();
+                StartCoroutine(RetrieveAlivePlayer());
+                //GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+                //other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().AddScore();
             }
         }
 
@@ -40,8 +42,8 @@ public class TakeDamage : MonoBehaviour {
             if (other.CompareTag("HeadP1") || other.CompareTag("HeadP2") || other.CompareTag("HeadP4"))
             {
                 playerHealthScript.playerHealth -= damage;
-                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
-                other.GetComponent<PlayerHealth_v2>().AddScore();
+                StartCoroutine(RetrieveAlivePlayer());
+                //other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().AddScore();
             }
         }
 
@@ -50,9 +52,21 @@ public class TakeDamage : MonoBehaviour {
             if (other.CompareTag("HeadP1") || other.CompareTag("HeadP2") || other.CompareTag("HeadP3"))
             {
                 playerHealthScript.playerHealth -= damage;
-                GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
-                other.GetComponent<PlayerHealth_v2>().AddScore();
+                StartCoroutine(RetrieveAlivePlayer());
+                //other.transform.parent.parent.parent.GetComponent<PlayerHealth_v2>().AddScore();
             }
         }
+    }
+
+    public IEnumerator RetrieveAlivePlayer()
+    {
+        if (_canRetrieveAlivePlayer)
+        {
+            GM.GetComponent<GameManager_v2>().totalPlayersAlive -= 1;
+            _canRetrieveAlivePlayer = false;
+        }
+        yield return new WaitForSecondsRealtime(0.1f);
+            _canRetrieveAlivePlayer = false;
+        yield return null;
     }
 }
