@@ -251,11 +251,11 @@ pass = false;
             }
             else if (MapSelected == 2)
             {
-                SceneManager.LoadScene(m_2PMap1);
+                SceneManager.LoadScene(m_2PMap2);
             }
             else if (MapSelected == 3)
             {
-                SceneManager.LoadScene(m_2PMap1);
+                SceneManager.LoadScene(m_2PMap3);
             }
         }
         else if (ConnectedPlayers == 3)
