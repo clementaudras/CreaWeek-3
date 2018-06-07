@@ -92,8 +92,11 @@ public class Egg : MonoBehaviour {
 			
 			//egg death -> flaque
 		if(eggHealthPoint <= 0){
-            flaque.SetActive(true);
-            flaque.transform.position = transform.position;
+            if(flaque.activeInHierarchy == false)
+            {
+                flaque.SetActive(true);
+                flaque.transform.position = transform.position;
+            }
 
             if (!eggEpl)
             {

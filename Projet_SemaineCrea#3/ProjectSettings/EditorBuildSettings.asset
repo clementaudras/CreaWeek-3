@@ -9,26 +9,29 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: ffb160bd7fd325945945a326e5706835
   - enabled: 1
-    path: Assets/Scenes/Other/TheGame.unity
-    guid: 759c4ac65629a5a40ae55ae888545acc
+    path: Assets/Scenes/Levels/2 player/2p_001.unity
+    guid: 35cb9673909144947a32cdca093ed649
   - enabled: 1
-    path: Assets/Scenes/LD.unity
-    guid: a435ea922007a0c42a2684701f3cf3f8
+    path: Assets/Scenes/Levels/2 player/2p_002.unity
+    guid: 94e36ef1465366b4fb07ed7ca2f3b7f7
   - enabled: 1
-    path: Assets/Scenes/Other/UI Victor.unity
-    guid: df1706ee2e7fa5947b5c95305f7b4103
+    path: Assets/Scenes/Levels/2 player/2p_003.unity
+    guid: 1d4ef899eb080784c802f4b9aa9b2669
   - enabled: 1
-    path: Assets/Scenes/2J-1.unity
-    guid: faeba18a40db92242ad98afe03b45ded
+    path: Assets/Scenes/Levels/3 player/3p_001.unity
+    guid: 1115f42cf4d8b35478120549bd73533c
   - enabled: 1
-    path: Assets/Scenes/2J-2.unity
-    guid: 69244121bdc46f64780fa2bbce87dd52
+    path: Assets/Scenes/Levels/3 player/3p_002.unity
+    guid: fd9a2f00da6ab3f4c9ae3e8eb177d233
   - enabled: 1
-    path: Assets/Scenes/2J-3.unity
-    guid: 3eae062651136764d99faed7f4fa9918
+    path: Assets/Scenes/Levels/3 player/3p_003.unity
+    guid: 1a6aee98080526f4d86e31780dcf2be5
   - enabled: 1
-    path: Assets/Scenes/3J-1.unity
-    guid: e142b53cae0519247bb37170b7e4c618
+    path: Assets/Scenes/Levels/4 player/4p_001.unity
+    guid: d79b1f0cf26f15047816bea884996d5b
   - enabled: 1
-    path: Assets/Scenes/3J-2.unity
-    guid: f944299d67046a845815e51161aa342d
+    path: Assets/Scenes/Levels/4 player/4p_002.unity
+    guid: ff1f6404358824246a717a12b77c22d0
+  - enabled: 1
+    path: Assets/Scenes/Levels/4 player/4p_003.unity
+    guid: 17905459763c43d49b4a2bc28945532a

@@ -16,6 +16,8 @@ TagManager:
   - HeadP3
   - HeadP4
   - Flaque
+  - P3Egg
+  - P4Egg
   layers:
   - Default
   - TransparentFX
@@ -31,10 +33,10 @@ TagManager:
   - Player1
   - Player3
   - Player4
-  - 
-  - 
-  - 
-  - 
+  - P1head
+  - P2head
+  - P3head
+  - P4head
   - 
   - 
   - 

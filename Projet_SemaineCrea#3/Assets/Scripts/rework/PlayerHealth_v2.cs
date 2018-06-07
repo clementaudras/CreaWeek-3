@@ -16,10 +16,7 @@ public class PlayerHealth_v2 : MonoBehaviour {
     GameObject _player3;
     GameObject _player4;
 
-    GameObject player1_WinScreen;
-    GameObject player2_WinScreen;
-    GameObject player3_WinScreen;
-    GameObject player4_WinScreen;
+    GameObject winScreens_go;
 
     GameObject dontdestroyonload;
     public int nombreManches = 3;
@@ -32,23 +29,32 @@ public class PlayerHealth_v2 : MonoBehaviour {
     public bool endManche;
     public bool endMatch;
 
-    ParticleSystem my_deadExplosion;
+    //public ParticleSystem _deadExplosion;
     GameObject my_liveSprite;
     ParticleSystem his_deadExplosion;
     GameObject his_liveSprite;
 
+    ScoreFeedback p1Sc;
+    ScoreFeedback p2Sc;
+    ScoreFeedback p3Sc;
+    ScoreFeedback p4Sc;
     
     void Awake()
     {
-        player1_WinScreen = GameObject.Find("player1_WinScreen");
-        player2_WinScreen = GameObject.Find("player2_WinScreen");
-        player3_WinScreen = GameObject.Find("player3_WinScreen");
-        player4_WinScreen = GameObject.Find("player4_WinScreen");
+
+        winScreens_go = GameObject.Find("WinScreens");
+
+        p1Sc = GameObject.Find("TextScore_P1").GetComponent<ScoreFeedback>();
+        p2Sc = GameObject.Find("TextScore_P2").GetComponent<ScoreFeedback>();
+        p3Sc = GameObject.Find("TextScore_P3").GetComponent<ScoreFeedback>();
+        p4Sc = GameObject.Find("TextScore_P4").GetComponent<ScoreFeedback>();
 
         _player1 = GameObject.Find("Player_1");
         _player2 = GameObject.Find("Player_2");
         _player3 = GameObject.Find("Player_3");
         _player4 = GameObject.Find("Player_4");
+
+        scoreScript = GameObject.Find("Score_ddol").GetComponent<Score_v2>();
     }
     // Use this for initialization
     void Start () {
@@ -83,7 +89,7 @@ public class PlayerHealth_v2 : MonoBehaviour {
     {
         _isDead = false;
         //_canAddScore = false;
-        Debug.Log("Player " + is_playerNum + " +1");
+        //Debug.Log("Player " + is_playerNum + " +1");
 
         if (_canAddScore)
         {
@@ -91,24 +97,28 @@ public class PlayerHealth_v2 : MonoBehaviour {
             {
                 scoreScript.score_p1 += 1;
                 _canAddScore = false;
+                p1Sc._feedback = true;
             }
 
             if (is_playerNum == 2)
             {
                 scoreScript.score_p2 += 1;
                 _canAddScore = false;
+                p2Sc._feedback = true;
             }
 
             if (is_playerNum == 3)
             {
                 scoreScript.score_p3 += 1;
                 _canAddScore = false;
+                p3Sc._feedback = true;
             }
 
             if (is_playerNum == 4)
             {
                 scoreScript.score_p4 += 1;
                 _canAddScore = false;
+                p4Sc._feedback = true;
             }
         }
     }
@@ -120,6 +130,7 @@ public class PlayerHealth_v2 : MonoBehaviour {
 
         if (playerHealth <= 0)
         {
+            //StartCoroutine(playerSkin());
             _isDead = true;
             this.gameObject.SetActive(false); //disable all colliders
         }
@@ -147,35 +158,31 @@ public class PlayerHealth_v2 : MonoBehaviour {
         */
 
         //FINAL POINT
-        if (scoreScript.score_p1 == nombreManches)
+        if (scoreScript.score_p1 == nombreManches && scoreScript.score_p2 != nombreManches 
+            && scoreScript.score_p3 != nombreManches && scoreScript.score_p4 != nombreManches)
         {
             endMatch = true;
-            Debug.Log(is_playerNum + " WIN");
-            //player1_WinScreen.SetActive(true);
+            winScreens_go.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            StartCoroutine(WaitLoad());
+        } else if (scoreScript.score_p1 != nombreManches && scoreScript.score_p2 == nombreManches
+            && scoreScript.score_p3 != nombreManches && scoreScript.score_p4 != nombreManches)
+        {
+            endMatch = true;
+            winScreens_go.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             StartCoroutine(WaitLoad());
         }
-
-        if (scoreScript.score_p2 == nombreManches)
+        else if (scoreScript.score_p1 != nombreManches && scoreScript.score_p2 != nombreManches
+            && scoreScript.score_p3 == nombreManches && scoreScript.score_p4 != nombreManches)
         {
             endMatch = true;
-            Debug.Log(is_playerNum + " WIN");
-            //player2_WinScreen.SetActive(true);
+            winScreens_go.gameObject.transform.GetChild(2).gameObject.SetActive(true);
             StartCoroutine(WaitLoad());
         }
-
-        if (scoreScript.score_p3 == nombreManches)
+        else if (scoreScript.score_p1 != nombreManches && scoreScript.score_p2 != nombreManches
+            && scoreScript.score_p3 != nombreManches && scoreScript.score_p4 == nombreManches)
         {
             endMatch = true;
-            Debug.Log(is_playerNum + " WIN");
-            //player3_WinScreen.SetActive(true);
-            StartCoroutine(WaitLoad());
-        }
-
-        if (scoreScript.score_p4 == nombreManches)
-        {
-            endMatch = true;
-            Debug.Log(is_playerNum + " WIN");
-            //player4_WinScreen.SetActive(true);
+            winScreens_go.gameObject.transform.GetChild(3).gameObject.SetActive(true);
             StartCoroutine(WaitLoad());
         }
     }
@@ -185,21 +192,25 @@ public class PlayerHealth_v2 : MonoBehaviour {
 
     IEnumerator WaitLoad()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(2.5f);
+        SceneManager.LoadScene("Menu");
+        Destroy(dontdestroyonload);
+        /*
         transitionScript.GetComponent<Transition>().transition = true;
         if (transitionScript.GetComponent<Transition>()._transitionFinished == true)
         {
             SceneManager.LoadScene(nextSceneName);
             Destroy(dontdestroyonload);
         }
+        */
     }
 
     IEnumerator playerSkin()
     {
         if (!pouleExplosion)
         {
-            my_liveSprite.SetActive(true);
-            his_deadExplosion.Play();
+            //my_liveSprite.SetActive(true);
+            //_deadExplosion.Play();
             pouleExplosion = true;
         }
         yield return null;

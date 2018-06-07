@@ -46,7 +46,9 @@ public class PlayerController_v2 : MonoBehaviour {
     [HideInInspector] public bool p3_canSelectDir = true;
     [HideInInspector] public bool p4_canSelectDir = true;
 
-
+    private bool _flaqueAct = false;
+    private bool _destroyFlaque = false;
+    
     //[HideInInspector] public bool cancelAct;
     //[HideInInspector] public bool validAct;
     [HideInInspector] public bool dirConfirmed;
@@ -126,11 +128,14 @@ public class PlayerController_v2 : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
         //egg
+        /*
         if (slow)
         {
             rb.velocity = rb.velocity * 0.9f;
         }
+        */
 
         if (_explodeEgg)
         {
@@ -181,7 +186,7 @@ public class PlayerController_v2 : MonoBehaviour {
         #region MECHANICS INPUTS FOR ALL PLAYERS
 
         //MECHANICS INPUTS FOR ALL PLAYERS
-        if (XCI.GetButtonDown(XboxButton.LeftStick, xboxCtrl)) //choose a direction
+        if (XCI.GetButtonDown(XboxButton.LeftStick, xboxCtrl) || Input.GetKeyDown(KeyCode.A)) //choose a direction
         {
            // if (p1_canSelectDir)
            // {
@@ -196,7 +201,7 @@ public class PlayerController_v2 : MonoBehaviour {
 
         if (p1_hasConfirmed)
         {
-            if (XCI.GetButtonDown(XboxButton.A, xboxCtrl)) //move in the choosed direction
+            if (XCI.GetButtonDown(XboxButton.A, xboxCtrl) || Input.GetKeyDown(KeyCode.Z)) //move in the choosed direction
             {
             target.transform.parent = null;
             _canCancel = true;
@@ -213,12 +218,13 @@ public class PlayerController_v2 : MonoBehaviour {
                 p1_canSelectEgg = false;
             }
 
-            if (XCI.GetButtonDown(XboxButton.Y, xboxCtrl)) //lay an egg, and move a little
+            if (XCI.GetButtonDown(XboxButton.Y, xboxCtrl) || Input.GetKeyDown(KeyCode.Y)) //lay an egg, and move a little
             {
                 if (p1_canSelectEgg)
                 {
                 target.transform.parent = null;
                 _canCancel = true;
+                    ui_ready.SetActive(true);
                     GM.GetComponent<GameManager_v2>().confirmation += 1;
                     //animatorUI.SetBool("Press_B", false);
                     //animatorUI.SetBool("Press_A", true);
@@ -266,6 +272,8 @@ public class PlayerController_v2 : MonoBehaviour {
         if (slow)
         {
             rb.velocity = rb.velocity * 0.9f;
+            if (rb.velocity.magnitude <= 0.01f)
+                slow = false;
         }
 
         Debug.DrawLine(transform.position, (target.transform.position - transform.position).normalized * 100f, Color.yellow);
@@ -288,16 +296,53 @@ public class PlayerController_v2 : MonoBehaviour {
             egged = false;
             _canCancel = false;
         }
+        Flaque();
     }
     #endregion
+
+    void Flaque()
+    {
+        if (_flaqueAct)
+        {
+            rb.velocity = rb.velocity * 0f;
+
+            flaqueDirectionScript.newDirectionAngle += 25;
+
+            if (flaqueDirectionScript.newDirectionAngle >= 360)
+                flaqueDirectionScript.newDirectionAngle = 0;
+
+            Vector3 flakVect = (flaqueTarget.transform.position - transform.position).normalized + transform.position;
+            spriteTrans.LookAt(flakVect);
+
+            StartCoroutine(FlaqueWait());
+        }
+    }
 
     //Flaque
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Flaque")) {
-            Destroy(other.gameObject);
-            StartCoroutine(FlaqueEffect());
+            _flaqueAct = true;
+            other.transform.position = new Vector3(0f, 100f, 0f);
+            //Destroy(other.gameObject);
+            if (_destroyFlaque)
+            {
+                
+                _destroyFlaque = false;
+            }
+
+            //StartCoroutine(FlaqueEffect());
         }
+    }
+
+    public IEnumerator FlaqueWait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _flaqueAct = false;
+        _destroyFlaque = true;
+        rb.AddForce((flaqueTarget.transform.position - transform.position).normalized * 5f);
+        slow = true;
+        yield return null;
     }
 
     public IEnumerator SlowDown()
@@ -316,12 +361,40 @@ public class PlayerController_v2 : MonoBehaviour {
         yield return null;
     }
 
-    public IEnumerator FlaqueEffect()
+    public IEnumerator FlaqueDestroyWait()
     {
         yield return new WaitForSeconds(0.01f);
+
+        yield return null;
+    }
+
+    public IEnumerator FlaqueEffect()
+    {
+
+
+        rb.velocity = rb.velocity * 0f;
+
+
+
+        yield return new WaitForSeconds(0.01f);
+        Vector3 flakVect = (flaqueTarget.transform.position - transform.position).normalized + transform.position;
+        spriteTrans.LookAt(flakVect);
+
+
+        flaqueDirectionScript.newDirectionAngle += 1;
+
+        if (flaqueDirectionScript.newDirectionAngle >= 360)
+            flaqueDirectionScript.newDirectionAngle = 0;
+        
+        /*
+      flaqueDirectionScript.newDirectionAngle = Random.Range(0, 360);
+        */
+
+
+        yield return new WaitForSeconds(1.5f);
         flaqueDirectionScript.newDirectionAngle = Random.Range(0, 360);
         yield return new WaitForSeconds(0.01f);
-        rb.AddForce((flaqueTarget.transform.position - transform.position).normalized * 25f);
+        rb.AddForce((flaqueTarget.transform.position - transform.position).normalized * 100f);
         yield return new WaitForSeconds(1f);
         slow = true;
         yield return null;

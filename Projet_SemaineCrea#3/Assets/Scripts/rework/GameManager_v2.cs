@@ -10,6 +10,8 @@ public class GameManager_v2 : MonoBehaviour {
 
     public int confirmation = 0;
 
+    public DeathChecker DC;
+
     private GameObject player_1;
     private GameObject player_2;
     private GameObject player_3;
@@ -35,21 +37,13 @@ public class GameManager_v2 : MonoBehaviour {
 	void Update () {
         #region The game flow & references
         //Find Players
-        if (player_1 == null)
             player_1 = GameObject.FindGameObjectWithTag("Player1");
 
-        if (player_2 == null)
             player_2 = GameObject.FindGameObjectWithTag("Player2");
 
-        if(totalPlayers == 3) {
-            if (player_3 == null)
-                player_3 = GameObject.FindGameObjectWithTag("Player3");
-        }
+            player_3 = GameObject.FindGameObjectWithTag("Player3");
 
-        if (totalPlayers == 4) {
-            if (player_4 == null)
-                player_4 = GameObject.FindGameObjectWithTag("Player4");
-        }
+            player_4 = GameObject.FindGameObjectWithTag("Player4");
 
         //Quit to menu
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -65,14 +59,14 @@ public class GameManager_v2 : MonoBehaviour {
         {
             confirmation = 0;
         }
-        Debug.Log(totalPlayersAlive);
+        //Debug.Log(totalPlayersAlive);
 
-        if (totalPlayersAlive < 1)
-            totalPlayersAlive = 1;
+        if (totalPlayersAlive < 0)
+            totalPlayersAlive = 0;
 
         if(totalPlayersAlive == 0)
         {
-
+            StartCoroutine(Equality());
         }
 
         //IF only 1 player is alive -> Transition to next scene, until someone is at 3/3 win -> Win screen -> Menu
@@ -132,27 +126,109 @@ public class GameManager_v2 : MonoBehaviour {
                 }
             }
         }
+
+        if (totalPlayers == 4)
+        {
+            if (confirmation == 4)
+            {
+                //Confirmed Actions
+                P1_Confirmed();
+                P2_Confirmed();
+                P3_Confirmed();
+                P4_Confirmed();
+
+                //Deactivate UI "READY!"
+                uiReadyp1.SetActive(false);
+                uiReadyp2.SetActive(false);
+                uiReadyp3.SetActive(false);
+                uiReadyp4.SetActive(false);
+
+                Reset();
+            }
+
+            if (totalPlayersAlive == 3)
+            {
+                if (confirmation == 3)
+                {
+                    //Confirmed Actions
+                    P1_Confirmed();
+                    P2_Confirmed();
+                    P3_Confirmed();
+                    P4_Confirmed();
+
+                    //Deactivate UI "READY!"
+                    uiReadyp1.SetActive(false);
+                    uiReadyp2.SetActive(false);
+                    uiReadyp3.SetActive(false);
+                    uiReadyp4.SetActive(false);
+
+                    Reset();
+                }
+            }
+
+            if (totalPlayersAlive == 2)
+            {
+                if (confirmation == 2)
+                {
+                    //Confirmed Actions
+                    P1_Confirmed();
+                    P2_Confirmed();
+                    P3_Confirmed();
+                    P4_Confirmed();
+
+                    //Deactivate UI "READY!"
+                    uiReadyp1.SetActive(false);
+                    uiReadyp2.SetActive(false);
+                    uiReadyp3.SetActive(false);
+                    uiReadyp4.SetActive(false);
+
+                    Reset();
+                }
+            }
+        }
         #endregion
     }
 
     //RESET ALL BOOL
     void Reset()
     {
-        confirmation = 0;
         player_1.GetComponent<PlayerController_v2>().dirConfirmed = false;
         player_2.GetComponent<PlayerController_v2>().dirConfirmed = false;
-        player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
-        //player_4.GetComponent<PlayerController_v2>().dirConfirmed = false;
 
         player_1.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
         player_2.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
-        player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
-        //player_4.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
 
         player_1.GetComponent<PlayerController_v2>().eggConfirmed = false;
         player_2.GetComponent<PlayerController_v2>().eggConfirmed = false;
-        player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
-        //player_4.GetComponent<PlayerController_v2>().eggConfirmed = false;
+
+        player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+        player_2.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+
+
+
+        if (totalPlayers == 3)
+        {
+            player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
+
+            player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+
+            player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
+
+            player_3.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+        } else if (totalPlayers == 4) {
+            player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
+            player_4.GetComponent<PlayerController_v2>().dirConfirmed = false;
+
+            player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+            player_4.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+
+            player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
+            player_4.GetComponent<PlayerController_v2>().eggConfirmed = false;
+
+            player_3.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+            player_4.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+        }
+        confirmation = 0;
     }
 
 
@@ -166,7 +242,7 @@ public class GameManager_v2 : MonoBehaviour {
             player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
             player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
             _hasLayedEgg = false;
-            Debug.Log("P1 MOVE");
+            //Debug.Log("P1 MOVE");
         }
 
         //LAY EGG
@@ -179,7 +255,7 @@ public class GameManager_v2 : MonoBehaviour {
             player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
             //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
             player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            Debug.Log("P1 EGG");
+            //Debug.Log("P1 EGG");
         }
     }
 
@@ -192,33 +268,21 @@ public class GameManager_v2 : MonoBehaviour {
             player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
             player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
             _hasLayedEgg = false;
-            Debug.Log("P2 MOVE");
+            //Debug.Log("P1 MOVE");
         }
 
         //LAY EGG
         if (player_2.GetComponent<PlayerController_v2>().eggConfirmed == true)
         {
-            player_1.GetComponent<PlayerController_v2>().egged = true;
+            player_2.GetComponent<PlayerController_v2>().egged = true;
             player_2.GetComponent<PlayerController_v2>()._layEgg = true;
-            player_2.GetComponent<PlayerController_v2>().p2_canSelectEgg = true;
-            player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            player_2.GetComponent<Rigidbody2D>().AddForce(player_2.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
+            //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
             _hasLayedEgg = true;
+            player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+            //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
             player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            Debug.Log("P2 EGG");
+            //Debug.Log("P1 EGG");
         }
-
-        /*
-        //SLOW DOWN AFTER LAY EGG 
-        if (_hasLayedEgg && player_2.GetComponent<Rigidbody2D>().velocity.magnitude > 0f)
-        {
-            player_2.GetComponent<Rigidbody2D>().velocity *= 0.9f;
-            if (player_2.GetComponent<Rigidbody2D>().velocity.magnitude == 0f)
-            {
-                _hasLayedEgg = false;
-            }
-        }
-        */
     }
 
     void P3_Confirmed()
@@ -230,7 +294,7 @@ public class GameManager_v2 : MonoBehaviour {
             player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
             player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
             _hasLayedEgg = false;
-            Debug.Log("P3 MOVE");
+            //Debug.Log("P1 MOVE");
         }
 
         //LAY EGG
@@ -238,10 +302,38 @@ public class GameManager_v2 : MonoBehaviour {
         {
             player_3.GetComponent<PlayerController_v2>().egged = true;
             player_3.GetComponent<PlayerController_v2>()._layEgg = true;
+            //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
             _hasLayedEgg = true;
             player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+            //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
             player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            Debug.Log("P3 EGG");
+            //Debug.Log("P1 EGG");
+        }
+    }
+
+    void P4_Confirmed()
+    {
+        //MOVE
+        if (player_4.GetComponent<PlayerController_v2>().dirConfirmed == true)
+        {
+            player_4.GetComponent<PlayerController_v2>().move = true;
+            player_4.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+            player_4.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+            _hasLayedEgg = false;
+            //Debug.Log("P1 MOVE");
+        }
+
+        //LAY EGG
+        if (player_4.GetComponent<PlayerController_v2>().eggConfirmed == true)
+        {
+            player_4.GetComponent<PlayerController_v2>().egged = true;
+            player_4.GetComponent<PlayerController_v2>()._layEgg = true;
+            //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+            _hasLayedEgg = true;
+            player_4.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+            //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
+            player_4.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+            //Debug.Log("P1 EGG");
         }
     }
 
@@ -262,26 +354,27 @@ public class GameManager_v2 : MonoBehaviour {
     IEnumerator NewNextPhase()
     {
         yield return new WaitForSecondsRealtime(1f);
-        if (player_1.activeInHierarchy == true)
+        if (DC.p1_active)
         {
             player_1.GetComponent<PlayerHealth_v2>().AddScore();
             GameObject P1_Transition;
             P1_Transition = GameObject.Find("P1_Transition");
             P1_Transition.GetComponent<Transition>().transition = true;
-
-        } else if (player_2.activeInHierarchy == true)
+        } else if (DC.p2_active)
         {
             player_2.GetComponent<PlayerHealth_v2>().AddScore();
             GameObject P2_Transition;
             P2_Transition = GameObject.Find("P2_Transition");
             P2_Transition.GetComponent<Transition>().transition = true;
-        } else if (player_3.activeInHierarchy == true)
+        }
+        else if (DC.p3_active)
         {
             player_3.GetComponent<PlayerHealth_v2>().AddScore();
             GameObject P3_Transition;
             P3_Transition = GameObject.Find("P3_Transition");
             P3_Transition.GetComponent<Transition>().transition = true;
-        } else if (player_4.activeInHierarchy == true)
+        }
+        else if (DC.p4_active)
         {
             player_4.GetComponent<PlayerHealth_v2>().AddScore();
             GameObject P4_Transition;
@@ -289,7 +382,35 @@ public class GameManager_v2 : MonoBehaviour {
             P4_Transition.GetComponent<Transition>().transition = true;
         }
 
-        yield return new WaitForSecondsRealtime(2.5f);
+            /*
+            if (player_1.activeInHierarchy == true)
+            {
+                player_1.GetComponent<PlayerHealth_v2>().AddScore();
+                GameObject P1_Transition;
+                P1_Transition = GameObject.Find("P1_Transition");
+                P1_Transition.GetComponent<Transition>().transition = true;
+            } else if (player_2.activeInHierarchy == true)
+            {
+                player_2.GetComponent<PlayerHealth_v2>().AddScore();
+                GameObject P2_Transition;
+                P2_Transition = GameObject.Find("P2_Transition");
+                P2_Transition.GetComponent<Transition>().transition = true;
+            } else if (player_3.activeInHierarchy == true)
+            {
+                player_3.GetComponent<PlayerHealth_v2>().AddScore();
+                GameObject P3_Transition;
+                P3_Transition = GameObject.Find("P3_Transition");
+                P3_Transition.GetComponent<Transition>().transition = true;
+            } else if (player_4.activeInHierarchy == true)
+            {
+                player_4.GetComponent<PlayerHealth_v2>().AddScore();
+                GameObject P4_Transition;
+                P4_Transition = GameObject.Find("P4_Transition");
+                P4_Transition.GetComponent<Transition>().transition = true;
+            }
+            */
+
+            yield return new WaitForSecondsRealtime(2.5f);
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
         yield return null;
@@ -297,13 +418,15 @@ public class GameManager_v2 : MonoBehaviour {
 
     IEnumerator Equality()
     {
+        /*
         yield return new WaitForSecondsRealtime(1f);
+
         if (player_1.activeInHierarchy == false && player_2.activeInHierarchy == false
             && player_3.activeInHierarchy == false && player_4.activeInHierarchy == false)
         {
             Debug.Log("EQUALITY");
         }
-
+        */
         yield return new WaitForSecondsRealtime(2.5f);
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
