@@ -58,16 +58,16 @@ public class MainMenu : MonoBehaviour {
 	void Update ()
     {
         MapSelector();
-        pass = false;
+pass = false;       
         if (MenuState == "Intro" && !pass)
         {
             Go_MenuIntro();
         }
-        if (MenuState == "PlayerNum" && !pass)
+        else if (MenuState == "PlayerNum" && !pass)
         {
             Go_MenuPlayer();
         }
-        if (MenuState == "MapSelection" && !pass)
+        else if (MenuState == "MapSelection" && !pass)
         {
             Go_MenuMap();
         }
@@ -76,7 +76,7 @@ public class MainMenu : MonoBehaviour {
     {
         
 
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || Input.GetKey(KeyCode.RightArrow))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             MenuState = "PlayerNum";
             pass = true;
@@ -88,14 +88,14 @@ public class MainMenu : MonoBehaviour {
 
         ChangePlayerNum();
         // P1 controller
-        if (XCI.GetButtonDown(XboxButton.A, XboxController.First) && ConnectedPlayers > 1 && P1Ready || Input.GetKey(KeyCode.RightArrow) && ConnectedPlayers > 1 && P1Ready)
+        if (XCI.GetButtonDown(XboxButton.A, XboxController.First) && ConnectedPlayers > 1 && P1Ready || Input.GetKeyDown(KeyCode.RightArrow) && ConnectedPlayers > 1 && P1Ready)
         {
             MenuAnim.SetTrigger("ChangeMenu");
             MenuState = "MapSelection";
             pass = true;
         }
 
-        if (XCI.GetButtonDown(XboxButton.B, XboxController.First) && !P1Ready || Input.GetKey(KeyCode.LeftArrow) && !P1Ready)
+        if (XCI.GetButtonDown(XboxButton.B, XboxController.First) && !P1Ready || Input.GetKeyDown(KeyCode.LeftArrow) && !P1Ready)
         {
             MenuAnim.SetTrigger("Back");
             MenuState = "Intro";
@@ -104,26 +104,26 @@ public class MainMenu : MonoBehaviour {
 
         // Other
         //P1
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || Input.GetKey(KeyCode.Alpha1))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             P1Ready = true;
             P1ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P1ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKey(KeyCode.A))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKeyDown(KeyCode.A))
         {
             P1Ready = false;
             P1ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
             P1ReadySprite.GetComponent<Image>().enabled = true;
         }
         // P2
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Second) || Input.GetKey(KeyCode.Alpha2))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Second) || Input.GetKeyDown(KeyCode.Alpha2))
         {
             P2Ready = true;
             P2ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P2ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Second) || Input.GetKey(KeyCode.Z))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Second) || Input.GetKeyDown(KeyCode.Z))
         {
             P2Ready = false;
             P2ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
@@ -131,13 +131,13 @@ public class MainMenu : MonoBehaviour {
         }
 
         // P3
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Third) || Input.GetKey(KeyCode.Alpha3))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Third) || Input.GetKeyDown(KeyCode.Alpha3))
         {
             P3Ready = true;
             P3ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P3ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Third) || Input.GetKey(KeyCode.E))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Third) || Input.GetKeyDown(KeyCode.E))
         {
             P3Ready = false;
             P3ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
@@ -145,13 +145,13 @@ public class MainMenu : MonoBehaviour {
         }
 
         // P4
-        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Fourth) || Input.GetKey(KeyCode.Alpha4))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.Fourth) || Input.GetKeyDown(KeyCode.Alpha4))
         {
             P4Ready = true;
             P4ReadySprite.transform.GetChild(0).gameObject.SetActive(true);
             P4ReadySprite.GetComponent<Image>().enabled = false;
         }
-        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Fourth) || Input.GetKey(KeyCode.R))
+        else if (XCI.GetButtonDown(XboxButton.B, XboxController.Fourth) || Input.GetKeyDown(KeyCode.R))
         {
             P4Ready = false;
             P4ReadySprite.transform.GetChild(0).gameObject.SetActive(false);
@@ -161,12 +161,12 @@ public class MainMenu : MonoBehaviour {
     }
     void Go_MenuMap()
     {       
-        if (XCI.GetAxis(XboxAxis.LeftStickX, XboxController.First) >= 0.7f && canNav)
+        if (XCI.GetAxis(XboxAxis.LeftStickX, XboxController.First) >= 0.7f && canNav || Input.GetKeyDown(KeyCode.Q))
         {
             canNav = false;
             MapSelected += 1;
         }
-        if (XCI.GetAxis(XboxAxis.LeftStickX, XboxController.First) <= -0.7f && canNav)
+        if (XCI.GetAxis(XboxAxis.LeftStickX, XboxController.First) <= -0.7f && canNav || Input.GetKeyDown(KeyCode.D))
         {
             canNav = false;
             MapSelected -= 1;
@@ -176,12 +176,12 @@ public class MainMenu : MonoBehaviour {
             canNav = true;
         }
 
-        if (XCI.GetButtonDown(XboxButton.A, XboxController.First))
+        if (XCI.GetButtonDown(XboxButton.A, XboxController.First) || Input.GetKeyDown(KeyCode.RightArrow) && !pass)
         {
             LauchMap();
             pass = true;
         }
-        if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKey(KeyCode.LeftArrow))
+        if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MenuAnim.SetTrigger("Back");
             MenuState = "PlayerNum";
