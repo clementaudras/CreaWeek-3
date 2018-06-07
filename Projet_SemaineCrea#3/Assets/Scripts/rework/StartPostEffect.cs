@@ -10,7 +10,7 @@ public class StartPostEffect : MonoBehaviour {
     void Start () {
         var dof = poulusPostPross.depthOfField.settings;
 
-        dof.aperture = 0.05f;
+        dof.focusDistance = 0.05f;
         poulusPostPross.depthOfField.settings = dof;
     }
 	
@@ -19,10 +19,10 @@ public class StartPostEffect : MonoBehaviour {
 
         var dof = poulusPostPross.depthOfField.settings;
 
-        dof.aperture += 1f;
+        dof.focusDistance += 1f;
 
-        if (dof.aperture >= 32f)
-            dof.aperture = 32f;
+        if (dof.focusDistance >= 100f)
+            dof.focusDistance = 100f;
 
         poulusPostPross.depthOfField.settings = dof;
     }
