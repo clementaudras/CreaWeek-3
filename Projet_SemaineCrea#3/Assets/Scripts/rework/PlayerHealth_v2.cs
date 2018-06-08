@@ -11,6 +11,9 @@ public class PlayerHealth_v2 : MonoBehaviour {
     public int playerHealth = 100;
     int is_playerNum;
 
+    [HideInInspector]
+    public GameObject _winSprite;
+
     GameObject _player1;
     GameObject _player2;
     GameObject _player3;
@@ -29,7 +32,15 @@ public class PlayerHealth_v2 : MonoBehaviour {
     public bool endManche;
     public bool endMatch;
 
-    //public ParticleSystem _deadExplosion;
+    [HideInInspector]
+    public ParticleSystem _deadExplosion;
+
+    [HideInInspector]
+    public GameObject _col;
+
+    [HideInInspector]
+    public GameObject _trig;
+
     GameObject my_liveSprite;
     ParticleSystem his_deadExplosion;
     GameObject his_liveSprite;
@@ -58,28 +69,39 @@ public class PlayerHealth_v2 : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        foreach (Transform t in transform)
+        {
+            if (t.name == "WinSprite")
+            {
+                _winSprite = t.gameObject;
+                _deadExplosion = t.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
+            }
+        }
+
         is_playerNum = playerCtrl.GetComponent<PlayerController_v2>().playerNum;
 
         if(is_playerNum == 1)
         {
-            //my_liveSprite = _player2.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
-            //his_deadExplosion = _player1.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+            _col = GameObject.Find("A_head_col");
+            _trig = GameObject.Find("A_head_trigger");
         }
 
         if (is_playerNum == 2)
         {
-            //my_liveSprite = _player1.transform.parent.parent.GetChild(2).GetChild(1).gameObject;
-            //his_deadExplosion = _player2.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+            _col = GameObject.Find("B_head_col");
+            _trig = GameObject.Find("B_head_trigger");
         }
 
         if (is_playerNum == 3)
         {
-
+            _col = GameObject.Find("C_head_col");
+            _trig = GameObject.Find("C_head_trigger");
         }
 
         if (is_playerNum == 4)
         {
-
+            _col = GameObject.Find("D_head_col");
+            _trig = GameObject.Find("D_head_trigger");
         }
 
     }
@@ -130,9 +152,14 @@ public class PlayerHealth_v2 : MonoBehaviour {
 
         if (playerHealth <= 0)
         {
-            //StartCoroutine(playerSkin());
+            _winSprite.transform.parent = null;
+            this.gameObject.layer = 18;
+            _col.gameObject.layer = 18;
+            _trig.gameObject.layer = 18;
+            this.gameObject.GetComponent<Rigidbody2D>().velocity *= 0;
+            StartCoroutine(playerSkin());
             _isDead = true;
-            this.gameObject.SetActive(false); //disable all colliders
+            StartCoroutine(WaitDeath());
         }
 
         /*
@@ -187,7 +214,15 @@ public class PlayerHealth_v2 : MonoBehaviour {
         }
     }
 
+    IEnumerator WaitDeath()
+    {
+        this.gameObject.SetActive(false); //disable all colliders
+        yield return new WaitForSecondsRealtime(10f);
 
+        
+        
+
+    }
 
 
     IEnumerator WaitLoad()
@@ -210,7 +245,7 @@ public class PlayerHealth_v2 : MonoBehaviour {
         if (!pouleExplosion)
         {
             //my_liveSprite.SetActive(true);
-            //_deadExplosion.Play();
+            _deadExplosion.Play();
             pouleExplosion = true;
         }
         yield return null;

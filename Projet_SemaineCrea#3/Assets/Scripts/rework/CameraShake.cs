@@ -35,10 +35,16 @@ public class CameraShake : MonoBehaviour
 
     void Update()
     {
+        if (shakeDuration >= 1f)
+        {
+            shakeDuration = 1f;
+        }
+
         if (_activateScreenShake)
         {
             if (shakeDuration > 0)
             {
+
                 camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
                 shakeDuration -= Time.deltaTime * decreaseFactor;

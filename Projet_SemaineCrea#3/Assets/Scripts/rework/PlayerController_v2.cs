@@ -85,7 +85,8 @@ public class PlayerController_v2 : MonoBehaviour {
     [Header("FLAQUE")]
     public FlaqueNewDirection flaqueDirectionScript;
     public GameObject flaqueTarget;
-
+    public GameObject flaqueFX_prefab;
+    public bool _canInstantiate = true;
     void Awake()
     {
         p1_hasConfirmed = true;
@@ -304,15 +305,8 @@ public class PlayerController_v2 : MonoBehaviour {
     {
         if (_flaqueAct)
         {
-            rb.velocity = rb.velocity * 0f;
-
+            StartCoroutine(Wait1());
             flaqueDirectionScript.newDirectionAngle += 25;
-
-            if (flaqueDirectionScript.newDirectionAngle >= 360)
-                flaqueDirectionScript.newDirectionAngle = 0;
-
-            Vector3 flakVect = (flaqueTarget.transform.position - transform.position).normalized + transform.position;
-            spriteTrans.LookAt(flakVect);
 
             StartCoroutine(FlaqueWait());
         }
@@ -334,7 +328,28 @@ public class PlayerController_v2 : MonoBehaviour {
             //StartCoroutine(FlaqueEffect());
         }
     }
+    public IEnumerator Wait1()
+    {
+        
 
+        yield return new WaitForSeconds(0.2f);
+        rb.velocity = rb.velocity * 0f;
+        Instantiate(flaqueFX_prefab, this.transform.position, Quaternion.identity);
+
+        if (_canInstantiate)
+        {
+            _canInstantiate = false;
+        }
+        
+        if (flaqueDirectionScript.newDirectionAngle >= 360)
+            flaqueDirectionScript.newDirectionAngle = 0;
+
+        Vector3 flakVect = (flaqueTarget.transform.position - transform.position).normalized + transform.position;
+        spriteTrans.LookAt(flakVect);
+        yield return new WaitForSeconds(1.5f);
+
+        yield return null;
+    }
     public IEnumerator FlaqueWait()
     {
         yield return new WaitForSeconds(1.5f);
@@ -342,6 +357,7 @@ public class PlayerController_v2 : MonoBehaviour {
         _destroyFlaque = true;
         rb.AddForce((flaqueTarget.transform.position - transform.position).normalized * 5f);
         slow = true;
+        _canInstantiate = true;
         yield return null;
     }
 
