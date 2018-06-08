@@ -8,6 +8,6 @@ public class AddForceOnCollision : MonoBehaviour {
 	public float eggForce;
 
 	void OnCollisionEnter2D(Collision2D other){
-		rbEgg.AddForce(Vector3.right * eggForce);
+		//rbEgg.AddForce(Vector3.right * eggForce);
 	}
 }
