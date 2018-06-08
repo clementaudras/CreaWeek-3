@@ -75,6 +75,7 @@ public class GameManager_v2 : MonoBehaviour {
             StartCoroutine(NewNextPhase());
         }
 
+        //2 players
         if (totalPlayers == 2)
         {
             if (confirmation == 2)
@@ -91,21 +92,25 @@ public class GameManager_v2 : MonoBehaviour {
             }
         }
 
+        //3 players
         if (totalPlayers == 3)
         {
-            if (confirmation == 3)
+            if (totalPlayersAlive == 3)
             {
-                //Confirmed Actions
-                P1_Confirmed();
-                P2_Confirmed();
-                P3_Confirmed();
+                if (confirmation == 3)
+                {
+                    //Confirmed Actions
+                    P1_Confirmed();
+                    P2_Confirmed();
+                    P3_Confirmed();
 
-                //Deactivate UI "READY!"
-                uiReadyp1.SetActive(false);
-                uiReadyp2.SetActive(false);
-                uiReadyp3.SetActive(false);
+                    //Deactivate UI "READY!"
+                    uiReadyp1.SetActive(false);
+                    uiReadyp2.SetActive(false);
+                    uiReadyp3.SetActive(false);
 
-                Reset();
+                    Reset();
+                }
             }
 
             if (totalPlayersAlive == 2)
@@ -127,6 +132,7 @@ public class GameManager_v2 : MonoBehaviour {
             }
         }
 
+        //4 players
         if (totalPlayers == 4)
         {
             if (confirmation == 4)
@@ -192,41 +198,48 @@ public class GameManager_v2 : MonoBehaviour {
     //RESET ALL BOOL
     void Reset()
     {
-        player_1.GetComponent<PlayerController_v2>().dirConfirmed = false;
-        player_2.GetComponent<PlayerController_v2>().dirConfirmed = false;
+        if (DC.p1_active)
+        {
+            player_1.GetComponent<PlayerController_v2>().dirConfirmed = false;
+            player_1.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+            player_1.GetComponent<PlayerController_v2>().eggConfirmed = false;
+            player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+        }
 
-        player_1.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
-        player_2.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
-
-        player_1.GetComponent<PlayerController_v2>().eggConfirmed = false;
-        player_2.GetComponent<PlayerController_v2>().eggConfirmed = false;
-
-        player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-        player_2.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-
-
+        if (DC.p2_active)
+        {
+            player_2.GetComponent<PlayerController_v2>().dirConfirmed = false;
+            player_2.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+            player_2.GetComponent<PlayerController_v2>().eggConfirmed = false;
+            player_2.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+        }
 
         if (totalPlayers == 3)
         {
-            player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
+            if (DC.p3_active)
+            {
+                player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
+                player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+                player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
+                player_3.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+            }
 
-            player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
-
-            player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
-
-            player_3.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
         } else if (totalPlayers == 4) {
-            player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
-            player_4.GetComponent<PlayerController_v2>().dirConfirmed = false;
+            if (DC.p3_active)
+            {
+                player_3.GetComponent<PlayerController_v2>().dirConfirmed = false;
+                player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+                player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
+                player_3.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+            }
 
-            player_3.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
-            player_4.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
-
-            player_3.GetComponent<PlayerController_v2>().eggConfirmed = false;
-            player_4.GetComponent<PlayerController_v2>().eggConfirmed = false;
-
-            player_3.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-            player_4.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+            if (DC.p4_active)
+            {
+                player_4.GetComponent<PlayerController_v2>().dirConfirmed = false;
+                player_4.GetComponent<PlayerController_v2>().p1_hasConfirmed = true;
+                player_4.GetComponent<PlayerController_v2>().eggConfirmed = false;
+                player_4.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+            }
         }
         confirmation = 0;
     }
@@ -235,105 +248,118 @@ public class GameManager_v2 : MonoBehaviour {
     //CONFIRM ACTION
     void P1_Confirmed()
     {
-        //MOVE
-        if (player_1.GetComponent<PlayerController_v2>().dirConfirmed == true)
+        if (DC.p1_active)
         {
-            player_1.GetComponent<PlayerController_v2>().move = true;
-            player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            _hasLayedEgg = false;
-            //Debug.Log("P1 MOVE");
-        }
+            //MOVE
+            if (player_1.GetComponent<PlayerController_v2>().dirConfirmed == true)
+            {
+                player_1.GetComponent<PlayerController_v2>().move = true;
+                player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                _hasLayedEgg = false;
+                //Debug.Log("P1 MOVE");
+            }
 
-        //LAY EGG
-        if (player_1.GetComponent<PlayerController_v2>().eggConfirmed == true)
-        {
-            player_1.GetComponent<PlayerController_v2>().egged = true;
-            player_1.GetComponent<PlayerController_v2>()._layEgg = true;
-            //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-            _hasLayedEgg = true;
-            player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
-            player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            //Debug.Log("P1 EGG");
+            //LAY EGG
+            if (player_1.GetComponent<PlayerController_v2>().eggConfirmed == true)
+            {
+                player_1.GetComponent<PlayerController_v2>().egged = true;
+                player_1.GetComponent<PlayerController_v2>()._layEgg = true;
+                //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+                _hasLayedEgg = true;
+                player_1.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
+                player_1.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                //Debug.Log("P1 EGG");
+            }
         }
     }
 
     void P2_Confirmed()
     {
-        //MOVE
-        if (player_2.GetComponent<PlayerController_v2>().dirConfirmed == true)
+        if (DC.p2_active)
         {
-            player_2.GetComponent<PlayerController_v2>().move = true;
-            player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            _hasLayedEgg = false;
-            //Debug.Log("P1 MOVE");
-        }
+            //MOVE
+            if (player_2.GetComponent<PlayerController_v2>().dirConfirmed == true)
+            {
+                player_2.GetComponent<PlayerController_v2>().move = true;
+                player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                _hasLayedEgg = false;
+                //Debug.Log("P1 MOVE");
+            }
 
-        //LAY EGG
-        if (player_2.GetComponent<PlayerController_v2>().eggConfirmed == true)
-        {
-            player_2.GetComponent<PlayerController_v2>().egged = true;
-            player_2.GetComponent<PlayerController_v2>()._layEgg = true;
-            //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-            _hasLayedEgg = true;
-            player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
-            player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            //Debug.Log("P1 EGG");
+            //LAY EGG
+            if (player_2.GetComponent<PlayerController_v2>().eggConfirmed == true)
+            {
+                player_2.GetComponent<PlayerController_v2>().egged = true;
+                player_2.GetComponent<PlayerController_v2>()._layEgg = true;
+                //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+                _hasLayedEgg = true;
+                player_2.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
+                player_2.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                //Debug.Log("P1 EGG");
+            }
         }
     }
 
     void P3_Confirmed()
     {
-        //MOVE
-        if (player_3.GetComponent<PlayerController_v2>().dirConfirmed == true)
-        {
-            player_3.GetComponent<PlayerController_v2>().move = true;
-            player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            _hasLayedEgg = false;
-            //Debug.Log("P1 MOVE");
-        }
 
-        //LAY EGG
-        if (player_3.GetComponent<PlayerController_v2>().eggConfirmed == true)
+        if (DC.p3_active)
         {
-            player_3.GetComponent<PlayerController_v2>().egged = true;
-            player_3.GetComponent<PlayerController_v2>()._layEgg = true;
-            //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-            _hasLayedEgg = true;
-            player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
-            player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            //Debug.Log("P1 EGG");
+            //MOVE
+            if (player_3.GetComponent<PlayerController_v2>().dirConfirmed == true)
+            {
+                player_3.GetComponent<PlayerController_v2>().move = true;
+                player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                _hasLayedEgg = false;
+                //Debug.Log("P1 MOVE");
+            }
+
+            //LAY EGG
+            if (player_3.GetComponent<PlayerController_v2>().eggConfirmed == true)
+            {
+                player_3.GetComponent<PlayerController_v2>().egged = true;
+                player_3.GetComponent<PlayerController_v2>()._layEgg = true;
+                //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+                _hasLayedEgg = true;
+                player_3.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
+                player_3.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                //Debug.Log("P1 EGG");
+            }
         }
     }
 
     void P4_Confirmed()
     {
-        //MOVE
-        if (player_4.GetComponent<PlayerController_v2>().dirConfirmed == true)
+        if (DC.p4_active)
         {
-            player_4.GetComponent<PlayerController_v2>().move = true;
-            player_4.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            player_4.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            _hasLayedEgg = false;
-            //Debug.Log("P1 MOVE");
-        }
+            //MOVE
+            if (player_4.GetComponent<PlayerController_v2>().dirConfirmed == true)
+            {
+                player_4.GetComponent<PlayerController_v2>().move = true;
+                player_4.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                player_4.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                _hasLayedEgg = false;
+                //Debug.Log("P1 MOVE");
+            }
 
-        //LAY EGG
-        if (player_4.GetComponent<PlayerController_v2>().eggConfirmed == true)
-        {
-            player_4.GetComponent<PlayerController_v2>().egged = true;
-            player_4.GetComponent<PlayerController_v2>()._layEgg = true;
-            //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
-            _hasLayedEgg = true;
-            player_4.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
-            //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
-            player_4.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
-            //Debug.Log("P1 EGG");
+            //LAY EGG
+            if (player_4.GetComponent<PlayerController_v2>().eggConfirmed == true)
+            {
+                player_4.GetComponent<PlayerController_v2>().egged = true;
+                player_4.GetComponent<PlayerController_v2>()._layEgg = true;
+                //player_1.GetComponent<PlayerController_v2>().p1_canSelectEgg = true;
+                _hasLayedEgg = true;
+                player_4.GetComponent<PlayerController_v2>().p1_canSelectDir = true;
+                //player_1.GetComponent<Rigidbody2D>().AddForce(player_1.GetComponent<PlayerController_v2>().vectorDirPlayer * 5f);
+                player_4.GetComponent<PlayerController_v2>().StartCoroutine("WaitToReParent");
+                //Debug.Log("P1 EGG");
+            }
         }
     }
 
