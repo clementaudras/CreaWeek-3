@@ -59,11 +59,11 @@ public class MenuInGame : MonoBehaviour {
         }
         if (ButtonSelect)
         {
-            Selector.transform.DOLocalMoveY(0, 0.001f);
+            Selector.transform.DOLocalMoveY(22, 0.001f);
         }
         else
         {
-            Selector.transform.DOLocalMoveY(-62, 0.001f);
+            Selector.transform.DOLocalMoveY(-40, 0.001f);
         }
     }
 }
